@@ -2,8 +2,12 @@
   "schema": {
     "maincolor": {
       "type": "string",
-      "title": "Main color",
-      "format": "color"
+      "title": "Main color"
+    }
+  },
+  "customFormItems": {
+    "maincolor": {
+      "type": "color"
     }
   }
 }

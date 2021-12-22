@@ -31,7 +31,7 @@ The example below creates a form that asks for the user's name and age. The user
     <div id="res" class="alert"></div>
     <script type="text/javascript" src="deps/jquery.min.js"></script>
     <script type="text/javascript" src="deps/underscore.js"></script>
-    <script type="text/javascript" src="deps/opt/jsv.js"></script>
+    <script type="text/javascript" src="deps/opt/ZSchema-browser.js"></script>
     <script type="text/javascript" src="lib/jsonform.js"></script>
     <script type="text/javascript">
       $('form').jsonForm({
@@ -88,7 +88,7 @@ At a minimum, the JSON Form library depends on:
 The JSON Form library may require further libraries, depending on the features you need for the forms you need to render. In particular:
 - [ACE](http://ace.ajax.org/) is needed to render rich text input fields. The [deps/opt/ace](https://github.com/joshfire/jsonform/tree/master/deps/opt/ace) folder contains a minimal set of files from ACE to render a JSON input field. Beware that the code of `ace.js` needs to be encapsulated in `(function(require,define,requirejs) {...})(undefined,undefined,undefined);` before it may be used within JSON Form.
 - [Bootstrap](https://github.com/twbs/bootstrap) v2.0.3 or above is more or less needed (unless you enjoy ugly forms, that is) if you don't provide your own styles. JSON Form only needs the ```bootstrap.css``` file.
-- The [JSON Schema Validator](https://github.com/garycourt/JSV) is used to detect and report validation errors upon form submission. The [deps/opt](https://github.com/joshfire/jsonform/tree/master/deps/opt) folder contains a "build" of the JSON Schema Validator for use in JSON Form.
+- The <del>[JSON Schema Validator](https://github.com/garycourt/JSV)</del> [Z-Schema Validator](https://github.com/zaggino/z-schema) is used to detect and report validation errors upon form submission. The [deps/opt](https://github.com/joshfire/jsonform/tree/master/deps/opt) folder contains a "build" of the Validator for use in JSON Form.
 - [Bootstrap Dropdowns](https://github.com/twbs/bootstrap/blob/master/javascript.html) v2.0.3 or above is needed for ```imageselect``` fields.
 - [jQuery UI Sortable](http://jqueryui.com/demos/sortable/) v1.8.20 or above is required for drag-and-drop support within arrays and tabarrays. Note the plugin itself depends on jQuery IU Core, jQuery UI Mouse, and jQuery UI Widget.
 - [wysihtml5](http://jhollingworth.github.com/bootstrap-wysihtml5/) is required if the form uses ```wysihtml5``` textarea fields.

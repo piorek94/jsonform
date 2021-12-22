@@ -22,7 +22,8 @@
           "title": "Magic number",
           "default": 42
         }
-      }
+      },
+      "default": {"gender": "alien", "magic": 36}
     }
   }
 }

@@ -6,6 +6,9 @@
     <style>
       @import url("../deps/opt/bootstrap.css");
       @import url("../deps/opt/spectrum.css");
+      @import url("../deps/opt/jquery.ui.custom.css");
+      @import url("../deps/opt/jquery.ui.theme.css");
+      @import url("../deps/opt/bootstrap-tagsinput.css");
 
       h2 { font-weight: 200; }
       .navbar-inner {
@@ -65,6 +68,19 @@
         color: red;
         padding-top: 1em;
       }
+      .inline-other-field > .other-field-content,
+      .inline-other-field > label > .other-field-content {
+        display: inline-block;
+        margin: 0;
+      }
+      .inline-other-field > input[type=checkbox],
+      .inline-other-field > label > input[type=checkbox] {
+        margin-top: 8px;
+      }
+      .other-field-content > .control-group,
+      .other-field-content > .control-group > .controls > input[type=text] {
+        margin: 0;
+      }
     </style>
   </head>
   
@@ -108,13 +124,16 @@
     </footer>
     
     <script src="../deps/jquery.min.js"></script>
-    <script src="../deps/underscore.js"></script>
-    <script src="../deps/opt/jsv.js"></script>
-    <script src="../deps/opt/jquery.ui.core.js"></script>
+    <script src="../deps/underscore-min.js"></script>
+    <script src="../deps/opt/ZSchema-browser.js"></script>
+    <!--script src="../deps/opt/jquery.ui.core.js"></script>
     <script src="../deps/opt/jquery.ui.widget.js"></script>
     <script src="../deps/opt/jquery.ui.mouse.js"></script>
-    <script src="../deps/opt/jquery.ui.sortable.js"></script>
+    <script src="../deps/opt/jquery.ui.sortable.js"></script-->
+    <script src="../deps/opt/jquery.ui.custom.js"></script>
     <script src="../deps/opt/bootstrap-dropdown.js"></script>
+    <script src="../deps/opt/bootstrap-typeahead.js"></script>
+    <script src="../deps/opt/bootstrap-tagsinput.min.js"></script>
     <script src="../deps/opt/spectrum.js"></script>
     <script src="../deps/opt/ace/ace.js"></script>
     <script src="../deps/opt/ace/mode-json.js"></script>
