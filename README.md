@@ -30,7 +30,7 @@ The example below creates a form that asks for the user's name and age. The user
     <form></form>
     <div id="res" class="alert"></div>
     <script type="text/javascript" src="deps/jquery.min.js"></script>
-    <script type="text/javascript" src="deps/underscore.js"></script>
+    <script type="text/javascript" src="deps/underscore-min.js"></script>
     <script type="text/javascript" src="deps/opt/ZSchema-browser.js"></script>
     <script type="text/javascript" src="lib/jsonform.js"></script>
     <script type="text/javascript">
