@@ -1,0 +1,29 @@
+{
+  "schema": {
+    "notDraggableFamily": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "title": "Family member",
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          }
+        }
+      }
+    }
+  },
+  "form": [
+    {
+      "type": "tabarray",
+      "draggable": false,
+      "items": {
+        "type": "section",
+        "items": [
+          "notDraggableFamily[].name"
+        ]
+      }
+    }
+  ]
+}

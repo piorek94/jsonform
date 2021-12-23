@@ -20,7 +20,7 @@
       "key": "favourite",
       "type": "radiobuttons",
       "activeClass": "btn-danger",
-      "titleMap": {
+      "options": {
         "true": "Yes",
         "false": "No"
       }

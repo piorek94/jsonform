@@ -1,6 +1,5 @@
 /*global $, ace, console*/
 $('document').ready(function () {
-  var isBootstrap2 = JSONForm.isBootstrap2 = location.pathname.indexOf('bootstrap3') < 0;
   var formObject = {
     schema: {
       example: {
@@ -33,9 +32,12 @@ $('document').ready(function () {
           'fields-textarea': 'Fields - Large text: the textarea type',
           'fields-text-autocomplete': 'Fields - Text field with jquery-ui autocomplete',
           'fields-ace': 'Fields - Code (JavaScript, JSON...): the ace type',
+          'fields-wysihtml5': 'Fields - HTML5: the rich text type',
           'fields-color': 'Fields - Color picker: the color type',
+          'fields-color-custom': 'Fields - Color picker: the color type by customFormItems',
           'fields-checkbox': 'Fields - Boolean flag: the checkbox type',
           'fields-checkboxes': 'Fields - Multiple options: the checkboxes type',
+          'fields-checkboxes-complex': 'Fields - Multiple options: the checkboxes type - complex',
           'fields-select': 'Fields - Selection list: the select type',
           'fields-radios': 'Fields - A list of radio buttons: the radios type',
           'fields-radiobuttons': 'Fields - Radio buttons as real buttons: the radio buttons type',
@@ -49,15 +51,19 @@ $('document').ready(function () {
           'fields-section': 'Fields - Generic group: the section type',
           'fields-actions': 'Fields - Group of buttons: the actions type',
           'fields-array': 'Fields - Generic array: the array type',
+          'fields-array-ref': 'Fields - Arrays using inline $ref: the array type',
           'fields-tabarray': 'Fields - Arrays with tabs: the tabarray type',
+          'fields-tabarray-notdraggable':  'Fields - Arrays with tabs: not draggable',
           'fields-tabarray-maxitems': 'Fields - Arrays with tabs: the tabarray type w/ maxItems',
           'fields-tabarray-value': 'Fields - Arrays with tabs: the tabarray type w/ default & legend',
           'fields-selectfieldset': 'Fields - Alternative: the selectfieldset type',
           'fields-selectfieldset-key': 'Fields - Alternative with schema key',
+          'fields-selectfieldset-tpldata': 'Fields - Alternative with tpldata for initialization',
           'fields-submit': 'Fields - Submit the form: the submit type',
           'fields-help': 'Fields - Guide users: the help type',
           'fields-hidden': 'Fields - Hidden form values: the hidden type',
           'fields-questions': 'Fields - Series of questions: the questions type',
+          'fields-file': 'Fields - Upload file: the file type',
           'templating-idx': 'Templating - item index with idx',
           'templating-value': 'Templating - tab legend with value and valueInLegend',
           'templating-values': 'Templating - values.xxx to reference another field',
@@ -65,7 +71,8 @@ $('document').ready(function () {
           'events': 'Using event handlers',
           'previousvalues': 'Using previously submitted values',
           'previousvalues-multi-array': 'Using previously submitted values - Multidimensional Arrays',
-          'factory-sleek': 'Joshfire Factory - Sleek template'
+          'factory-sleek': 'Joshfire Factory - Sleek template',
+          'navigation-tabs': 'Display - Navigation tabs'
         },
         onChange: function (evt) {
           var selected = $(evt.target).val();
@@ -102,8 +109,8 @@ $('document').ready(function () {
     for (var i = 0; i < vars.length; i++) {
       param = vars[i].split('=');
       if (param[0] === 'example') {
-        if (param[1].slice(-1) == '/')
-          return param[1].slice(0, -1);
+        if (param[1].charAt(param[1].length - 1) == '/')
+          return param[1].replace('/', '');
         return param[1];
       }
     }
@@ -114,9 +121,8 @@ $('document').ready(function () {
    * Loads and displays the example identified by the given name
    */
   var loadExample = function (example) {
-    var exampleDir = !isBootstrap2 ? '../examples/' : 'examples/';
     $.ajax({
-      url: exampleDir + example + '.json',
+      url: 'examples/' + example + '.json',
       dataType: 'text'
     }).done(function (code) {
       var aceId = $('#form .ace_editor').attr('id');
