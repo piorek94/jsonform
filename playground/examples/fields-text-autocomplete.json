@@ -1,22 +1,22 @@
 {
   "schema": {
     "name": {
-      title: 'Name',
-      type: 'string'
+      "title": "Name",
+      "type": "string"
     },
     "nick": {
-      title: 'Nick name',
-      type: 'string'
+      "title": "Nick name",
+      "type": "string"
     },
     "title": {
-      title: 'Title',
-      type: 'string'
+      "title": "Title",
+      "type": "string"
     },
     "tags": {
-      title: 'Tags',
-      type: 'array',
-      items: {
-        type: 'string'
+      "title": "Tags",
+      "type": "array",
+      "items": {
+        "type": "string"
       },
       "default": ["abc", "def"]
     },
@@ -25,20 +25,20 @@
     "name": {
       "type": "text",
       "autocomplete": {
-        "source": ['abc', 'bed', 'bee', 'dog', 'cat']
+        "source": ["abc", "bed", "bee", "dog", "cat"]
       }
     },
     "nick": {
       "type": "text",
       "typeahead": {
-        "source": ['abc', 'bed', 'bee', 'dog', 'cat']
+        "source": ["abc", "bed", "bee", "dog", "cat"]
       }
     },
     "title": {
       "type": "text",
       "tagsinput": {
         "typeahead": {
-          "source": ['abc', 'bed', 'bee', 'dog', 'cat']
+          "source": ["abc", "bed", "bee", "dog", "cat"]
         }
       }
     },
@@ -46,7 +46,7 @@
       "type": "tagsinput",
       "tagsinput": {
         "typeahead": {
-          "source": ['abc', 'bed', 'bee', 'dog', 'cat']
+          "source": ["abc", "bed", "bee", "dog", "cat"]
         }
       }
     }

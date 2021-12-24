@@ -53,7 +53,6 @@ $('document').ready(function () {
           'fields-array': 'Fields - Generic array: the array type',
           'fields-array-ref': 'Fields - Arrays using inline $ref: the array type',
           'fields-tabarray': 'Fields - Arrays with tabs: the tabarray type',
-          'fields-tabarray-notdraggable':  'Fields - Arrays with tabs: not draggable',
           'fields-tabarray-maxitems': 'Fields - Arrays with tabs: the tabarray type w/ maxItems',
           'fields-tabarray-value': 'Fields - Arrays with tabs: the tabarray type w/ default & legend',
           'fields-selectfieldset': 'Fields - Alternative: the selectfieldset type',
@@ -71,7 +70,6 @@ $('document').ready(function () {
           'events': 'Using event handlers',
           'previousvalues': 'Using previously submitted values',
           'previousvalues-multi-array': 'Using previously submitted values - Multidimensional Arrays',
-          'factory-sleek': 'Joshfire Factory - Sleek template',
           'navigation-tabs': 'Display - Navigation tabs'
         },
         onChange: function (evt) {
