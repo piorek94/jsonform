@@ -4,6 +4,15 @@
       "type": "string",
       "title": "Main color",
       "format": "color"
+    },
+    "maincolor2": {
+      "type": "string",
+      "title": "Main color2"
+    }
+  },
+  "customFormItems": {
+    "maincolor2": {
+      "type": "color"
     }
   }
 }
