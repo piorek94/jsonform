@@ -11,26 +11,12 @@
       @import url("../deps/opt/jquery.ui.theme.css");
       @import url("../deps/opt/bootstrap-tagsinput.css");
 
-      h2 { font-weight: 200; }
-      .navbar-inner {
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;
-        border-radius: 0;
-      }
-      .row: { margin: 0.5em; }
+      h2 { font-weight: 200; margin-top: 0; }
+
       .tagline {
         padding: 10px;
         font-weight: 200;
         margin-top: -1em;
-      }
-      .tagline p { font-size: 16px; }
-
-      .navbar .factory a {
-        display: block;
-        padding: 10px 20px 10px;
-        background: url(http://factory.joshfire.com/css/images/topbar-beta-logo.png) 22px -3px no-repeat;
-        text-indent: -9999px;
-        width: 178px;
       }
 
       .footer {
@@ -38,15 +24,10 @@
         padding: 10px 0.5em;
         border-top: 1px solid #E5E5E5;
       }
-      .footer p { margin-bottom: 0; }
 
       #form .add-on {
         border: none;
         background-color: inherit;
-      }
-      .control-label + .help-block {
-        margin-top: 0px;
-        margin-bottom: 5px;
       }
 
       .expandable > legend:before {
@@ -55,10 +36,6 @@
       }
       .expanded > legend:before {
         content: '\25BE';
-      }
-
-      .tab-content>.tab-pane {
-        margin-top: 10px;
       }
 
       ._jsonform-array-buttons {
@@ -103,50 +80,47 @@
       .has-error > a.tab {
         border: #b94a48 solid 1px;
       }
-
+      .tab-content>.tab-pane {
+        margin-top: 10px;
+      }
     </style>
   </head>
-
+  
   <body>
-    <nav class="navbar navbar-inverse" role="navigation">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container">
           <a class="navbar-brand" href="#">JSON Form Playground</a>
+          <div>
+            <ul class="nav navbar-nav">
+              <li><a href="#">Home</a></li>
+              <li><a href="https://github.com/jsonform/jsonform/wiki">Documentation</a></li>
+              <li><a href="https://github.com/jsonform/jsonform">Project on github</a></li>
+            </ul>
+          </div>
         </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="http://github.com/joshfire/jsonform/wiki">Documentation</a></li>
-            <li><a href="http://github.com/joshfire/jsonform">Project on github</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li class="factory"><a href="http://factory.joshfire.com">Joshfire Factory</a>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
     </nav>
 
-    <div class="tagline">
-      <p>Choose a JSON Form example below and check the generated form. Refer to the <a href="http://github.com/joshfire/jsonform/wiki">documentation</a> for details and directions to extend the form.</p>
-    </div>
-
-    <div class="row">
-      <div class="col-md-5">
-        <form id="form"></form>
+    <div class="container">
+      <div class="tagline">
+        <p>Choose a JSON Form example below and check the generated form. Refer to the <a href="https://github.com/jsonform/jsonform/wiki">documentation</a> for details and directions to extend the form.</p>
       </div>
-      <div class="col-md-7">
-        <h2>Generated form</h2>
-        <div id="result" class="well">(please wait)</div>
-      </div>
-    </div>
 
+      <div class="row">
+        <div class="col-md-5">
+          <form id="form" class="form-vertical"></form>
+        </div>
+        <div class="col-md-7">
+          <h2>Generated form</h2>
+          <div id="result" class="well">(please wait)</div>
+        </div>
+      </div>
+
+    </div>
     <footer class="footer">
-      <p>Manufactured on the assembly line by <a href="http://factory.joshfire.com">Joshfire Factory</a> workers.</p>
-      <p><a href="http://github.com/joshfire/jsonform" title="JSON Form library code">Code</a> available on github, licensed under the <a href="https://raw.github.com/joshfire/jsonform/master/LICENSE">MIT License</a>.</p>
-      <p>See <a href="https://github.com/joshfire/jsonform/wiki#wiki-deps">dependencies</a> for the list of libraries and licenses used by JSON Form.</p>
+      <div class="container">
+      <p>Originally created by <a href="https://joshfire.com">Joshfire</a>.</p>
+      <p><a href="https://github.com/jsonform/jsonform" title="JSON Form library code">Code</a> available on github, licensed under the <a href="https://raw.github.com/jsonform/jsonform/master/LICENSE">MIT License</a> — See <a href="https://github.com/jsonform/jsonform/wiki#wiki-deps">dependencies</a> for the list of libraries and licenses used by JSON Form.</p>
+      </div>
     </footer>
 
     <script src="../deps/jquery.min.js"></script>
