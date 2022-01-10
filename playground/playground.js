@@ -89,7 +89,7 @@ $('document').ready(function () {
           'fields-wysihtml5': 'Fields - HTML5: the rich text type',
           'fields-color': 'Fields - Color picker: the color type',
           'fields-checkbox': 'Fields - Boolean flag: the checkbox type',
-          'fields-checkbox-toogleNext': 'Fields - Boolean flag: the checkbox type w/ toogleNext',
+          'fields-checkbox-toogleNext': 'Fields - Boolean flag: the checkbox type w/ toogleNext & dependencies',
           'fields-checkboxes': 'Fields - Multiple options: the checkboxes type',
           'fields-checkboxes-other-field': 'Fields - Multiple options: the checkboxes type w/ custom otherField',
           'fields-select': 'Fields - Selection list: the select type',

@@ -3,7 +3,8 @@
     "language": {
       "type": "string",
       "title": "Best language",
-      "enum": [ "JavaScript", "Python", "PHP", "Java", "C++", "other" ]
+      "enum": [ "JavaScript", "Python", "PHP", "Java", "C++", "other" ],
+      "required": true
     },
     "favourite": {
       "type": "boolean",
@@ -29,6 +30,5 @@
       "type": "submit",
       "title": "Submit"
     }
-  ],
-  "value": {"language": "Python"}
+  ]
 }

@@ -18,10 +18,6 @@
           }
         },
         "required": ["field1", "field2"]
-      },
-      "commonInfo": {
-        "title": "Common Field",
-        "type": "string"
       }
     },
     "dependencies": {
