@@ -10,7 +10,7 @@
         "readOnly": true
       }
     },
-    "fiends": {
+    "friends2": {
       "type": "array",
       "default": [{"name": "bob", "age": 24}, {"name": "alice", "age": 42}],
       "readOnly": true,

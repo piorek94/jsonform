@@ -26,8 +26,8 @@
       }
     },
     {
-      "title": "Submit",
-      "type": "submit"
+      "type": "submit",
+      "title": "Submit"
     }
   ],
   "value": {"language": "Python"}
