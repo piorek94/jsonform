@@ -10,14 +10,6 @@
       "title": "Gender",
       "enum": [ "male", "female", "alien" ],
       "required": true
-    },
-    "ismale": {
-      "type": "boolean",
-      "title": "Is male?"
-    },
-    "isfemale": {
-      "type": "boolean",
-      "title": "Is female?"
     }
   },
   "form": [
@@ -38,23 +30,6 @@
         "male": "Dude",
         "female": "Dudette"
       }
-    },
-    {
-      "key": "ismale",
-      "type": "select",
-      "required": true
-    },
-    {
-      "key": "isfemale",
-      "type": "select",
-      "titleMap": {
-        "false": "No",
-        "true": "Yes"
-      }
-    },
-    {
-      "title": "Submit",
-      "type": "submit"
     }
   ]
 }
