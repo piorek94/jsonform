@@ -8,7 +8,8 @@
     },
     "favourite": {
       "type": "boolean",
-      "title": "Is it your favourite?"
+      "title": "Is it your favourite?",
+      "default": "true"
     }
   },
   "form": [
@@ -30,5 +31,8 @@
       "type": "submit",
       "title": "Submit"
     }
-  ]
+  ],
+  "defaultClasses": {
+    "submitButtonClass": "btn btn-warning",
+  }
 }
