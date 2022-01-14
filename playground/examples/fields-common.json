@@ -25,7 +25,7 @@
         "style":"border: 1px solid blue",
         "data-title":"Mood"
       },
-      "fieldHtmlClass": "input-xxlarge",
+      "fieldHtmlClass": "col-xs-12",
       "placeholder": "incredibly and admirably great"
     }
   ]

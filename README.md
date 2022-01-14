@@ -34,7 +34,7 @@ The example below creates a form that asks for the user's name and age. The user
   <body>
     <h1>Getting started with JSON Form</h1>
     <form></form>
-    <div id="res" class="alert"></div>
+    <div id="res" class="alert alert-warning"></div>
     <script type="text/javascript" src="deps/jquery.min.js"></script>
     <script type="text/javascript" src="deps/underscore.js"></script>
     <script type="text/javascript" src="deps/opt/jsv.js"></script>
