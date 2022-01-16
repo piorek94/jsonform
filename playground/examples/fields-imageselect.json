@@ -23,7 +23,7 @@
       "type": "imageselect",
       "imageWidth": 64,
       "imageHeight": 64,
-      "imageButtonClass": "btn-inverse",
+      "imageButtonClass": "btn-default",
       "imagePrefix": "http://icons.iconarchive.com/icons/double-j-design/origami-colored-pencil/64/blue-",
       "imageSuffix": "-icon.png",
       "imageSelectorColumns": 4,
