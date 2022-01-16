@@ -10,7 +10,7 @@ var tests = [
       form: [
         {
           key: 'textfield',
-          template: 'I can haz template miam-miam<br/><input class="col-xs-6" type="text" name="<%= node.name %>" value="<%= escape(value) %>" id="<%= id %>" />'
+          template: 'I can haz template miam-miam<br/><input class="col-sm-6" type="text" name="<%= node.name %>" value="<%= escape(value) %>" id="<%= id %>" />'
         }
       ]
     }
