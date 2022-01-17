@@ -37,9 +37,9 @@ The example below creates a form that asks for the user's name and age. The user
     <div id="res" class="alert alert-warning"></div>
     <script type="text/javascript" src="deps/jquery.min.js"></script>
     <script type="text/javascript" src="deps/underscore.js"></script>
-    <script type="text/javascript" src="deps/opt/jsv.js"></script>
+    <script type="text/javascript" src="deps/opt/validators/JSV/jsv.js"></script>
     <!-- or -->
-    <!-- <script type="text/javascript" src="deps/opt/ZSchema-browser.js"></script> -->
+    <!-- <script type="text/javascript" src="deps/opt/validators/z-schema/ZSchema-browser-min.js"></script> -->
     <script type="text/javascript" src="lib/jsonform.js"></script>
     <script type="text/javascript">
       $('form').jsonForm({
