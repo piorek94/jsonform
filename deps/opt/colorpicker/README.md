@@ -2,4 +2,4 @@
 
 ### Spectrum
 * source: https://github.com/bgrins/spectrum
-* version: v1.8.0
+* version: v1.8.1
