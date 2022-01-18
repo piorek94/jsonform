@@ -37,9 +37,9 @@ The example below creates a form that asks for the user's name and age. The user
     <div id="res" class="alert alert-warning"></div>
     <script type="text/javascript" src="deps/jquery.min.js"></script>
     <script type="text/javascript" src="deps/underscore/underscore-min.js"></script>
-    <script type="text/javascript" src="deps/opt/validators/JSV/jsv.js"></script>
+    <script type="text/javascript" src="deps/opt/validator/JSV/jsv.js"></script>
     <!-- or -->
-    <!-- <script type="text/javascript" src="deps/opt/validators/z-schema/ZSchema-browser-min.js"></script> -->
+    <!-- <script type="text/javascript" src="deps/opt/validator/z-schema/ZSchema-browser-min.js"></script> -->
     <script type="text/javascript" src="lib/jsonform.js"></script>
     <script type="text/javascript">
       $('form').jsonForm({
@@ -93,7 +93,7 @@ At a minimum, the JSON Form library depends on:
 - The [Underscore.js](http://underscorejs.org/) utility belt
 
 The JSON Form library may require further libraries, depending on the features you need for the forms you need to render. In particular:
-- [ACE](http://ace.ajax.org/) is needed to render rich text input fields. The [deps/opt/ace](https://github.com/joshfire/jsonform/tree/master/deps/opt/ace) folder contains a minimal set of files from ACE to render a JSON input field. Beware that the code of `ace.js` needs to be encapsulated in `(function(require,define,requirejs) {...})(undefined,undefined,undefined);` before it may be used within JSON Form.
+- [ACE](http://ace.ajax.org/) is needed to render rich text input fields. The [deps/opt/code-editor/ace](https://github.com/joshfire/jsonform/tree/master/deps/opt/code-editor/ace) folder contains a minimal set of files from ACE to render a JSON input field. Beware that the code of `ace.js` needs to be encapsulated in `(function(require,define,requirejs) {...})(undefined,undefined,undefined);` before it may be used within JSON Form.
 - [Bootstrap](https://getbootstrap.com/docs/3.3/) v3.3 or above is more or less needed (unless you enjoy ugly forms, that is) if you don't provide your own styles. JSON Form only needs the ```bootstrap.css``` file.
 - The [JSON Schema Validator](https://github.com/garycourt/JSV)(or [Z-Schema Validator](https://github.com/zaggino/z-schema)) is used to detect and report validation errors upon form submission. The [deps/opt](https://github.com/joshfire/jsonform/tree/master/deps/opt) folder contains a "build" of the JSON Schema Validator for use in JSON Form.
 - [Bootstrap Dropdowns](https://github.com/twbs/bootstrap/blob/master/javascript.html) v2.0.3 or above is needed for ```imageselect``` fields.

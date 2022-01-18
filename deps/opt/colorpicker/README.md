@@ -1,4 +1,4 @@
-# Colorpickers (JavaScript)
+# Color picker
 
 ### spectrum
 * source: https://github.com/bgrins/spectrum

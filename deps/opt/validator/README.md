@@ -1,4 +1,4 @@
-# JSON Schema validators
+# JSON Schema validator
 
 ### JSV
 * source: https://github.com/garycourt/JSV
