@@ -7,3 +7,7 @@
 ### seballot-spectrum
 * source: https://github.com/seballot/spectrum
 * version: 2.0.8
+
+### vanilla-picker
+* source: https://github.com/Sphinxxxx/vanilla-picker
+* version: v2.12.1
