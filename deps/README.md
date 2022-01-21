@@ -6,7 +6,7 @@ This folder contains required and optional dependencies for JSON Form.
 Required
 --------
 - [jQuery](http://jquery.com/) v1.7.2 or above
-- [Underscore.js](http://documentcloud.github.com/underscore/) v1.3.3 or above
+- [Underscore.js](http://documentcloud.github.com/underscore/) v1.7.0 or above
 
 
 Optional

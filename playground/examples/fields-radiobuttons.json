@@ -33,6 +33,6 @@
     }
   ],
   "defaultClasses": {
-    "submitButtonClass": "btn btn-warning",
+    "submitButtonClass": "btn btn-warning"
   }
 }

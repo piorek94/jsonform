@@ -36,7 +36,7 @@ The example below creates a form that asks for the user's name and age. The user
     <form></form>
     <div id="res" class="alert alert-warning"></div>
     <script type="text/javascript" src="deps/jquery.min.js"></script>
-    <script type="text/javascript" src="deps/underscore/underscore-min.js"></script>
+    <script type="text/javascript" src="deps/underscore/underscore-umd-min.js"></script>
     <script type="text/javascript" src="deps/opt/validator/JSV/jsv.js"></script>
     <!-- or -->
     <!-- <script type="text/javascript" src="deps/opt/validator/z-schema/ZSchema-browser-min.js"></script> -->
