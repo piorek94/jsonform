@@ -111,4 +111,7 @@ License
 
 The JSON Form library is licensed under the [MIT license](https://raw.github.com/joshfire/jsonform/master/LICENSE).
 
-All the libraries that JSON Form may depend on are licensed under the MIT license, except for the JSON Schema Validator, licensed under the BSD 3 Clause license and the ACE editor licensed under the Mozilla tri-license (MPL/GPL/LGPL).
+All the libraries that JSON Form may depend on are licensed under the MIT license, except for:
+  - JSON Schema Validator: FreeBSD License
+  - ACE editor: Mozilla tri-license (MPL/GPL/LGPL)
+  - vanilla-picker: ISC License
