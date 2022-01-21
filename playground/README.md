@@ -5,9 +5,13 @@ The playground is a one-page application that lets you try out JSON Form. It fea
 
 For examples to load, the playground must be served over HTTP. There are many ways you can achieve that. Here are two:
 
-1. Using Python's `SimpleHTTPServer` from the root of the JSON Form project:
+1. Using Python's 2 `SimpleHTTPServer` or Python'3 `http.server` from the root of the JSON Form project:
 ```bash
 python -m SimpleHTTPServer
+```
+or (for python3):
+```bash
+python3 -m http.server
 ```
 Then open this page in your favorite browser:
 [`http://localhost:8000/playground/`](http://localhost:8000/playground/)
