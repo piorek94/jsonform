@@ -1,6 +1,6 @@
 # jQuery UI
 
-* source: https://github.com/jquery/jquery-ui 
+* source: https://github.com/jquery/jquery-ui
 * version: v1.12.1
 * __NOTES__:
   - custom download from https://jqueryui.com/download/

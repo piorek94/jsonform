@@ -18,7 +18,7 @@
       "title": "Click me",
       "onClick": function (evt) {
         evt.preventDefault();
-        alert('Thank you!');        
+        alert('Thank you!');
       }
     }
   ]

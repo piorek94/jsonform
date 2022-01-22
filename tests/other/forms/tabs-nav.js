@@ -56,7 +56,7 @@ $("#testform").jsonForm({
               "title":"Movies",
               "type":"tab",
               "items":[
-                {  
+                {
                   "key":"favorite_movie",
                   "type":"radiobuttons",
                   "activeClass": "btn-success"
@@ -67,7 +67,7 @@ $("#testform").jsonForm({
               "title":"TV Series",
               "type":"tab",
               "items":[
-                {  
+                {
                   "key":"favorite_tv",
                   "type":"radiobuttons",
                   "activeClass": "btn-success"
@@ -78,12 +78,12 @@ $("#testform").jsonForm({
               "title":"Actors",
               "type":"tab",
               "items":[
-                {  
+                {
                   "key":"actor_male",
                   "type":"radiobuttons",
                   "activeClass": "btn-success"
                 },
-                {  
+                {
                   "key":"actor_female",
                   "type":"radiobuttons",
                   "activeClass": "btn-success"
