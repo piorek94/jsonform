@@ -1,7 +1,7 @@
 JSON Form
 =========
 
-![MIT license](https://img.shields.io/badge/License-MIT-blue.svg?longCache=true)
+![MIT License](https://img.shields.io/badge/License-MIT-blue.svg?longCache=true)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?longCache=true)
 ![Maintained](https://img.shields.io/badge/Maintained-yes-brightgreen.svg?longCache=true)
 ![Release](https://img.shields.io/github/release/jsonform/jsonform.svg)
@@ -26,47 +26,50 @@ The example below creates a form that asks for the user's name and age. The user
 ```html
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Getting started with JSON Form</title>
-    <link rel="stylesheet" style="text/css" href="deps/opt/bootstrap/css/bootstrap.css" />
-  </head>
-  <body>
-    <h1>Getting started with JSON Form</h1>
-    <form></form>
-    <div id="res" class="alert alert-warning"></div>
-    <script type="text/javascript" src="deps/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="deps/underscore/underscore-umd-min.js"></script>
-    <script type="text/javascript" src="deps/opt/validator/JSV/jsv.js"></script>
-    <!-- or -->
-    <!-- <script type="text/javascript" src="deps/opt/validator/z-schema/ZSchema-browser-min.js"></script> -->
-    <script type="text/javascript" src="lib/jsonform.js"></script>
-    <script type="text/javascript">
-      $('form').jsonForm({
-        schema: {
-          name: {
-            type: 'string',
-            title: 'Name',
-            required: true
-          },
-          age: {
-            type: 'number',
-            title: 'Age'
-          }
+
+<head>
+  <meta charset="utf-8" />
+  <title>Getting started with JSON Form</title>
+  <link rel="stylesheet" type="text/css" href="deps/opt/bootstrap/css/bootstrap.css" />
+</head>
+
+<body>
+  <h1>Getting started with JSON Form</h1>
+  <form></form>
+  <div id="res" class="alert alert-warning"></div>
+  <script type="text/javascript" src="deps/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="deps/underscore/underscore-umd-min.js"></script>
+  <!-- JVS: outdated, no longer updated, do not support draft v4 -->
+  <!-- <script type="text/javascript" src="deps/opt/validator/JSV/jsv.js"></script> -->
+  <!-- it is recommended to use another validator, eg. z-schema -->
+  <script type="text/javascript" src="deps/opt/validator/z-schema/ZSchema-browser-min.js"></script>
+  <script type="text/javascript" src="lib/jsonform.js"></script>
+  <script type="text/javascript">
+    $('form').jsonForm({
+      schema: {
+        name: {
+          type: 'string',
+          title: 'Name',
+          required: true
         },
-        onSubmit: function (errors, values) {
-          if (errors) {
-            $('#res').html('<p>I beg your pardon?</p>');
-          }
-          else {
-            $('#res').html('<p>Hello ' + values.name + '.' +
-              (values.age ? '<br/>You are ' + values.age + '.' : '') +
-              '</p>');
-          }
+        age: {
+          type: 'number',
+          title: 'Age'
         }
-      });
-    </script>
-  </body>
+      },
+      onSubmit: function(errors, values) {
+        if (errors) {
+          $('#res').html('<p>I beg your pardon?</p>');
+        } else {
+          $('#res').html('<p>Hello ' + values.name + '.' +
+            (values.age ? '<br/>You are ' + values.age + '.' : '') +
+            '</p>');
+        }
+      }
+    });
+  </script>
+</body>
+
 </html>
 ```
 
@@ -78,30 +81,19 @@ NB: Paths in this example are relative to the root of the JSON Form project.
 Documentation
 -------------
 
-You can do much more with the JSON Form library. You may define a more complex data model that includes arrays and objects for instance, or you may control the layout of the form to include fieldsets, expandable sections or tabs. For more information, check the [reference documentation for JSON Form](http://github.com/joshfire/jsonform/wiki).
+You can do much more with the JSON Form library. You may define a more complex data model that includes arrays and objects for instance, or you may control the layout of the form to include fieldsets, expandable sections or tabs. For more information, check the [reference documentation for JSON Form](https://github.com/jsonform/jsonform/wiki).
 
 
 Playground
 ----------
-If you're more of the acting type than of the reading type, the [JSON Form Playground](https://jsonform.github.io/jsonform/playground/index.html) is a simple JSON Form editor that lets you try out and extend all the examples in the doc.
+
+If you're more of the acting type than of the reading type, the [JSON Form Playground](https://jsonform.github.io/jsonform/playground/index.html) is a simple JSON Form editor that lets you try out and extend all the examples in the doc. You can also run playground on your own (see [playground](playground/README.md)).
+
 
 Dependencies
 ------------
 
-At a minimum, the JSON Form library depends on:
-- [jQuery](http://jquery.com/)
-- The [Underscore.js](http://underscorejs.org/) utility belt
-
-The JSON Form library may require further libraries, depending on the features you need for the forms you need to render. In particular:
-- [ACE](http://ace.ajax.org/) v1.0.0 or above is needed to render rich text input fields. The [deps/opt/code-editor/ace](https://github.com/joshfire/jsonform/tree/master/deps/opt/code-editor/ace) folder contains a minimal set of files from ACE to render a CSS/HTML/JAVASCRIPT/JSON/LESS/MARKDOWN input field.
-- [Bootstrap](https://getbootstrap.com/docs/3.3/) v3.3 or above is more or less needed (unless you enjoy ugly forms, that is) if you don't provide your own styles. JSON Form only needs the ```bootstrap.css``` file.
-- The [JSON Schema Validator](https://github.com/garycourt/JSV)(or [Z-Schema Validator](https://github.com/zaggino/z-schema)) is used to detect and report validation errors upon form submission. The [deps/opt](https://github.com/joshfire/jsonform/tree/master/deps/opt) folder contains a "build" of the JSON Schema Validator for use in JSON Form.
-- [Bootstrap Dropdowns](https://github.com/twbs/bootstrap/blob/master/javascript.html) v2.0.3 or above is needed for ```imageselect``` fields.
-- [jQuery UI Sortable](http://jqueryui.com/demos/sortable/) v1.8.20 or above is required for drag-and-drop support within arrays and tabarrays. Note the plugin itself depends on jQuery IU Core, jQuery UI Mouse, and jQuery UI Widget.
-- [wysihtml5](http://jhollingworth.github.com/bootstrap-wysihtml5/) is required if the form uses ```wysihtml5``` textarea fields.
-- [Spectrum](http://bgrins.github.com/spectrum/) is required if the form uses `color` fields.
-
-All of these libraries are in the [deps](https://github.com/joshfire/jsonform/tree/master/deps) folder for now, although you might want to check their respective Web site for more recent versions.
+For the list of required and optional dependencies for JSON Form see [Dependencies](deps/README.md).
 
 NB: JSON Form also uses ```JSON.parse``` and ```JSON.stringify``` which is normally already natively supported by all modern browsers.
 
@@ -109,9 +101,9 @@ NB: JSON Form also uses ```JSON.parse``` and ```JSON.stringify``` which is norma
 License
 -------
 
-The JSON Form library is licensed under the [MIT license](https://raw.github.com/joshfire/jsonform/master/LICENSE).
+The JSON Form library is licensed under the [MIT License](LICENSE).
 
-All the libraries that JSON Form may depend on are licensed under the MIT license, except for:
+All the libraries that JSON Form may depend on are licensed under the MIT License, except for:
   - JSON Schema Validator: FreeBSD License
   - ACE editor: BSD License
   - vanilla-picker: ISC License
