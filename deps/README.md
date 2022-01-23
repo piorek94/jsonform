@@ -33,6 +33,8 @@ The libraries in the ```opt``` subfolder are optional as long as you do not use 
   * [file-uploader](opt/file-uploader):
     - [Transloadit's jQuery SDK](https://transloadit.com/docs/sdks/jquery-sdk/) is required if form uses ```file-hosted-public``` or ```file-transloadit``` fields. The [opt/file-uploader/jquery-transloadit](opt/file-uploader/jquery-transloadit) folder contains all required files.
 
+  * [Font Awesome](https://fontawesome.com/) is used as alternative icons library. The [opt/fontawesome](opt/fontawesome) folder contains a minimal set of files from Font Awesome.
+
   * [jQuery UI](https://jqueryui.com/) enables two features:
     - drag-and-drop support within arrays and tabarrays;
     - autocomplete with textual input fields;
