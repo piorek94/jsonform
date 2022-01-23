@@ -93,7 +93,7 @@ If you're more of the acting type than of the reading type, the [JSON Form Playg
 Dependencies
 ------------
 
-For the list of required and optional dependencies for JSON Form see [Dependencies](deps).
+All of required and optional libraries are located in the [deps](deps) folder for now, although you might want to check their respective Web site for more recent versions.
 
 NB: JSON Form also uses ```JSON.parse``` and ```JSON.stringify``` which is normally already natively supported by all modern browsers.
 
