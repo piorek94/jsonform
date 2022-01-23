@@ -37,5 +37,8 @@
         ]
       }
     }
-  ]
+  ],
+  "defaultClasses": {
+    "iconClassPrefix": "fa fa"
+  }
 }
