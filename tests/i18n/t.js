@@ -71,7 +71,7 @@ var tests = [
           title: 'Short memory item',
           desc: 'I think about...',
           'default': 'kittens'
-        }     
+        }
       }
     }
   },

@@ -1,0 +1,50 @@
+{
+  "schema": {
+    "happy": {
+      "type": "boolean",
+      "title": "Are you happy?",
+      "required": true
+    },
+    "happy1": {
+      "type": "boolean",
+      "title": "Really happy?"
+    },
+    "happy2": {
+      "type": "boolean",
+      "title": "Really really happy?"
+    }
+  },
+  "form": [
+    {
+      "key": "happy",
+      "type": "radios",
+      "inline": true,
+      "toggleNextMap": {
+        "true": true
+      }
+    },
+    {
+      "key": "happy1",
+      "type": "radios",
+      "titleMap": {
+        "false": "Not at all",
+        "true": "Very cool"
+      },
+      "toggleNextMap": {
+        "true": true
+      }
+    },
+    {
+      "key": "happy2",
+      "type": "radios",
+      "options": {
+        "false": "Not at all",
+        "true": "Very cool"
+      }
+    },
+    {
+      "type": "submit",
+      "title": "Submit",
+    }
+  ]
+}

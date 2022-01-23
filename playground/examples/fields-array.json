@@ -1,69 +1,41 @@
 {
   "schema": {
-    "type": "object",
-    "properties": {
-      "friendsA": {
-        "$ref": "#/definitions/friends"
-      },
-      "friendsB": {
-        "$ref": "#/definitions/friends"
-      }
-    },
-    "definitions": {
-      "friends": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "title": "Friend",
-          "properties": {
-            "nick": {
+    "friends": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "title": "Friend",
+        "properties": {
+          "nick": {
+            "type": "string",
+            "title": "Nickname"
+          },
+          "animals": {
+            "type": "array",
+            "items": {
               "type": "string",
-              "title": "Nickname"
-            },
-            "animals": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "title": "Animal name"
-              },
-              "default": ["dog", "cat"]
+              "title": "Animal name"
             }
           }
         }
       }
     }
   },
-  "customFormItems": {
-    "friendsB": {
+  "form": [
+    {
       "type": "array",
-      "key": "friendsB",
-      "title": "Friends B",
-      "readOnly": true,
       "items": {
         "type": "section",
         "items": [
+          "friends[].nick",
           {
             "type": "array",
-            "key": "friendsB[].animals",
             "items": [
-              "friendsB[].animals[]"
+              "friends[].animals[]"
             ]
-          },
-          "friendsB[].nick"
+          }
         ]
       }
     }
-  },
-  "value": {
-    "friendsB": [
-      {
-        "nick": "B",
-        "animals": ["fish", "bee"]
-      },
-      {
-        "nick": "B2",
-        "animals": ["bee", "cat"]
-      }
-    ]
-  }
+  ]
 }

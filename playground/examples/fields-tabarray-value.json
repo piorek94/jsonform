@@ -12,7 +12,6 @@
   "form": [
     {
       "type": "tabarray",
-      "key": "thoughts",
       "items": [
         {
           "type": "section",

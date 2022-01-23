@@ -19,12 +19,24 @@
           }
         }
       }
+    },
+    "notDraggableFamily": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "title": "Family member",
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          }
+        }
+      }
     }
   },
   "form": [
     {
       "type": "tabarray",
-      "key": "friends",
       "items": {
         "type": "section",
         "items": [
@@ -35,6 +47,16 @@
               "friends[].animals[]"
             ]
           }
+        ]
+      }
+    },
+    {
+      "type": "tabarray",
+      "draggable": false,
+      "items": {
+        "type": "section",
+        "items": [
+          "notDraggableFamily[].name"
         ]
       }
     }

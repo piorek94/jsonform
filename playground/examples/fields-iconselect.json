@@ -151,10 +151,9 @@
     {
       "key": "icon",
       "type": "iconselect",
-      "imageButtonClass": "btn",
+      "imageButtonClass": "btn-default",
       "imageSelectorColumns": 10,
       "imageSelectorTitle": "Select an icon"
     }
   ]
 }
-

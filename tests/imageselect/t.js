@@ -134,7 +134,7 @@ var tests = [
           imageHeight: 64,
           imageSelectorColumns: 3,
           imageSelectorTitle: 'Choose an icon!',
-          imageButtonClass: 'btn-inverse'
+          imageButtonClass: 'btn-default'
         }
       ]
     }
@@ -195,7 +195,7 @@ var tests = [
         {
           key: 'choice',
           type: 'imageselect',
-          imageButtonClass: 'btn-inverse',
+          imageButtonClass: 'btn-default',
           imagePrefix: 'http://exports.platform.joshfire.com.s3.amazonaws.com/template/official/4f/cc/4fccd335ef88120db50000dd/df5d0b32d95b/',
           imageWidth: 32,
           imageHeight: 64
@@ -231,7 +231,7 @@ var tests = [
         {
           key: 'choice',
           type: 'imageselect',
-          imageButtonClass: 'btn-inverse',
+          imageButtonClass: 'btn-default',
           imagePrefix: 'http://exports.platform.joshfire.com.s3.amazonaws.com/template/official/4f/cc/4fccd335ef88120db50000dd/df5d0b32d95b/',
           imageWidth: 32,
           imageHeight: 64
@@ -265,7 +265,7 @@ var tests = [
         {
           key: 'choice',
           type: 'imageselect',
-          imageButtonClass: 'btn-inverse',
+          imageButtonClass: 'btn-default',
           imagePrefix: 'http://exports.platform.joshfire.com.s3.amazonaws.com/template/official/4f/cc/4fccd335ef88120db50000dd/df5d0b32d95b/app/images/tv-',
           imageSuffix: '.png',
           imageWidth: 32,

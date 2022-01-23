@@ -1,0 +1,24 @@
+{
+  "schema": {
+    "tags1": {
+      "title": "Tags string",
+      "type": "string"
+    },
+    "tags2": {
+      "title": "Tags array",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "customFormItems": {
+    "tags1": {
+      "type": "text",
+      "tagsinput": {}
+    },
+    "tags2": {
+      "type": "tagsinput"
+    }
+  }
+}

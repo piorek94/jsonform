@@ -1,0 +1,43 @@
+{
+  "schema": {
+    "bool1": {
+      "type": "boolean",
+      "title": "Is it your favorite library?"
+    },
+    "bool2": {
+      "type": "boolean",
+      "title": "Do you like it?"
+    },
+    "bool3": {
+      "type": "boolean",
+      "title": "Will you contribute it?"
+    }
+  },
+  "form": [
+    {
+      "key": "bool1",
+      "type": "select",
+      "required": true
+    },
+    {
+      "key": "bool2",
+      "type": "select",
+      "titleMap": {
+        "false": "No",
+        "true": "Yes"
+      }
+    },
+    {
+      "key": "bool3",
+      "type": "select",
+      "options": {
+        "false": "Maybe not",
+        "true": "Maybe yes"
+      }
+    },
+    {
+      "type": "submit",
+      "title": "Submit"
+    }
+  ]
+}
