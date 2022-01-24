@@ -1,3 +1,8 @@
+/*
+ * bootstrap-tagsinput v0.8.0
+ * 
+ */
+
 (function ($) {
   "use strict";
 
@@ -5,28 +10,37 @@
     tagClass: function(item) {
       return 'label label-info';
     },
+    focusClass: 'focus',
     itemValue: function(item) {
       return item ? item.toString() : item;
     },
     itemText: function(item) {
       return this.itemValue(item);
     },
+    itemTitle: function(item) {
+      return null;
+    },
     freeInput: true,
     addOnBlur: true,
     maxTags: undefined,
     maxChars: undefined,
     confirmKeys: [13, 44],
+    delimiter: ',',
+    delimiterRegex: null,
+    cancelConfirmKeysOnEmpty: false,
     onTagExists: function(item, $tag) {
       $tag.hide().fadeIn();
     },
     trimValue: false,
-    allowDuplicates: false
+    allowDuplicates: false,
+    triggerChange: true
   };
 
   /**
    * Constructor function
    */
   function TagsInput(element, options) {
+    this.isInit = true;
     this.itemsArray = [];
 
     this.$element = $(element);
@@ -41,11 +55,10 @@
     this.$container = $('<div class="bootstrap-tagsinput"></div>');
     this.$input = $('<input type="text" placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
 
-    this.$element.after(this.$container);
+    this.$element.before(this.$container);
 
-    var inputWidth = (this.inputSize < 3 ? 3 : this.inputSize) + "em";
-    this.$input.get(0).style.cssText = "width: " + inputWidth + " !important;";
     this.build(options);
+    this.isInit = false;
   }
 
   TagsInput.prototype = {
@@ -55,7 +68,7 @@
      * Adds the given item as a new tag. Pass true to dontPushVal to prevent
      * updating the elements val()
      */
-    add: function(item, dontPushVal) {
+    add: function(item, dontPushVal, options) {
       var self = this;
 
       if (self.options.maxTags && self.itemsArray.length >= self.options.maxTags)
@@ -83,21 +96,23 @@
         self.remove(self.itemsArray[0]);
 
       if (typeof item === "string" && this.$element[0].tagName === 'INPUT') {
-        var items = item.split(',');
+        var delimiter = (self.options.delimiterRegex) ? self.options.delimiterRegex : self.options.delimiter;
+        var items = item.split(delimiter);
         if (items.length > 1) {
           for (var i = 0; i < items.length; i++) {
             this.add(items[i], true);
           }
 
           if (!dontPushVal)
-            self.pushVal();
+            self.pushVal(self.options.triggerChange);
           return;
         }
       }
 
       var itemValue = self.options.itemValue(item),
           itemText = self.options.itemText(item),
-          tagClass = self.options.tagClass(item);
+          tagClass = self.options.tagClass(item),
+          itemTitle = self.options.itemTitle(item);
 
       // Ignore items allready added
       var existing = $.grep(self.itemsArray, function(item) { return self.options.itemValue(item) === itemValue; } )[0];
@@ -115,79 +130,59 @@
         return;
 
       // raise beforeItemAdd arg
-      var beforeItemAddEvent = $.Event('beforeItemAdd', { item: item, cancel: false });
+      var beforeItemAddEvent = $.Event('beforeItemAdd', { item: item, cancel: false, options: options});
       self.$element.trigger(beforeItemAddEvent);
       if (beforeItemAddEvent.cancel)
         return;
 
       // register item in internal array and map
-      // ULION: support array values
-      var index = self.findInputWrapper().index();
-      if (index >= 0 && index < self.itemsArray.length) {
-        self.itemsArray.splice(index, 0, item);
-      } else {
-        index = -1; // use push later for the last position insertion
-        self.itemsArray.push(item);
-      }
-      // ULION: end of custom code
-      //self.itemsArray.push(item);
+      self.itemsArray.push(item);
 
       // add a tag element
-      var $tag = $('<span class="tag ' + htmlEncode(tagClass) + '">' + htmlEncode(itemText) + '<span data-role="remove"></span></span>');
+
+      var $tag = $('<span class="tag ' + htmlEncode(tagClass) + (itemTitle !== null ? ('" title="' + itemTitle) : '') + '">' + htmlEncode(itemText) + '<span data-role="remove"></span></span>');
       $tag.data('item', item);
       self.findInputWrapper().before($tag);
       $tag.after(' ');
 
+      // Check to see if the tag exists in its raw or uri-encoded form
+      var optionExists = (
+        $('option[value="' + encodeURIComponent(itemValue) + '"]', self.$element).length ||
+        $('option[value="' + htmlEncode(itemValue) + '"]', self.$element).length
+      );
+
       // add <option /> if item represents a value not present in one of the <select />'s options
-      // ULION: support array values
-      if (self.isSelect) {
-        var $option = $('option[value="' + itemValue + '"]',self.$element);
-        if ($option.length == 0) {
-          $option = $('<option selected>' + htmlEncode(itemText) + '</option>');
-          $option.data('item', item);
-          $option.attr('value', itemValue);
-          if (index >= 0)
-            self.$element.find('option:selected').eq(index).before($option);
-          else
-            self.$element.append($option);
-        }
-        else {
-          if (index >= 0)
-            self.$element.find('option:selected').eq(index).before($option);
-          else
-            self.$element.append($option);
-          $option.prop('selected', true);
-        }
+      if (self.isSelect && !optionExists) {
+        var $option = $('<option selected>' + htmlEncode(itemText) + '</option>');
+        $option.data('item', item);
+        $option.attr('value', itemValue);
+        self.$element.append($option);
       }
-      // ULION: end of custom code
-      // if (self.isSelect && !$('option[value="' + encodeURIComponent(itemValue) + '"]',self.$element)[0]) {
-      //   var $option = $('<option selected>' + htmlEncode(itemText) + '</option>');
-      //   $option.data('item', item);
-      //   $option.attr('value', itemValue);
-      //   self.$element.append($option);
-      // }
 
       if (!dontPushVal)
-        self.pushVal();
+        self.pushVal(self.options.triggerChange);
 
       // Add class when reached maxTags
       if (self.options.maxTags === self.itemsArray.length || self.items().toString().length === self.options.maxInputLength)
         self.$container.addClass('bootstrap-tagsinput-max');
 
-      self.$element.trigger($.Event('itemAdded', { item: item }));
-      // ULION: remove inserted text after selecting tag from typeahead
-      if (self.options.typeaheadjs)
+      // If using typeahead, once the tag has been added, clear the typeahead value so it does not stick around in the input.
+      if ($('.typeahead, .twitter-typeahead', self.$container).length) {
         self.$input.typeahead('val', '');
-      else
-        self.$input.val('');
-      // ULION: end of custom code
+      }
+
+      if (this.isInit) {
+        self.$element.trigger($.Event('itemAddedOnInit', { item: item, options: options }));
+      } else {
+        self.$element.trigger($.Event('itemAdded', { item: item, options: options }));
+      }
     },
 
     /**
      * Removes the given item. Pass true to dontPushVal to prevent updating the
      * elements val()
      */
-    remove: function(item, dontPushVal) {
+    remove: function(item, dontPushVal, options) {
       var self = this;
 
       if (self.objectItems) {
@@ -200,7 +195,7 @@
       }
 
       if (item) {
-        var beforeItemRemoveEvent = $.Event('beforeItemRemove', { item: item, cancel: false });
+        var beforeItemRemoveEvent = $.Event('beforeItemRemove', { item: item, cancel: false, options: options });
         self.$element.trigger(beforeItemRemoveEvent);
         if (beforeItemRemoveEvent.cancel)
           return;
@@ -212,13 +207,13 @@
       }
 
       if (!dontPushVal)
-        self.pushVal();
+        self.pushVal(self.options.triggerChange);
 
       // Remove class when reached maxTags
       if (self.options.maxTags > self.itemsArray.length)
         self.$container.removeClass('bootstrap-tagsinput-max');
 
-      self.$element.trigger($.Event('itemRemoved',  { item: item }));
+      self.$element.trigger($.Event('itemRemoved',  { item: item, options: options }));
     },
 
     /**
@@ -233,7 +228,7 @@
       while(self.itemsArray.length > 0)
         self.itemsArray.pop();
 
-      self.pushVal();
+      self.pushVal(self.options.triggerChange);
     },
 
     /**
@@ -280,7 +275,10 @@
             return self.options.itemValue(item).toString();
           });
 
-      self.$element.val(val, true).trigger('change');
+      self.$element.val(val, true);
+
+      if (self.options.triggerChange)
+        self.$element.trigger('change');
     },
 
     /**
@@ -297,7 +295,7 @@
       makeOptionItemFunction(self.options, 'itemValue');
       makeOptionItemFunction(self.options, 'itemText');
       makeOptionFunction(self.options, 'tagClass');
-      
+
       // Typeahead Bootstrap version 2.3.2
       if (self.options.typeahead) {
         var typeahead = self.options.typeahead || {};
@@ -306,56 +304,103 @@
 
         self.$input.typeahead($.extend({}, typeahead, {
           source: function (query, process) {
-            function processItems(items) {
-              var texts = [];
+            // PIOREK94: add support for latest version of bootstrap3-typeahead v4.0.2 and bloodhound v0.11.1
+            function processData(data) {
+              if (!data)
+                return;
 
-              for (var i = 0; i < items.length; i++) {
-                var text = self.options.itemText(items[i]);
-                map[text] = items[i];
-                texts.push(text);
+              if ($.isFunction(data.success)) {
+                // support for Angular callbacks
+                data.success(process);
+              } else if ($.isFunction(data.then)) {
+                // support for Angular promises
+                data.then(process);
+              } else {
+                // support for functions and jquery promises
+                $.when(data).then(process);
               }
-              process(texts);
             }
 
-            this.map = {};
-            var map = this.map,
-                data = typeahead.source(query);
-
-            if ($.isFunction(data.success)) {
-              // support for Angular callbacks
-              data.success(processItems);
-            } else if ($.isFunction(data.then)) {
-              // support for Angular promises
-              data.then(processItems);
-            } else {
-              // support for functions and jquery promises
-              $.when(data)
-               .then(processItems);
+            // Bloodhound (since 0.11) needs three arguments.
+            // Two of them are callback functions (sync and async) for local and remote data processing
+            // see https://github.com/twitter/typeahead.js/blob/master/src/bloodhound/bloodhound.js#L132
+            if ($.isFunction(typeahead.source) && typeahead.source.length === 3) {
+              typeahead.source(query, processData, processData);
+            }
+            else {
+              // data is directly returned by source function
+              processData(typeahead.source(query));
             }
           },
-          updater: function (text) {
-            self.add(this.map[text]);
-          },
-          matcher: function (text) {
-            return (text.toLowerCase().indexOf(this.query.trim().toLowerCase()) !== -1);
-          },
-          sorter: function (texts) {
-            return texts.sort();
-          },
-          highlighter: function (text) {
-            var regex = new RegExp( '(' + this.query + ')', 'gi' );
-            return text.replace( regex, "<strong>$1</strong>" );
+          updater: function (item) {
+            if (self.objectItems)
+              self.add(self.options.itemValue(item));
+            else
+              self.add(self.options.itemText(item));
+            return '';
           }
+          // PIOREK94: end of custom code
+          //   function processItems(items) {
+          //     var texts = [];
+          //
+          //     for (var i = 0; i < items.length; i++) {
+          //       var text = self.options.itemText(items[i]);
+          //       map[text] = items[i];
+          //       texts.push(text);
+          //     }
+          //     process(texts);
+          //   }
+          //
+          //   this.map = {};
+          //   var map = this.map,
+          //       data = typeahead.source(query);
+          //
+          //   if ($.isFunction(data.success)) {
+          //     // support for Angular callbacks
+          //     data.success(processItems);
+          //   } else if ($.isFunction(data.then)) {
+          //     // support for Angular promises
+          //     data.then(processItems);
+          //   } else {
+          //     // support for functions and jquery promises
+          //     $.when(data)
+          //      .then(processItems);
+          //   }
+          // },
+          // updater: function (text) {
+          //   self.add(this.map[text]);
+          //   return this.map[text];
+          // },
+          // matcher: function (text) {
+          //   return (text.toLowerCase().indexOf(this.query.trim().toLowerCase()) !== -1);
+          // },
+          // sorter: function (texts) {
+          //   return texts.sort();
+          // },
+          // highlighter: function (text) {
+          //   var regex = new RegExp( '(' + this.query + ')', 'gi' );
+          //   return text.replace( regex, "<strong>$1</strong>" );
+          // }
         }));
       }
 
       // typeahead.js
       if (self.options.typeaheadjs) {
-          var typeaheadjs = self.options.typeaheadjs || {};
-          
-          self.$input.typeahead(null, typeaheadjs).on('typeahead:selected', $.proxy(function (obj, datum) {
-            if (typeaheadjs.valueKey)
-              self.add(datum[typeaheadjs.valueKey]);
+          var typeaheadConfig = null;
+          var typeaheadDatasets = {};
+
+          // Determine if main configurations were passed or simply a dataset
+          var typeaheadjs = self.options.typeaheadjs;
+          if ($.isArray(typeaheadjs)) {
+            typeaheadConfig = typeaheadjs[0];
+            typeaheadDatasets = typeaheadjs[1];
+          } else {
+            typeaheadDatasets = typeaheadjs;
+          }
+
+          self.$input.typeahead(typeaheadConfig, typeaheadDatasets).on('typeahead:selected', $.proxy(function (obj, datum) {
+            if (typeaheadDatasets.valueKey)
+              self.add(datum[typeaheadDatasets.valueKey]);
             else
               self.add(datum);
             self.$input.typeahead('val', '');
@@ -369,6 +414,16 @@
         self.$input.focus();
       }, self));
 
+      // PIOREK94: clear input value after when freeInput is disabled:
+      // user typed few letters but did not select the tag and then focused out from the control
+      if (!self.options.freeInput) {
+        self.$input.on('focusout', $.proxy(function(event) {
+          if (self.$input.typeahead) {
+            self.$input.val('');
+          }
+        }, self));
+      }
+      // PIOREK94: end of custom code
         if (self.options.addOnBlur && self.options.freeInput) {
           self.$input.on('focusout', $.proxy(function(event) {
               // HACK: only process on focusout when no typeahead opened, to
@@ -379,7 +434,16 @@
               }
           }, self));
         }
-        
+
+      // Toggle the 'focus' css class on the container when it has focus
+      self.$container.on({
+        focusin: function() {
+          self.$container.addClass(self.options.focusClass);
+        },
+        focusout: function() {
+          self.$container.removeClass(self.options.focusClass);
+        },
+      });
 
       self.$container.on('keydown', 'input', $.proxy(function(event) {
         var $input = $(event.target),
@@ -395,7 +459,7 @@
           case 8:
             if (doGetCaretPosition($input[0]) === 0) {
               var prev = $inputWrapper.prev();
-              if (prev) {
+              if (prev.length) {
                 self.remove(prev.data('item'));
               }
             }
@@ -405,7 +469,7 @@
           case 46:
             if (doGetCaretPosition($input[0]) === 0) {
               var next = $inputWrapper.next();
-              if (next) {
+              if (next.length) {
                 self.remove(next.data('item'));
               }
             }
@@ -451,9 +515,21 @@
          var text = $input.val(),
          maxLengthReached = self.options.maxChars && text.length >= self.options.maxChars;
          if (self.options.freeInput && (keyCombinationInList(event, self.options.confirmKeys) || maxLengthReached)) {
-            self.add(maxLengthReached ? text.substr(0, self.options.maxChars) : text);
-            $input.val('');
-            event.preventDefault();
+            // Only attempt to add a tag if there is data in the field
+            if (text.length !== 0) {
+               self.add(maxLengthReached ? text.substr(0, self.options.maxChars) : text);
+               $input.val('');
+               // PIOREK94: clear the value of typeaheadjs, as tagsinput clears the input field
+               if (self.options.typeaheadjs) {
+                 $input.typeahead('val', '');
+               }
+               // PIOREK94: end of custom code
+            }
+
+            // If the field is empty, let the event triggered fire as usual
+            if (self.options.cancelConfirmKeysOnEmpty === false) {
+                event.preventDefault();
+            }
          }
 
          // Reset internal input's size
@@ -529,7 +605,7 @@
   /**
    * Register JQuery plugin
    */
-  $.fn.tagsinput = function(arg1, arg2) {
+  $.fn.tagsinput = function(arg1, arg2, arg3) {
     var results = [];
 
     this.each(function() {
@@ -552,7 +628,11 @@
           results.push(tagsinput);
       } else if(tagsinput[arg1] !== undefined) {
           // Invoke function on existing tags input
-          var retVal = tagsinput[arg1](arg2);
+            if(tagsinput[arg1].length === 3 && arg3 !== undefined){
+               var retVal = tagsinput[arg1](arg2, null, arg3);
+            }else{
+               var retVal = tagsinput[arg1](arg2);
+            }
           if (retVal !== undefined)
               results.push(retVal);
       }
@@ -615,7 +695,7 @@
   }
 
   /**
-    * Returns boolean indicates whether user has pressed an expected key combination. 
+    * Returns boolean indicates whether user has pressed an expected key combination.
     * @param object keyPressEvent: JavaScript event object, refer
     *     http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/ecma-script-binding.html
     * @param object lookupList: expected key combinations, as in:
