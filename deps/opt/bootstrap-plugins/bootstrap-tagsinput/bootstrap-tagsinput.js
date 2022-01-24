@@ -304,47 +304,83 @@
 
         self.$input.typeahead($.extend({}, typeahead, {
           source: function (query, process) {
-            function processItems(items) {
-              var texts = [];
+            // PIOREK94: add support for latest version of bootstrap3-typeahead v4.0.2 and bloodhound v0.11.1
+            function processData(data) {
+              if (!data)
+                return;
 
-              for (var i = 0; i < items.length; i++) {
-                var text = self.options.itemText(items[i]);
-                map[text] = items[i];
-                texts.push(text);
+              if ($.isFunction(data.success)) {
+                // support for Angular callbacks
+                data.success(process);
+              } else if ($.isFunction(data.then)) {
+                // support for Angular promises
+                data.then(process);
+              } else {
+                // support for functions and jquery promises
+                $.when(data).then(process);
               }
-              process(texts);
             }
 
-            this.map = {};
-            var map = this.map,
-                data = typeahead.source(query);
-
-            if ($.isFunction(data.success)) {
-              // support for Angular callbacks
-              data.success(processItems);
-            } else if ($.isFunction(data.then)) {
-              // support for Angular promises
-              data.then(processItems);
-            } else {
-              // support for functions and jquery promises
-              $.when(data)
-               .then(processItems);
+            // Bloodhound (since 0.11) needs three arguments.
+            // Two of them are callback functions (sync and async) for local and remote data processing
+            // see https://github.com/twitter/typeahead.js/blob/master/src/bloodhound/bloodhound.js#L132
+            if ($.isFunction(typeahead.source) && typeahead.source.length === 3) {
+              typeahead.source(query, processData, processData);
+            }
+            else {
+              // data is directly returned by source function
+              processData(typeahead.source(query));
             }
           },
-          updater: function (text) {
-            self.add(this.map[text]);
-            return this.map[text];
-          },
-          matcher: function (text) {
-            return (text.toLowerCase().indexOf(this.query.trim().toLowerCase()) !== -1);
-          },
-          sorter: function (texts) {
-            return texts.sort();
-          },
-          highlighter: function (text) {
-            var regex = new RegExp( '(' + this.query + ')', 'gi' );
-            return text.replace( regex, "<strong>$1</strong>" );
+          updater: function (item) {
+            if (self.objectItems)
+              self.add(self.options.itemValue(item));
+            else
+              self.add(self.options.itemText(item));
+            return '';
           }
+          // PIOREK94: end of custom code
+          //   function processItems(items) {
+          //     var texts = [];
+          //
+          //     for (var i = 0; i < items.length; i++) {
+          //       var text = self.options.itemText(items[i]);
+          //       map[text] = items[i];
+          //       texts.push(text);
+          //     }
+          //     process(texts);
+          //   }
+          //
+          //   this.map = {};
+          //   var map = this.map,
+          //       data = typeahead.source(query);
+          //
+          //   if ($.isFunction(data.success)) {
+          //     // support for Angular callbacks
+          //     data.success(processItems);
+          //   } else if ($.isFunction(data.then)) {
+          //     // support for Angular promises
+          //     data.then(processItems);
+          //   } else {
+          //     // support for functions and jquery promises
+          //     $.when(data)
+          //      .then(processItems);
+          //   }
+          // },
+          // updater: function (text) {
+          //   self.add(this.map[text]);
+          //   return this.map[text];
+          // },
+          // matcher: function (text) {
+          //   return (text.toLowerCase().indexOf(this.query.trim().toLowerCase()) !== -1);
+          // },
+          // sorter: function (texts) {
+          //   return texts.sort();
+          // },
+          // highlighter: function (text) {
+          //   var regex = new RegExp( '(' + this.query + ')', 'gi' );
+          //   return text.replace( regex, "<strong>$1</strong>" );
+          // }
         }));
       }
 
@@ -378,6 +414,16 @@
         self.$input.focus();
       }, self));
 
+      // PIOREK94: clear input value after when freeInput is disabled:
+      // user typed few letters but did not select the tag and then focused out from the control
+      if (!self.options.freeInput) {
+        self.$input.on('focusout', $.proxy(function(event) {
+          if (self.$input.typeahead) {
+            self.$input.val('');
+          }
+        }, self));
+      }
+      // PIOREK94: end of custom code
         if (self.options.addOnBlur && self.options.freeInput) {
           self.$input.on('focusout', $.proxy(function(event) {
               // HACK: only process on focusout when no typeahead opened, to
@@ -473,6 +519,11 @@
             if (text.length !== 0) {
                self.add(maxLengthReached ? text.substr(0, self.options.maxChars) : text);
                $input.val('');
+               // PIOREK94: clear the value of typeaheadjs, as tagsinput clears the input field
+               if (self.options.typeaheadjs) {
+                 $input.typeahead('val', '');
+               }
+               // PIOREK94: end of custom code
             }
 
             // If the field is empty, let the event triggered fire as usual

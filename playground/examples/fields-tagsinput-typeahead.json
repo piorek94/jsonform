@@ -17,6 +17,8 @@
     "tags1": {
       "type": "text",
       "tagsinput": {
+        "freeInput": false,
+        "allowDuplicates": true,
         "typeahead": {
           "source": ["abc", "bed", "bee", "dog", "cat"]
         }
