@@ -200,10 +200,21 @@
         if (beforeItemRemoveEvent.cancel)
           return;
 
-        $('.tag', self.$container).filter(function() { return $(this).data('item') === item; }).remove();
+        // PIOREK94: Fix item removal when allowDuplicates is true
+        if (options && options.tagElement)
+          $(options.tagElement).remove()
+        else
+          $('.tag', self.$container).filter(function() { return $(this).data('item') === item; }).remove();
         $('option', self.$element).filter(function() { return $(this).data('item') === item; }).remove();
-        if($.inArray(item, self.itemsArray) !== -1)
-          self.itemsArray.splice($.inArray(item, self.itemsArray), 1);
+        if($.inArray(item, self.itemsArray) !== -1) {
+          var itemIndex = (options && options.tagIndex) || $.inArray(item, self.itemsArray);
+          self.itemsArray.splice(itemIndex, 1);
+        }
+        // PIOREK94: end of custom code
+        // $('.tag', self.$container).filter(function() { return $(this).data('item') === item; }).remove();
+        // $('option', self.$element).filter(function() { return $(this).data('item') === item; }).remove();
+        // if($.inArray(item, self.itemsArray) !== -1)
+        //   self.itemsArray.splice($.inArray(item, self.itemsArray), 1);
       }
 
       if (!dontPushVal)
@@ -460,7 +471,10 @@
             if (doGetCaretPosition($input[0]) === 0) {
               var prev = $inputWrapper.prev();
               if (prev.length) {
-                self.remove(prev.data('item'));
+                // PIOREK94: Fix item removal when allowDuplicates is true
+                self.remove(prev.data('item'), false, { tagElement: prev, tagIndex: prev.index() });
+                // PIOREK94: end of custom code
+                // self.remove(prev.data('item'));
               }
             }
             break;
@@ -470,7 +484,10 @@
             if (doGetCaretPosition($input[0]) === 0) {
               var next = $inputWrapper.next();
               if (next.length) {
-                self.remove(next.data('item'));
+                // PIOREK94: Fix item removal when allowDuplicates is true
+                self.remove(next.data('item'), false, { tagElement: next, tagIndex: next.index() - 1 });
+                // PIOREK94: end of custom code
+                // self.remove(next.data('item'));
               }
             }
             break;
@@ -544,7 +561,11 @@
         if (self.$element.attr('disabled')) {
           return;
         }
-        self.remove($(event.target).closest('.tag').data('item'));
+        // PIOREK94: Fix item removal when allowDuplicates is true
+        var $tag = $(event.target).closest('.tag');
+        self.remove($tag.data('item'), false, { tagElement: $tag, tagIndex: $tag.index() });
+        // PIOREK94: end of custom code
+        // self.remove($(event.target).closest('.tag').data('item'));
       }, self));
 
       // Only add existing value as tags when using strings as tags
