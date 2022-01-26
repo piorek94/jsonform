@@ -71,6 +71,11 @@
         this.showHintOnFocus = typeof this.options.showHintOnFocus == 'boolean' || this.options.showHintOnFocus === 'all' ? this.options.showHintOnFocus : false;
         this.afterSelect = this.options.afterSelect;
         this.afterEmptySelect = this.options.afterEmptySelect;
+        // PIOREK94: Added afterRender call back function useful for using
+        // plugins that depend on the HTML being rendered on the page, ex.
+        // Bootstrap tooltips for each typeahead option
+        this.afterRender = this.options.afterRender;
+        // PIOREK94: end of custom code
         this.addItem = false;
         this.value = this.$element.val() || this.$element.text();
         this.keyPressed = false;
@@ -195,6 +200,11 @@
             }
 
             this.shown = true;
+            // PIOREK94: Added afterRender call back function useful for using
+            // plugins that depend on the HTML being rendered on the page, ex.
+            // Bootstrap tooltips for each typeahead option
+            this.afterRender();
+            // PIOREK94: end of custom code
             return this;
         },
 
@@ -342,7 +352,10 @@
                     });
                 }
 
-                if (this.showCategoryHeader) {
+                // PIOREK94: fix not showing category header
+                if (self.showCategoryHeader) {
+                // PIOREK94: end of custom code
+                // if (this.showCategoryHeader) {
                     // inject category header
                     if (value[_category] && (key === 0 || value[_category] !== items[key - 1][_category])) {
                         data.push({
@@ -374,7 +387,10 @@
                     }
                     i.find('a').attr('title', self.itemTitle(item));
                     if (text == self.$element.val()) {
-                        i.addClass('active');
+                        // PIOREK94: Bootstrap 4 highlight fix: active class has to be added to li>a element not li, for backward compatibility add to both
+                        i.addClass('active').find('a').addClass('active');
+                        // PIOREK94: end of custom code
+                        // i.addClass('active');
                         self.$element.data('active', item);
                         activeFound = true;
                     }
@@ -382,7 +398,10 @@
                 });
 
             if (this.autoSelect && !activeFound) {
-                items.filter(':not(.dropdown-header)').first().addClass('active');
+                // PIOREK94: Bootstrap 4 highlight fix: active class has to be added to li>a element not li, for backward compatibility add to both
+                items.filter(':not(.dropdown-header)').first().addClass('active').find('a').addClass('active');
+                // PIOREK94: end of custom code
+                // items.filter(':not(.dropdown-header)').first().addClass('active');
                 this.$element.data('active', items.first().data('value'));
             }
             this.$menu.html(items);
@@ -406,19 +425,48 @@
             var next = active.next();
 
             if (!next.length) {
-                next = $(this.$menu.find($(this.options.item || this.theme.item).prop('tagName'))[0]);
+                // PIOREK94: Added handling for up/down key scrolling and a carousel option
+                if (this.options.carousel) {
+                    next = $(this.$menu.find($(this.options.item || this.theme.item).prop('tagName'))[0]);
+                } else {
+                    next = active; // stop at end of list
+                }
+                // PIOREK94: end of custom code
+                // next = $(this.$menu.find($(this.options.item || this.theme.item).prop('tagName'))[0]);
             }
 
             while (next.hasClass('divider') || next.hasClass('dropdown-header')) {
                 next = next.next();
             }
 
-            next.addClass('active');
+            // PIOREK94: Bootstrap 4 highlight fix: active class has to be added to li>a element not li, for backward compatibility add to both
+            next.addClass('active').find('a').addClass('active');
+            // PIOREK94: end of custom code
+            // next.addClass('active');
             // added for screen reader
-            var newVal = this.updater(next.data('value'));
+            // PIOREK94: updater should not be triggered on move when
+            // changeInputOnMove is false - this introduces incompatibility with
+            // bootstrap-tagsinput (even if changeInputOnMove is false new tag
+            // is inserted on move)
             if (this.changeInputOnMove) {
+                var newVal = this.updater(next.data('value'));
                 this.$element.val(this.displayText(newVal) || newVal);
             }
+            // PIOREK94: end of custom code
+            // var newVal = this.updater(next.data('value'));
+            // if (this.changeInputOnMove) {
+            //     this.$element.val(this.displayText(newVal) || newVal);
+            // }
+
+            // PIOREK94: Added handling for up/down key scrolling and a carousel option
+            // added to scroll parent container
+            var offset_in_list = next.offset().top - next.closest('ul').offset().top;
+            var item_height = next.outerHeight();
+
+            if (offset_in_list > next.closest('ul').height()) {
+                next.closest('ul').scrollTop(next.closest('ul').scrollTop() + item_height);
+            }
+            // PIOREK94: end of custom code
         },
 
         prev: function (event) {
@@ -426,19 +474,48 @@
             var prev = active.prev();
 
             if (!prev.length) {
-                prev = this.$menu.find($(this.options.item || this.theme.item).prop('tagName')).last();
+                // PIOREK94: Added handling for up/down key scrolling and a carousel option
+                if (this.options.carousel) {
+                    prev = this.$menu.find($(this.options.item || this.theme.item).prop('tagName')).last();
+                } else {
+                    prev = active; // stop at start of list
+                }
+                // PIOREK94: end of custom code
+                // prev = this.$menu.find($(this.options.item || this.theme.item).prop('tagName')).last();
             }
 
             while (prev.hasClass('divider') || prev.hasClass('dropdown-header')) {
                 prev = prev.prev();
             }
 
-            prev.addClass('active');
+            // PIOREK94: Bootstrap 4 highlight fix: active class has to be added to li>a element not li, for backward compatibility add to both
+            prev.addClass('active').find('a').addClass('active');
+            // PIOREK94: end of custom code
+            // prev.addClass('active');
             // added for screen reader
-            var newVal = this.updater(prev.data('value'));
+            // PIOREK94: updater should not be triggered on move when
+            // changeInputOnMove is false - this introduces incompatibility with
+            // bootstrap-tagsinput (even if changeInputOnMove is false new tag
+            // is inserted on move)
             if (this.changeInputOnMove) {
+                var newVal = this.updater(prev.data('value'));
                 this.$element.val(this.displayText(newVal) || newVal);
             }
+            // PIOREK94: end of custom code
+            // var newVal = this.updater(prev.data('value'));
+            // if (this.changeInputOnMove) {
+            //     this.$element.val(this.displayText(newVal) || newVal);
+            // }
+
+            // PIOREK94: Added handling for up/down key scrolling and a carousel option
+            // added to scroll parent container
+            var offset_in_list = prev.offset().top - prev.closest('ul').offset().top;
+            var item_height = prev.outerHeight();
+
+            if (offset_in_list < 0) {
+                prev.closest('ul').scrollTop(prev.closest('ul').scrollTop() - item_height);
+            }
+            // PIOREK94: end of custom code
         },
 
         listen: function () {
@@ -486,7 +563,10 @@
                 .unbind('keyup.bootstrap3Typeahead');
 
             if (this.eventSupported('keydown')) {
-                this.$element.unbind('keydown.bootstrap3-typeahead');
+                // PIOREK94: fix error keydown after event destroyed
+                this.$element.unbind('keydown.bootstrap3Typeahead');
+                // PIOREK94: end of custom code
+                // this.$element.unbind('keydown.bootstrap3-typeahead');
             }
 
             this.$menu.remove();
@@ -650,11 +730,19 @@
         mouseenter: function (e) {
             this.mousedover = true;
             this.$menu.find('.active').removeClass('active');
-            $(e.currentTarget).addClass('active');
+            // PIOREK94: Bootstrap 4 highlight fix: active class has to be added to li>a element not li, for backward compatibility add to both
+            $(e.currentTarget).addClass('active').find('a').addClass('active');
+            // PIOREK94: end of custom code
+            // $(e.currentTarget).addClass('active');
         },
 
         mouseleave: function (e) {
             this.mousedover = false;
+            // PIOREK94: remove the active element when moving the mouse outside of the list
+            if (! this.selectOnBlur) {
+                this.$menu.find('.active').removeClass('active');
+            }
+            // PIOREK94: end of custom code
             if (!this.focused && this.shown) {
                 this.hide();
             }
@@ -674,7 +762,10 @@
         touchstart: function (e) {
             e.preventDefault();
             this.$menu.find('.active').removeClass('active');
-            $(e.currentTarget).addClass('active');
+            // PIOREK94: Bootstrap 4 highlight fix: active class has to be added to li>a element not li, for backward compatibility add to both
+            $(e.currentTarget).addClass('active').find('a').addClass('active');
+            // PIOREK94: end of custom code
+            // $(e.currentTarget).addClass('active');
         },
 
         touchend: function (e) {
@@ -716,19 +807,35 @@
     Typeahead.defaults = {
         source: [],
         items: 8,
+        // PIOREK94: Added handling for up/down key scrolling and a carousel option
+        carousel: true,
+        // PIOREK94: end of custom code
         minLength: 1,
         scrollHeight: 0,
         autoSelect: true,
         afterSelect: $.noop,
         afterEmptySelect: $.noop,
+        // PIOREK94: Added afterRender call back function useful for using
+        // plugins that depend on the HTML being rendered on the page, ex.
+        // Bootstrap tooltips for each typeahead option
+        afterRender: $.noop,
+        // PIOREK94: end of custom code
         addItem: false,
         followLinkOnSelect: false,
         delay: 0,
         separator: 'category',
         changeInputOnSelect: true,
-        changeInputOnMove: true,
+        // PIOREK94: change default value of changeInputOnMove to false to keep
+        // compatibility with older code
+        changeInputOnMove: false,
+        // PIOREK94: end of custom code
+        // changeInputOnMove: true,
         openLinkInNewTab: false,
-        selectOnBlur: true,
+        // PIOREK94: change default value of selectOnBlur to false to keep
+        // compatibility with older code
+        selectOnBlur: false,
+        // PIOREK94: end of custom code
+        // selectOnBlur: true,
         showCategoryHeader: true,
         theme: "bootstrap3",
         themes: {
