@@ -9,6 +9,7 @@
 
 ### bootstrap-typeahead
 * source: https://github.com/bassjobsen/Bootstrap-3-Typeahead
-* version: 4.0.2
+* version: fc2d5dce4a5406d9b924224e395d5647918707c7 commit
 * __NOTES__:
   - bootstrap 3 and 4 support
+  - modified `bootstrap-tagsinput.js` file: custom code is wrapped in comments that start with "PIOREK94"
