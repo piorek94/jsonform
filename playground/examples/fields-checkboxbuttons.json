@@ -20,5 +20,5 @@
       "type": "submit"
     }
   ],
-  "value": {"language": "Python"}
+  "value": {"language": ["Python"]}
 }
