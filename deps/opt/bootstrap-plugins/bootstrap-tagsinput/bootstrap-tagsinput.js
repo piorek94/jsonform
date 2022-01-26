@@ -152,7 +152,10 @@
       );
 
       // add <option /> if item represents a value not present in one of the <select />'s options
-      if (self.isSelect && !optionExists) {
+      // PIOREK94: but allow add when multiple and allowDuplicates is set
+      if (self.isSelect && (!optionExists || (self.multiple && self.options.allowDuplicates))) {
+      // PIOREK94: end of custom code
+      // if (self.isSelect && !optionExists) {
         var $option = $('<option selected>' + htmlEncode(itemText) + '</option>');
         $option.data('item', item);
         $option.attr('value', itemValue);
@@ -205,7 +208,7 @@
           $(options.tagElement).remove()
         else
           $('.tag', self.$container).filter(function() { return $(this).data('item') === item; }).remove();
-        $('option', self.$element).filter(function() { return $(this).data('item') === item; }).remove();
+        $('option', self.$element).each(function(){ if($(this).data('item') === item) { $(this).remove(); return false; } });
         if($.inArray(item, self.itemsArray) !== -1) {
           var itemIndex = (options && options.tagIndex) || $.inArray(item, self.itemsArray);
           self.itemsArray.splice(itemIndex, 1);
