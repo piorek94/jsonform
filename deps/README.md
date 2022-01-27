@@ -46,4 +46,4 @@ The libraries in the ```opt``` subfolder are optional as long as you do not use 
     - [z-schema](https://github.com/zaggino/z-schema) is used to detect and report validation errors against the JSON schema upon form submission. The [opt/validator/z-schema](opt/validator/z-schema) folder contains all required files to use Validator in JSON Form.
 
   * [wysiwyg-editor](opt/wysiwyg-editor):
-    - [bootstrap3-wysiwyg](http://bootstrap-wysiwyg.github.io/bootstrap3-wysiwyg/) is required if the form uses ```wysihtml5``` textarea fields. The [opt/wysiwyg-editor/bootstrap3-wysiwyg](opt/wysiwyg-editor/bootstrap3-wysiwyg) folder contains all required files.
+    - [bootstrap3-wysiwyg](http://bootstrap-wysiwyg.github.io/bootstrap3-wysiwyg/) 0.3.1 or above is required if the form uses ```wysihtml5``` textarea fields. The [opt/wysiwyg-editor/bootstrap3-wysiwyg](opt/wysiwyg-editor/bootstrap3-wysiwyg) folder contains all required files.
