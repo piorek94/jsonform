@@ -14359,14 +14359,18 @@ function program1(depth0,data) {
 
 function program3(depth0,data) {
   
-  
-  return "\n        <span class=\"fa fa-pencil\"></span>\n      ";
+  // PIOREK94: Fix incompatible glyphicons and fontawesome icons
+  return "\n        <span class=\"fa fa-edit\"></span>\n      ";
+  // PIOREK94: end of custom code
+  // return "\n        <span class=\"fa fa-pencil\"></span>\n      ";
   }
 
 function program5(depth0,data) {
   
-  
-  return "\n        <span class=\"glyphicon glyphicon-pencil\"></span>\n      ";
+  // PIOREK94: Fix incompatible glyphicons and fontawesome icons
+  return "\n        <span class=\"glyphicon glyphicon-edit\"></span>\n      ";
+  // PIOREK94: end of custom code
+  // return "\n        <span class=\"glyphicon glyphicon-pencil\"></span>\n      ";
   }
 
   buffer += "<li>\n  <div class=\"btn-group\">\n    <a class=\"btn ";
@@ -14402,8 +14406,10 @@ function program3(depth0,data) {
 
 function program5(depth0,data) {
   
-  
-  return "\n      <span class=\"fa fa-file-image-o\"></span>\n    ";
+  // PIOREK94: Fix incompatible glyphicons and fontawesome icons
+  return "\n      <span class=\"fa fa-image\"></span>\n    ";
+  // PIOREK94: end of custom code
+  // return "\n      <span class=\"fa fa-file-image-o\"></span>\n    ";
   }
 
 function program7(depth0,data) {
@@ -14454,14 +14460,18 @@ function program3(depth0,data) {
 
 function program5(depth0,data) {
   
-  
-  return "\n      <span class=\"fa fa-share-square-o\"></span>\n    ";
+  // PIOREK94: Fix incompatible glyphicons and fontawesome icons
+  return "\n      <span class=\"fa fa-link\"></span>\n    ";
+  // PIOREK94: end of custom code
+  // return "\n      <span class=\"fa fa-share-square-o\"></span>\n    ";
   }
 
 function program7(depth0,data) {
   
-  
-  return "\n      <span class=\"glyphicon glyphicon-share\"></span>\n    ";
+  // PIOREK94: Fix incompatible glyphicons and fontawesome icons
+  return "\n      <span class=\"glyphicon glyphicon-link\"></span>\n    ";
+  // PIOREK94: end of custom code
+  // return "\n      <span class=\"glyphicon glyphicon-share\"></span>\n    ";
   }
 
   buffer += "<li>\n  <div class=\"bootstrap-wysihtml5-insert-link-modal modal fade\" data-wysihtml5-dialog=\"createLink\">\n    <div class=\"modal-dialog ";
