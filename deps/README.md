@@ -47,3 +47,4 @@ The libraries in the ```opt``` subfolder are optional as long as you do not use 
 
   * [wysiwyg-editor](opt/wysiwyg-editor):
     - [bootstrap3-wysiwyg](http://bootstrap-wysiwyg.github.io/bootstrap3-wysiwyg/) 0.3.1 or above is required if the form uses ```wysihtml5``` textarea fields. The [opt/wysiwyg-editor/bootstrap3-wysiwyg](opt/wysiwyg-editor/bootstrap3-wysiwyg) folder contains all required files.
+    - [Summernote](https://summernote.org/) v0.8.0 or above is required if the form uses ```summernote``` textarea fields. The [opt/wysiwyg-editor/summernote](opt/wysiwyg-editor/summernote) folder contains all required files.
