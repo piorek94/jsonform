@@ -6,7 +6,7 @@ This folder contains required and optional dependencies for JSON Form.
 
 Required
 --------
-  - [jQuery](https://jquery.com/) v1.7.2 or above. The [jquery](jquery) folder contains all required files.
+  - [jQuery](https://jquery.com/) v1.9.1 or above. The [jquery](jquery) folder contains all required files.
   - [Underscore.js](https://underscorejs.org/) v1.7.0 or above. The [underscore](underscore) folder contains all required files.
 
 
@@ -14,9 +14,9 @@ Optional
 --------
 The libraries in the ```opt``` subfolder are optional as long as you do not use the feature they enable:
 
-  * [Bootstrap 3](https://getbootstrap.com/):
+  * [Bootstrap 4](https://getbootstrap.com/):
     - [bootstrap.css](opt/bootstrap/css/bootstrap.css) is only used (but not required if you provide your own styles) for styling purpose.
-    - [dropdown.js](opt/bootstrap/js/dropdown.js) is needed for ```imageselect``` and ```iconselect``` fields.
+    - [dropdown.js](opt/bootstrap/js/dropdown.js) and [util.js](opt/bootstrap/js/util.js) are needed for ```imageselect``` and ```iconselect``` fields (also requires [Popper](opt/popper)).
 
   * [bootstrap-plugins](opt/bootstrap-plugins):
     - [bootstrap-tagsinput](http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/) is required for tags support with array values and textual input fields. The [opt/bootstrap-plugins/bootstrap-tagsinput](opt/bootstrap-plugins/bootstrap-tagsinput) folder contains all required files.
@@ -33,13 +33,15 @@ The libraries in the ```opt``` subfolder are optional as long as you do not use 
   * [file-uploader](opt/file-uploader):
     - [Transloadit's jQuery SDK](https://transloadit.com/docs/sdks/jquery-sdk/) is required if form uses ```file-hosted-public``` or ```file-transloadit``` fields. The [opt/file-uploader/jquery-transloadit](opt/file-uploader/jquery-transloadit) folder contains all required files.
 
-  * [Font Awesome](https://fontawesome.com/) is used as alternative icons library. The [opt/fontawesome](opt/fontawesome) folder contains a minimal set of files from Font Awesome.
+  * [Font Awesome](https://fontawesome.com/) 5.0.6 or above is used as alternative icons library. The [opt/fontawesome](opt/fontawesome) folder contains a minimal set of files from Font Awesome.
 
   * [jQuery UI](https://jqueryui.com/) enables two features:
     - drag-and-drop support within arrays and tabarrays;
     - autocomplete with textual input fields;
 
     The [opt/jQueryUI](opt/jQueryUI) folder contains all required files.
+
+  * [Popper](https://popper.js.org/) 1.16.1 or above (< 2.0.0) is required for ```imageselect``` and ```iconselect``` fields. The [opt/popper](opt/popper) folder contains all required files.
 
   * [validator](opt/validator):
     - [JSV](https://github.com/garycourt/JSV): JSON Schema Validator is used to detect and report validation errors against the JSON schema upon form submission. The [opt/validator/JSV](opt/validator/JSV) folder contains a "build" of the JSON Schema Validator for use in JSON Form. _It is not recommended to use this validator: outdated, no longer updated, support only drafts up to `json-schema-draft-03`._
