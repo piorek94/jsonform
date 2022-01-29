@@ -122,7 +122,7 @@
     {
       "key": "icon",
       "type": "iconselect",
-      "imageButtonClass": "btn-default",
+      "imageButtonClass": "btn-secondary",
       "imageSelectorColumns": 10,
       "imageSelectorTitle": "Select an icon"
     }
