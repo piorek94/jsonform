@@ -13,8 +13,6 @@
       @import url("../deps/opt/bootstrap-plugins/bootstrap-tagsinput/bootstrap-tagsinput.css");
       @import url("../deps/opt/wysiwyg-editor/summernote/summernote-lite.min.css");
 
-      h2 { font-weight: 200; margin-top: 0; }
-
       .tagline {
         padding: 10px;
         font-weight: 200;
@@ -112,8 +110,10 @@
           <form id="form" class="form-vertical"></form>
         </div>
         <div class="col-md-7">
-          <h2>Generated form</h2>
-          <div id="result" class="card">(please wait)</div>
+          <div class="card bg-light">
+            <div class="card-header">Generated form</div>
+            <div class="card-body" id="result">(please wait)</div>
+          </div>
         </div>
       </div>
 
