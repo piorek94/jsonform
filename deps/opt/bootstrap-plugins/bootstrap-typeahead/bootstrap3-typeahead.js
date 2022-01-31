@@ -460,11 +460,12 @@
 
             // PIOREK94: Added handling for up/down key scrolling and a carousel option
             // added to scroll parent container
-            var offset_in_list = next.offset().top - next.closest('ul').offset().top;
+            var el_selector = this.theme === 'bootstrap3' ? 'ul' : 'div';
+            var offset_in_list = next.offset().top - next.closest(el_selector + ' .typeahead').offset().top;
             var item_height = next.outerHeight();
 
-            if (offset_in_list > next.closest('ul').height()) {
-                next.closest('ul').scrollTop(next.closest('ul').scrollTop() + item_height);
+            if (offset_in_list > next.closest(el_selector + ' .typeahead').height()) {
+                next.closest(el_selector + ' .typeahead').scrollTop(next.closest(el_selector + ' .typeahead').scrollTop() + item_height);
             }
             // PIOREK94: end of custom code
         },
@@ -509,11 +510,12 @@
 
             // PIOREK94: Added handling for up/down key scrolling and a carousel option
             // added to scroll parent container
-            var offset_in_list = prev.offset().top - prev.closest('ul').offset().top;
+            var el_selector = this.theme === 'bootstrap3' ? 'ul' : 'div';
+            var offset_in_list = prev.offset().top - prev.closest(el_selector + ' .typeahead').offset().top;
             var item_height = prev.outerHeight();
 
             if (offset_in_list < 0) {
-                prev.closest('ul').scrollTop(prev.closest('ul').scrollTop() - item_height);
+                prev.closest(el_selector + ' .typeahead').scrollTop(prev.closest(el_selector + ' .typeahead').scrollTop() - item_height);
             }
             // PIOREK94: end of custom code
         },
@@ -837,7 +839,9 @@
         // PIOREK94: end of custom code
         // selectOnBlur: true,
         showCategoryHeader: true,
-        theme: "bootstrap3",
+        // PIOREK94: set default theme to bootstrap4
+        theme: "bootstrap4",
+        // PIOREK94: end of custom code
         themes: {
         bootstrap3: {
             menu: '<ul class="typeahead dropdown-menu" role="listbox"></ul>',
