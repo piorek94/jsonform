@@ -53,7 +53,10 @@
     this.itemsArray = [];
 
     this.$element = $(element);
-    this.$element.hide();
+    // PIOREK94: Setting style to display: none breaks browser-native validation; use `sr-only` class instead
+    this.$element.addClass('sr-only');
+    // PIOREK94: end of custom code
+    // this.$element.hide();
 
     this.isSelect = (element.tagName === 'SELECT');
     this.multiple = (this.isSelect && element.hasAttribute('multiple'));
