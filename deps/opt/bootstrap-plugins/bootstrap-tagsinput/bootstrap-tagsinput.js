@@ -159,10 +159,16 @@
       $tag.after(' ');
 
       // Check to see if the tag exists in its raw or uri-encoded form
+      // PIOREK94: jQuery selector fix for values containing quotes
       var optionExists = (
-        $('option[value="' + encodeURIComponent(itemValue) + '"]', self.$element).length ||
-        $('option[value="' + htmlEncode(itemValue) + '"]', self.$element).length
+        $('option[value="' + encodeURIComponent(itemValue).replace(/"/g, '\\"') + '"]', self.$element).length ||
+        $('option[value="' + htmlEncode(itemValue).replace(/"/g, '\\"') + '"]', self.$element).length
       );
+      // PIOREK94: end of custom code
+      // var optionExists = (
+      //   $('option[value="' + encodeURIComponent(itemValue) + '"]', self.$element).length ||
+      //   $('option[value="' + htmlEncode(itemValue) + '"]', self.$element).length
+      // );
 
       // add <option /> if item represents a value not present in one of the <select />'s options
       // PIOREK94: but allow add when multiple and allowDuplicates is set
