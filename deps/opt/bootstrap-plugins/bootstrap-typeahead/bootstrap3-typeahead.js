@@ -845,14 +845,20 @@
         themes: {
         bootstrap3: {
             menu: '<ul class="typeahead dropdown-menu" role="listbox"></ul>',
-            item: '<li><a class="dropdown-item" href="#" role="option"></a></li>',
+            // PIOREK94: fix bootstrap3/4
+            item: '<li><a href="#" role="option"></a></li>',
+            // PIOREK94: end of custom code
+            // item: '<li><a class="dropdown-item" href="#" role="option"></a></li>',
             itemContentSelector: "a",
             headerHtml: '<li class="dropdown-header"></li>',
             headerDivider: '<li class="divider" role="separator"></li>'
         },
         bootstrap4: {
             menu: '<div class="typeahead dropdown-menu" role="listbox"></div>',
-            item: '<button class="dropdown-item" role="option"></button>',
+            // PIOREK94: fix bootstrap3/4
+            item: '<a class="dropdown-item" href="#" role="option"></a>',
+            // PIOREK94: end of custom code
+            // item: '<button class="dropdown-item" role="option"></button>',
             itemContentSelector: '.dropdown-item',
             headerHtml: '<h6 class="dropdown-header"></h6>',
             headerDivider: '<div class="dropdown-divider"></div>'
