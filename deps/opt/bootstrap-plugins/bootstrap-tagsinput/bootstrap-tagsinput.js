@@ -7,11 +7,15 @@
   "use strict";
 
   var defaultOptions = {
+    // PIOREK94: Add bootstrap 4 support
     theme: "bootstrap4",
     tagClass: function(item) {
       return this.theme === "bootstrap4" ? 'badge badge-info' : 'label label-info';
     },
-    focusClass: 'focus',
+    // PIOREK94: end of custom code
+    // tagClass: function(item) {
+    //   return 'label label-info';
+    // },
     itemValue: function(item) {
       return item ? item.toString() : item;
     },
