@@ -7,8 +7,9 @@
   "use strict";
 
   var defaultOptions = {
+    theme: "bootstrap4",
     tagClass: function(item) {
-      return 'label label-info';
+      return this.theme === "bootstrap4" ? 'badge badge-info' : 'label label-info';
     },
     focusClass: 'focus',
     itemValue: function(item) {
