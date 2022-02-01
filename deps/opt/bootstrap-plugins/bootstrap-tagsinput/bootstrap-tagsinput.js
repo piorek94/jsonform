@@ -38,6 +38,9 @@
     },
     trimValue: false,
     allowDuplicates: false,
+    // PIOREK94: Allow to edit the Tag before remove: https://github.com/Nodws/bootstrap4-tagsinput/commit/6b0ce5a46eecc881d81298000fc8a5d97107e8bb
+    editOnBackspace: false,
+    // PIOREK94: end of custom code
     triggerChange: true
   };
 
@@ -485,6 +488,11 @@
             if (doGetCaretPosition($input[0]) === 0) {
               var prev = $inputWrapper.prev();
               if (prev.length) {
+                // PIOREK94: Allow to edit the Tag before remove: https://github.com/Nodws/bootstrap4-tagsinput/commit/6b0ce5a46eecc881d81298000fc8a5d97107e8bb
+                if (self.options.editOnBackspace === true) {
+                  $input.val(prev.data('item'));
+                }
+                // PIOREK94: end of custom code
                 // PIOREK94: Fix item removal when allowDuplicates is true
                 self.remove(prev.data('item'), false, { tagElement: prev, tagIndex: prev.index() });
                 // PIOREK94: end of custom code
