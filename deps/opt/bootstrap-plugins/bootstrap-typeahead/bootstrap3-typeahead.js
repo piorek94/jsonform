@@ -187,6 +187,8 @@
             // The rules for bootstrap are: 'dropup' in the parent and 'dropdown-menu-right' in the element.
             // Note that to get right alignment, you'll need to specify `menu` in the options to be:
             // '<ul class="typeahead dropdown-menu" role="listbox"></ul>'
+            // or for bootstrap >= 4
+            // '<div class="typeahead dropdown-menu" role="listbox"></div>'
             var dropup = $(element).parent().hasClass('dropup');
             var newTop = dropup ? 'auto' : (pos.top + pos.height + scrollHeight);
             var right = $(element).hasClass('dropdown-menu-right');
@@ -387,10 +389,7 @@
                     }
                     i.find('a').attr('title', self.itemTitle(item));
                     if (text == self.$element.val()) {
-                        // PIOREK94: Bootstrap 4 highlight fix: active class has to be added to li>a element not li, for backward compatibility add to both
-                        i.addClass('active').find('a').addClass('active');
-                        // PIOREK94: end of custom code
-                        // i.addClass('active');
+                        i.addClass('active');
                         self.$element.data('active', item);
                         activeFound = true;
                     }
@@ -398,10 +397,7 @@
                 });
 
             if (this.autoSelect && !activeFound) {
-                // PIOREK94: Bootstrap 4 highlight fix: active class has to be added to li>a element not li, for backward compatibility add to both
-                items.filter(':not(.dropdown-header)').first().addClass('active').find('a').addClass('active');
-                // PIOREK94: end of custom code
-                // items.filter(':not(.dropdown-header)').first().addClass('active');
+                items.filter(':not(.dropdown-header)').first().addClass('active');
                 this.$element.data('active', items.first().data('value'));
             }
             this.$menu.html(items);
@@ -435,14 +431,14 @@
                 // next = $(this.$menu.find($(this.options.item || this.theme.item).prop('tagName'))[0]);
             }
 
-            while (next.hasClass('divider') || next.hasClass('dropdown-header')) {
+            // PIOREK94: consider bootstrap >= 4 divider class
+            while ((next.hasClass('divider') || next.hasClass('dropdown-divider')) || next.hasClass('dropdown-header')) {
+            // PIOREK94: end of custom code
+            // while (next.hasClass('divider') || next.hasClass('dropdown-header')) {
                 next = next.next();
             }
 
-            // PIOREK94: Bootstrap 4 highlight fix: active class has to be added to li>a element not li, for backward compatibility add to both
-            next.addClass('active').find('a').addClass('active');
-            // PIOREK94: end of custom code
-            // next.addClass('active');
+            next.addClass('active');
             // added for screen reader
             // PIOREK94: updater should not be triggered on move when
             // changeInputOnMove is false - this introduces incompatibility with
@@ -489,10 +485,7 @@
                 prev = prev.prev();
             }
 
-            // PIOREK94: Bootstrap 4 highlight fix: active class has to be added to li>a element not li, for backward compatibility add to both
-            prev.addClass('active').find('a').addClass('active');
-            // PIOREK94: end of custom code
-            // prev.addClass('active');
+            prev.addClass('active');
             // added for screen reader
             // PIOREK94: updater should not be triggered on move when
             // changeInputOnMove is false - this introduces incompatibility with
@@ -732,10 +725,7 @@
         mouseenter: function (e) {
             this.mousedover = true;
             this.$menu.find('.active').removeClass('active');
-            // PIOREK94: Bootstrap 4 highlight fix: active class has to be added to li>a element not li, for backward compatibility add to both
-            $(e.currentTarget).addClass('active').find('a').addClass('active');
-            // PIOREK94: end of custom code
-            // $(e.currentTarget).addClass('active');
+            $(e.currentTarget).addClass('active');
         },
 
         mouseleave: function (e) {
@@ -764,10 +754,7 @@
         touchstart: function (e) {
             e.preventDefault();
             this.$menu.find('.active').removeClass('active');
-            // PIOREK94: Bootstrap 4 highlight fix: active class has to be added to li>a element not li, for backward compatibility add to both
-            $(e.currentTarget).addClass('active').find('a').addClass('active');
-            // PIOREK94: end of custom code
-            // $(e.currentTarget).addClass('active');
+            $(e.currentTarget).addClass('active');
         },
 
         touchend: function (e) {
