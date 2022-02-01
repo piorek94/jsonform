@@ -149,7 +149,11 @@
 
       // add a tag element
 
-      var $tag = $('<span class="tag ' + htmlEncode(tagClass) + (itemTitle !== null ? ('" title="' + itemTitle) : '') + '">' + htmlEncode(itemText) + '<span data-role="remove"></span></span>');
+      // PIOREK94: Fix XSS vulnerable https://snyk.io/vuln/npm:bootstrap-tagsinput:20160720:
+      // source: https://github.com/WOLFF-Daten-Menschen-Marketing-GmbH/bootstrap-tagsinput-2021/commit/76ad08ec524b7c6856f7d7ccb093d04d3a8a66b1
+      var $tag = $('<span class="tag ' + htmlEncode(tagClass) + (itemTitle !== null ? ('" title="' + htmlEncode(itemTitle)) : '') + '">' + htmlEncode(itemText) + '<span data-role="remove"></span></span>');
+      // PIOREK94: end of custom code
+      // var $tag = $('<span class="tag ' + htmlEncode(tagClass) + (itemTitle !== null ? ('" title="' + itemTitle) : '') + '">' + htmlEncode(itemText) + '<span data-role="remove"></span></span>');
       $tag.data('item', item);
       self.findInputWrapper().before($tag);
       $tag.after(' ');
