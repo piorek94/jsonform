@@ -778,6 +778,9 @@
         }
         return this.each(function () {
             var $this = $(this);
+            // PIOREK94: Prevent default browser menus from appearing over the Bootstrap typeahead dropdown
+            $this.attr( "autocomplete", "off" );
+            // PIOREK94: end of custom code
             var data = $this.data('typeahead');
             var options = typeof option == 'object' && option;
             if (!data) {
