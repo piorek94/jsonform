@@ -156,7 +156,7 @@
       // var $tag = $('<span class="tag ' + htmlEncode(tagClass) + (itemTitle !== null ? ('" title="' + itemTitle) : '') + '">' + htmlEncode(itemText) + '<span data-role="remove"></span></span>');
       $tag.data('item', item);
       self.findInputWrapper().before($tag);
-      $tag.after(' ');
+      //$tag.after(' ');
 
       // Check to see if the tag exists in its raw or uri-encoded form
       // PIOREK94: jQuery selector fix for values containing quotes
