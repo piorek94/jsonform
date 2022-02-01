@@ -16,6 +16,7 @@
     // tagClass: function(item) {
     //   return 'label label-info';
     // },
+    focusClass: 'focus',
     itemValue: function(item) {
       return item ? item.toString() : item;
     },
