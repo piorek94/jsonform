@@ -65,7 +65,15 @@
     this.inputSize = Math.max(1, this.placeholderText.length);
 
     this.$container = $('<div class="bootstrap-tagsinput"></div>');
-    this.$input = $('<input type="text" placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
+    // PIOREK94: TODO: Fix problem related to using bootstrap tags input on jquery
+    // validate plugin. Currently jquery validate error: "has no name assigned" occurs.
+    // The following line solves problem for text input, but for select causes one empty value.
+    // this.$input = $('<input type="' + this.type + '" name="' + this.name + '" placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
+    this.name = element.hasAttribute('name') ? this.$element.attr('name') : '';
+    this.type = element.hasAttribute('type') ? this.$element.attr('type') : 'text';
+    this.$input = $('<input type="' + this.type + '" placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
+    // PIOREK94: end of custom code
+    //this.$input = $('<input type="text" placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
 
     this.$element.before(this.$container);
 
