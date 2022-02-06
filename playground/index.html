@@ -52,20 +52,17 @@
         color: red;
         padding-top: 1em;
       }
-      .inline-other-field > .other-field-content,
-      .inline-other-field > label > .other-field-content {
+      .inline-other-field > .other-field-content {
         display: inline-block;
-        margin: 0;
       }
-      .inline-other-field.checkbox > label {
-        width: 100%;
-      }
-      .inline-other-field.checkbox > label > .other-field-content {
-        width: 80%;
-      }
-      .inline-other-field > input[type=checkbox],
-      .inline-other-field > label > input[type=checkbox] {
+      .inline-other-field > input[type=checkbox] {
         margin-top: 11px;
+      }
+      .inline-other-field.form-check-inline > input[type=checkbox] {
+        margin-top: inherit;
+      }
+      .inline-other-field > label {
+        margin-right: 3px;
       }
       .other-field-content > .form-group {
         margin: 0;
