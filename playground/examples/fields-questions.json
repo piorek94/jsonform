@@ -38,11 +38,29 @@
             {
               "title": "Yes",
               "value": "reallyhappy",
-              "submit": true
+              "next": "q3"
             },
             {
               "title": "No",
               "value": "happy",
+              "submit": true
+            }
+          ]
+        },
+        {
+          "type": "question",
+          "qid": "q3",
+          "inline": true,
+          "title": "Really really happy?",
+          "options": [
+            {
+              "title": "Yes",
+              "value": "reallyreallyhappy",
+              "submit": true
+            },
+            {
+              "title": "No",
+              "value": "reallyhappy",
               "submit": true
             }
           ]
