@@ -17,6 +17,7 @@ The libraries in the ```opt``` subfolder are optional as long as you do not use 
   * [Bootstrap 4](https://getbootstrap.com/):
     - [bootstrap.css](opt/bootstrap/css/bootstrap.css) is only used (but not required if you provide your own styles) for styling purpose.
     - [dropdown.js](opt/bootstrap/js/dropdown.js) and [util.js](opt/bootstrap/js/util.js) are needed for ```imageselect``` and ```iconselect``` fields (also requires [Popper](opt/popper)).
+    - [button.js](opt/bootstrap/js/button.js) is needed for ```radiobuttons``` and ```checkboxbuttons``` fields.
 
   * [bootstrap-plugins](opt/bootstrap-plugins):
     - [bootstrap-tagsinput](http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/) is required for tags support with array values and textual input fields. The [opt/bootstrap-plugins/bootstrap-tagsinput](opt/bootstrap-plugins/bootstrap-tagsinput) folder contains all required files.
