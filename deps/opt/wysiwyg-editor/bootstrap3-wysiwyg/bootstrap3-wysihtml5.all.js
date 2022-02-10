@@ -11998,6 +11998,11 @@ wysihtml5.views.View = Base.extend(
   },
 
   focus: function() {
+    // PIOREK94: Fix reference to undefined element
+    if (this.element === undefined) {
+      return;
+    }
+    // PIOREK94: end of custom code
     if (this.element.ownerDocument.querySelector(":focus") === this.element) {
       return;
     }
@@ -12113,7 +12118,11 @@ wysihtml5.views.View = Base.extend(
 
       this.base();
 
-      var lastChild = this.element.lastChild;
+      // PIOREK94: Fix reference to undefined element
+      if (this.element !== undefined) {
+        var lastChild = this.element.lastChild;
+      }
+      // PIOREK94: end of custom code
       if (setToEnd && lastChild && this.selection) {
         if (lastChild.nodeName === "BR") {
           this.selection.setBefore(this.element.lastChild);
