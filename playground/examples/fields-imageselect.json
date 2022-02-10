@@ -28,6 +28,10 @@
       "imageSuffix": "-icon.png",
       "imageSelectorColumns": 4,
       "imageSelectorTitle": "Random choice"
+    },
+    {
+      "type": "submit",
+      "title": "Submit"
     }
   ]
 }

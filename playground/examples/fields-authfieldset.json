@@ -16,6 +16,10 @@
       "items": [
         "key"
       ]
+    },
+    {
+      "type": "submit",
+      "title": "Submit"
     }
   ]
 }

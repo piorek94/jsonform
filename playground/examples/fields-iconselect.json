@@ -125,6 +125,10 @@
       "imageButtonClass": "btn-secondary",
       "imageSelectorColumns": 10,
       "imageSelectorTitle": "Select an icon"
+    },
+    {
+      "type": "submit",
+      "title": "Submit"
     }
   ]
 }

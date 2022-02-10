@@ -16,6 +16,10 @@
       "type": "range",
       "step": 20,
       "indicator": true
+    },
+    {
+      "type": "submit",
+      "title": "Submit"
     }
   ]
 }
