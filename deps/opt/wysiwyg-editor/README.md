@@ -13,3 +13,6 @@
 * __NOTES__:
   - bootstrap 3 and 4 support
   - lite version can work without bootstrap
+  - for bootstrap 4 version (`-bs4` suffix) there are some dependencies:
+    * bootstrap: `bootstrap.css`, `util.js`, `dropdown.js`, `modal.js`, `tooltip.js`
+    * popper
