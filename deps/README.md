@@ -34,7 +34,7 @@ The libraries in the ```opt``` subfolder are optional as long as you do not use 
     - [vanilla-picker](https://vanilla-picker.js.org/). The [opt/colorpicker/vanilla-picker](opt/colorpicker/vanilla-picker) folder contains required set of file to render `color` fields.
 
   * [file-uploader](opt/file-uploader):
-    - [Transloadit's jQuery SDK](https://transloadit.com/docs/sdks/jquery-sdk/) is required if form uses ```file-hosted-public``` or ```file-transloadit``` fields. The [opt/file-uploader/jquery-transloadit](opt/file-uploader/jquery-transloadit) folder contains all required files.
+    - <del>[Transloadit's jQuery SDK](https://transloadit.com/docs/sdks/jquery-sdk/) is required if form uses ```file-hosted-public``` or ```file-transloadit``` fields. The [opt/file-uploader/jquery-transloadit](opt/file-uploader/jquery-transloadit) folder contains all required files.</del> __NOT CURRENTLY SUPPORTED__
 
   * [Font Awesome](https://fontawesome.com/) 5.0.6 or above is used as alternative icons library. The [opt/fontawesome](opt/fontawesome) folder contains a minimal set of files from Font Awesome.
 
