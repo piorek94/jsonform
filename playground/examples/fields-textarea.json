@@ -9,6 +9,10 @@
     {
       "key": "comment",
       "type": "textarea"
+    },
+    {
+      "type": "submit",
+      "title": "Submit"
     }
   ]
 }

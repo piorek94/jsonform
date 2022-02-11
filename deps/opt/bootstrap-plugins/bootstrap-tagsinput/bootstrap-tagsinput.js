@@ -7,9 +7,15 @@
   "use strict";
 
   var defaultOptions = {
+    // PIOREK94: Add bootstrap 4 support
+    theme: "bootstrap4",
     tagClass: function(item) {
-      return 'label label-info';
+      return this.theme === "bootstrap4" ? 'badge badge-info' : 'label label-info';
     },
+    // PIOREK94: end of custom code
+    // tagClass: function(item) {
+    //   return 'label label-info';
+    // },
     focusClass: 'focus',
     itemValue: function(item) {
       return item ? item.toString() : item;
@@ -33,6 +39,9 @@
     },
     trimValue: false,
     allowDuplicates: false,
+    // PIOREK94: Allow to edit the Tag before remove: https://github.com/Nodws/bootstrap4-tagsinput/commit/6b0ce5a46eecc881d81298000fc8a5d97107e8bb
+    editOnBackspace: false,
+    // PIOREK94: end of custom code
     triggerChange: true
   };
 
@@ -44,7 +53,10 @@
     this.itemsArray = [];
 
     this.$element = $(element);
-    this.$element.hide();
+    // PIOREK94: Setting style to display: none breaks browser-native validation; use `sr-only` class instead
+    this.$element.addClass('sr-only');
+    // PIOREK94: end of custom code
+    // this.$element.hide();
 
     this.isSelect = (element.tagName === 'SELECT');
     this.multiple = (this.isSelect && element.hasAttribute('multiple'));
@@ -53,7 +65,15 @@
     this.inputSize = Math.max(1, this.placeholderText.length);
 
     this.$container = $('<div class="bootstrap-tagsinput"></div>');
-    this.$input = $('<input type="text" placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
+    // PIOREK94: TODO: Fix problem related to using bootstrap tags input on jquery
+    // validate plugin. Currently jquery validate error: "has no name assigned" occurs.
+    // The following line solves problem for text input, but for select causes one empty value.
+    // this.$input = $('<input type="' + this.type + '" name="' + this.name + '" placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
+    this.name = element.hasAttribute('name') ? this.$element.attr('name') : '';
+    this.type = element.hasAttribute('type') ? this.$element.attr('type') : 'text';
+    this.$input = $('<input type="' + this.type + '" placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
+    // PIOREK94: end of custom code
+    //this.$input = $('<input type="text" placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
 
     this.$element.before(this.$container);
 
@@ -140,16 +160,26 @@
 
       // add a tag element
 
-      var $tag = $('<span class="tag ' + htmlEncode(tagClass) + (itemTitle !== null ? ('" title="' + itemTitle) : '') + '">' + htmlEncode(itemText) + '<span data-role="remove"></span></span>');
+      // PIOREK94: Fix XSS vulnerable https://snyk.io/vuln/npm:bootstrap-tagsinput:20160720:
+      // source: https://github.com/WOLFF-Daten-Menschen-Marketing-GmbH/bootstrap-tagsinput-2021/commit/76ad08ec524b7c6856f7d7ccb093d04d3a8a66b1
+      var $tag = $('<span class="tag ' + htmlEncode(tagClass) + (itemTitle !== null ? ('" title="' + htmlEncode(itemTitle)) : '') + '">' + htmlEncode(itemText) + '<span data-role="remove"></span></span>');
+      // PIOREK94: end of custom code
+      // var $tag = $('<span class="tag ' + htmlEncode(tagClass) + (itemTitle !== null ? ('" title="' + itemTitle) : '') + '">' + htmlEncode(itemText) + '<span data-role="remove"></span></span>');
       $tag.data('item', item);
       self.findInputWrapper().before($tag);
-      $tag.after(' ');
+      //$tag.after(' ');
 
       // Check to see if the tag exists in its raw or uri-encoded form
+      // PIOREK94: jQuery selector fix for values containing quotes
       var optionExists = (
-        $('option[value="' + encodeURIComponent(itemValue) + '"]', self.$element).length ||
-        $('option[value="' + htmlEncode(itemValue) + '"]', self.$element).length
+        $('option[value="' + encodeURIComponent(itemValue).replace(/"/g, '\\"') + '"]', self.$element).length ||
+        $('option[value="' + htmlEncode(itemValue).replace(/"/g, '\\"') + '"]', self.$element).length
       );
+      // PIOREK94: end of custom code
+      // var optionExists = (
+      //   $('option[value="' + encodeURIComponent(itemValue) + '"]', self.$element).length ||
+      //   $('option[value="' + htmlEncode(itemValue) + '"]', self.$element).length
+      // );
 
       // add <option /> if item represents a value not present in one of the <select />'s options
       // PIOREK94: but allow add when multiple and allowDuplicates is set
@@ -318,15 +348,15 @@
 
         self.$input.typeahead($.extend({}, typeahead, {
           source: function (query, process) {
-            // PIOREK94: add support for latest version of bootstrap3-typeahead v4.0.2 and bloodhound v0.11.1
+            // PIOREK94: add support for latest version of bootstrap3-typeahead v4.0.2 and bloodhound v0.11.1 & replace deprecated jquery methods
             function processData(data) {
               if (!data)
                 return;
 
-              if ($.isFunction(data.success)) {
+              if (typeof data.success === "function") {
                 // support for Angular callbacks
                 data.success(process);
-              } else if ($.isFunction(data.then)) {
+              } else if (typeof data.then === "function") {
                 // support for Angular promises
                 data.then(process);
               } else {
@@ -338,7 +368,7 @@
             // Bloodhound (since 0.11) needs three arguments.
             // Two of them are callback functions (sync and async) for local and remote data processing
             // see https://github.com/twitter/typeahead.js/blob/master/src/bloodhound/bloodhound.js#L132
-            if ($.isFunction(typeahead.source) && typeahead.source.length === 3) {
+            if (typeof typeahead.source === "function" && typeahead.source.length === 3) {
               typeahead.source(query, processData, processData);
             }
             else {
@@ -400,32 +430,47 @@
 
       // typeahead.js
       if (self.options.typeaheadjs) {
-          var typeaheadConfig = null;
-          var typeaheadDatasets = {};
+        // Determine if main configurations were passed or simply a dataset
+        var typeaheadjs = self.options.typeaheadjs;
+        // PIOREK94: replace deprecated jquery methods
+        if (!Array.isArray(typeaheadjs)) {
+        // PIOREK94: end of custom code
+        // if (!$.isArray(typeaheadjs)) {
+            typeaheadjs = [null, typeaheadjs];
+        }
 
-          // Determine if main configurations were passed or simply a dataset
-          var typeaheadjs = self.options.typeaheadjs;
-          if ($.isArray(typeaheadjs)) {
-            typeaheadConfig = typeaheadjs[0];
-            typeaheadDatasets = typeaheadjs[1];
+        $.fn.typeahead.apply(self.$input, typeaheadjs).on('typeahead:selected', $.proxy(function (obj, datum, name) {
+          var index = 0;
+          typeaheadjs.some(function(dataset, _index) {
+            if (dataset.name === name) {
+              index = _index;
+              return true;
+            }
+            return false;
+          });
+
+          // @TODO Dep: https://github.com/corejavascript/typeahead.js/issues/89
+          if (typeaheadjs[index].valueKey) {
+            self.add(datum[typeaheadjs[index].valueKey]);
           } else {
-            typeaheadDatasets = typeaheadjs;
+            self.add(datum);
           }
 
-          self.$input.typeahead(typeaheadConfig, typeaheadDatasets).on('typeahead:selected', $.proxy(function (obj, datum) {
-            if (typeaheadDatasets.valueKey)
-              self.add(datum[typeaheadDatasets.valueKey]);
-            else
-              self.add(datum);
-            self.$input.typeahead('val', '');
-          }, self));
+          self.$input.typeahead('val', '');
+        }, self));
       }
 
       self.$container.on('click', $.proxy(function(event) {
         if (! self.$element.attr('disabled')) {
-          self.$input.removeAttr('disabled');
+          // PIOREK94: replace deprecated jquery methods
+          self.$input.prop('disabled', false);
+          // PIOREK94: end of custom code
+          // self.$input.removeAttr('disabled');
         }
-        self.$input.focus();
+        // PIOREK94: replace deprecated jquery methods
+        self.$input.trigger("focus");
+        // PIOREK94: end of custom code
+        // self.$input.focus();
       }, self));
 
       // PIOREK94: clear input value after when freeInput is disabled:
@@ -474,6 +519,11 @@
             if (doGetCaretPosition($input[0]) === 0) {
               var prev = $inputWrapper.prev();
               if (prev.length) {
+                // PIOREK94: Allow to edit the Tag before remove: https://github.com/Nodws/bootstrap4-tagsinput/commit/6b0ce5a46eecc881d81298000fc8a5d97107e8bb
+                if (self.options.editOnBackspace === true) {
+                  $input.val(prev.data('item'));
+                }
+                // PIOREK94: end of custom code
                 // PIOREK94: Fix item removal when allowDuplicates is true
                 self.remove(prev.data('item'), false, { tagElement: prev, tagIndex: prev.index() });
                 // PIOREK94: end of custom code
@@ -501,7 +551,10 @@
             var $prevTag = $inputWrapper.prev();
             if ($input.val().length === 0 && $prevTag[0]) {
               $prevTag.before($inputWrapper);
-              $input.focus();
+              // PIOREK94: replace deprecated jquery methods
+              $input.trigger("focus");
+              // PIOREK94: end of custom code
+              // $input.focus();
             }
             break;
           // RIGHT ARROW
@@ -510,7 +563,10 @@
             var $nextTag = $inputWrapper.next();
             if ($input.val().length === 0 && $nextTag[0]) {
               $nextTag.after($inputWrapper);
-              $input.focus();
+              // PIOREK94: replace deprecated jquery methods
+              $input.trigger("focus");
+              // PIOREK94: end of custom code
+              // $input.focus();
             }
             break;
          default:
@@ -521,7 +577,10 @@
         var textLength = $input.val().length,
             wordSpace = Math.ceil(textLength / 5),
             size = textLength + wordSpace + 1;
-        $input.attr('size', Math.max(this.inputSize, $input.val().length));
+        // PIOREK94: set input size properly
+        $input.attr('size', Math.max(this.inputSize, size));
+        // PIOREK94: end of custom code
+        // $input.attr('size', Math.max(this.inputSize, $input.val().length));
       }, self));
 
       self.$container.on('keypress', 'input', $.proxy(function(event) {
@@ -556,7 +615,10 @@
          var textLength = $input.val().length,
             wordSpace = Math.ceil(textLength / 5),
             size = textLength + wordSpace + 1;
-         $input.attr('size', Math.max(this.inputSize, $input.val().length));
+         // PIOREK94: set input size properly
+         $input.attr('size', Math.max(this.inputSize, size));
+         // PIOREK94: end of custom code
+         // $input.attr('size', Math.max(this.inputSize, $input.val().length));
       }, self));
 
       // Remove icon clicked
@@ -602,7 +664,10 @@
      * Sets focus on the tagsinput
      */
     focus: function() {
-      this.$input.focus();
+      // PIOREK94: replace deprecated jquery methods
+      this.$input.trigger("focus");
+      // PIOREK94: end of custom code
+      // this.$input.focus();
     },
 
     /**

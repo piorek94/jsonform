@@ -16,6 +16,10 @@
       "items": [
         "age"
       ]
+    },
+    {
+      "type": "submit",
+      "title": "Submit"
     }
   ]
 }

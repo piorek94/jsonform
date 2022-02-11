@@ -10,6 +10,10 @@
     {
       "key": "language",
       "type": "radios"
+    },
+    {
+      "type": "submit",
+      "title": "Submit"
     }
   ]
 }

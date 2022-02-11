@@ -59,6 +59,10 @@
           "notDraggableFamily[].name"
         ]
       }
+    },
+    {
+      "type": "submit",
+      "title": "Submit"
     }
   ]
 }

@@ -11,14 +11,11 @@
       @import url("../deps/opt/colorpicker/spectrum/spectrum.min.css");
       @import url("../deps/opt/jQueryUI/jquery-ui.min.css");
       @import url("../deps/opt/bootstrap-plugins/bootstrap-tagsinput/bootstrap-tagsinput.css");
-      @import url("../deps/opt/wysiwyg-editor/summernote/summernote-lite.min.css");
-
-      h2 { font-weight: 200; margin-top: 0; }
+      @import url("../deps/opt/wysiwyg-editor/summernote/summernote-bs4.min.css");
 
       .tagline {
         padding: 10px;
         font-weight: 200;
-        margin-top: -1em;
       }
 
       .footer {
@@ -27,7 +24,7 @@
         border-top: 1px solid #E5E5E5;
       }
 
-      #form .input-group-addon {
+      #form .input-group-text {
         border: none;
         background-color: inherit;
       }
@@ -55,29 +52,20 @@
         color: red;
         padding-top: 1em;
       }
-      .inline-other-field > .other-field-content,
-      .inline-other-field > label > .other-field-content {
+      .inline-other-field > .other-field-content {
         display: inline-block;
-        margin: 0;
       }
-      .inline-other-field.checkbox > label {
-        width: 100%;
-      }
-      .inline-other-field.checkbox > label > .other-field-content {
-        width: 80%;
-      }
-      .inline-other-field > input[type=checkbox],
-      .inline-other-field > label > input[type=checkbox] {
+      .inline-other-field > input[type=checkbox] {
         margin-top: 11px;
+      }
+      .inline-other-field.form-check-inline > input[type=checkbox] {
+        margin-top: inherit;
+      }
+      .inline-other-field > label {
+        margin-right: 3px;
       }
       .other-field-content > .form-group {
         margin: 0;
-      }
-      .radio-inline, .checkbox-inline {
-        margin-left: 10px;
-      }
-      .indent {
-        margin-left: 20px;
       }
       .has-error > a.tab {
         border: #b94a48 solid 1px;
@@ -89,17 +77,23 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-inverse navbar-static-top">
-        <div class="container">
-          <a class="navbar-brand" href="#">JSON Form Playground</a>
-          <div>
-            <ul class="nav navbar-nav">
-              <li><a href="#">Home</a></li>
-              <li><a href="https://github.com/jsonform/jsonform/wiki">Documentation</a></li>
-              <li><a href="https://github.com/jsonform/jsonform">Project on github</a></li>
-            </ul>
-          </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">JSON Form Playground</a>
+        <div class="navbar-collapse">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://github.com/jsonform/jsonform/wiki">Documentation</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"href="https://github.com/jsonform/jsonform">Project on github</a>
+            </li>
+          </ul>
         </div>
+      </div>
     </nav>
 
     <div class="container">
@@ -112,8 +106,10 @@
           <form id="form" class="form-vertical"></form>
         </div>
         <div class="col-md-7">
-          <h2>Generated form</h2>
-          <div id="result" class="well">(please wait)</div>
+          <div class="card bg-light">
+            <div class="card-header">Generated form</div>
+            <div class="card-body" id="result">(please wait)</div>
+          </div>
         </div>
       </div>
 
@@ -129,12 +125,17 @@
     <script src="../deps/underscore/underscore-umd-min.js"></script>
     <script src="../deps/opt/validator/z-schema/ZSchema-browser-min.js"></script>
     <script src="../deps/opt/jQueryUI/jquery-ui.min.js"></script>
+    <script src="../deps/opt/popper/popper.min.js"></script>
+    <script src="../deps/opt/bootstrap/js/util.js"></script>
     <script src="../deps/opt/bootstrap/js/dropdown.js"></script>
+    <script src="../deps/opt/bootstrap/js/button.js"></script>
+    <script src="../deps/opt/bootstrap/js/modal.js"></script>
+    <script src="../deps/opt/bootstrap/js/tooltip.js"></script>
     <script src="../deps/opt/bootstrap-plugins/bootstrap-typeahead/bootstrap3-typeahead.js"></script>
     <script src="../deps/opt/bootstrap-plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
     <script src="../deps/opt/wysiwyg-editor/bootstrap3-wysiwyg/bootstrap3-wysihtml5.all.js"></script>
-    <script src="../deps/opt/wysiwyg-editor/summernote/summernote-lite.min.js"></script>
-    <script src="../deps/opt/colorpicker/spectrum/spectrum.min.js"></script>
+    <script src="../deps/opt/wysiwyg-editor/summernote/summernote-bs4.min.js"></script>
+    <script src="../deps/opt/colorpicker/spectrum/spectrum.js"></script>
     <script src="../deps/opt/code-editor/ace/ace.js"></script>
     <script src="../deps/opt/code-editor/ace/mode-json.js"></script>
     <script src="../deps/opt/code-editor/ace/mode-html.js"></script>
@@ -142,7 +143,8 @@
     <script src="../deps/opt/code-editor/ace/mode-javascript.js"></script>
     <script src="../deps/opt/code-editor/ace/mode-less.js"></script>
     <script src="../deps/opt/code-editor/ace/mode-markdown.js"></script>
-    <script src="../deps/opt/file-uploader/jquery-transloadit/jquery.transloadit2.js"></script>
+    <!-- TODO: Not currently supported -->
+    <!-- <script src="../deps/opt/file-uploader/jquery-transloadit/jquery.transloadit2.js"></script> -->
 
     <script src="../lib/jsonform.js"></script>
 

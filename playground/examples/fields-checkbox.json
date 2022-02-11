@@ -9,6 +9,10 @@
     {
       "key": "flag",
       "inlinetitle": "Check this box if you are over 18"
+    },
+    {
+      "type": "submit",
+      "title": "Submit"
     }
   ]
 }

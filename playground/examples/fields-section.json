@@ -25,6 +25,10 @@
         "name",
         "age"
       ]
+    },
+    {
+      "type": "submit",
+      "title": "Submit"
     }
   ]
 }

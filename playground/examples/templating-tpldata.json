@@ -9,6 +9,10 @@
     {
       "key": "age",
       "title": "{{user.name}}'s age"
+    },
+    {
+      "type": "submit",
+      "title": "Submit"
     }
   ],
   "tpldata": {

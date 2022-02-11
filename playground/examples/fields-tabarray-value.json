@@ -24,6 +24,10 @@
           ]
         }
       ]
+    },
+    {
+      "type": "submit",
+      "title": "Submit"
     }
   ]
 }
