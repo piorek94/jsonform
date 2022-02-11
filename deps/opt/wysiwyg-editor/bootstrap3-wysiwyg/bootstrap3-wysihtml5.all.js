@@ -14805,7 +14805,10 @@ function program17(depth0,data) {
       },
 
       loadParserRules: function() {
-        if($.type(this.config.parserRules) === 'string') {
+        // PIOREK94: replace deprecated jquery methods
+        if(typeof this.config.parserRules === 'string') {
+        // PIOREK94: end of custom code
+        // if($.type(this.config.parserRules) === 'string') {
           $.ajax({
             dataType: 'json',
             url: this.config.parserRules,
@@ -14853,7 +14856,10 @@ function program17(depth0,data) {
             setTimeout(editor.composer.focus, 0);
           });
           $(dialog.container).on('shown.bs.modal', function () {
-            $(this).find('input, select, textarea').first().focus();
+            // PIOREK94: replace deprecated jquery methods
+            $(this).find('input, select, textarea').first().trigger("focus");
+            // PIOREK94: end of custom code
+            // $(this).find('input, select, textarea').first().focus();
           });
         });
         this.on('change_view', function() {
@@ -14879,7 +14885,10 @@ function program17(depth0,data) {
           }
         }
 
-        toolbar.find('a[data-wysihtml5-command="formatBlock"]').click(function(e) {
+        // PIOREK94: replace deprecated jquery methods
+        toolbar.find('a[data-wysihtml5-command="formatBlock"]').on('click', function(e) {
+        // PIOREK94: end of custom code
+        // toolbar.find('a[data-wysihtml5-command="formatBlock"]').click(function(e) {
           var target = e.delegateTarget || e.target || e.srcElement,
           el = $(target),
           showformat = el.data('wysihtml5-display-format-name'),
@@ -14889,7 +14898,10 @@ function program17(depth0,data) {
           }
         });
 
-        toolbar.find('a[data-wysihtml5-command="foreColor"]').click(function(e) {
+        // PIOREK94: replace deprecated jquery methods
+        toolbar.find('a[data-wysihtml5-command="foreColor"]').on('click', function(e) {
+        // PIOREK94: end of custom code
+        // toolbar.find('a[data-wysihtml5-command="foreColor"]').click(function(e) {
           var target = e.target || e.srcElement;
           var el = $(target);
           self.toolbar.find('.current-color').text(el.html());

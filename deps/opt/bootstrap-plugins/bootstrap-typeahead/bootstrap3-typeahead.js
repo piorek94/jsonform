@@ -102,10 +102,16 @@
                 if (!newVal) {
                     newVal = '';
                 }
+                // PIOREK94: replace deprecated jquery methods
                 this.$element
                     .val(this.displayText(newVal) || newVal)
                     .text(this.displayText(newVal) || newVal)
-                    .change();
+                    .trigger("change");
+                // PIOREK94: end of custom code
+                // this.$element
+                //     .val(this.displayText(newVal) || newVal)
+                //     .text(this.displayText(newVal) || newVal)
+                //     .change();
                 this.afterSelect(newVal);
             }
             return this.hide();
@@ -124,10 +130,16 @@
                 }
 
                 if (this.changeInputOnSelect) {
+                    // PIOREK94: replace deprecated jquery methods
                     this.$element
                         .val(this.displayText(newVal) || newVal)
                         .text(this.displayText(newVal) || newVal)
-                        .change();
+                        .trigger("change");
+                    // PIOREK94: end of custom code
+                    // this.$element
+                    //     .val(this.displayText(newVal) || newVal)
+                    //     .text(this.displayText(newVal) || newVal)
+                    //     .change();
                 }
 
                 if (this.followLinkOnSelect && this.itemLink(val)) {
@@ -232,13 +244,22 @@
                 // Bloodhound (since 0.11) needs three arguments.
                 // Two of them are callback functions (sync and async) for local and remote data processing
                 // see https://github.com/twitter/typeahead.js/blob/master/src/bloodhound/bloodhound.js#L132
-                if ($.isFunction(this.source) && this.source.length === 3) {
+                // PIOREK94: replace deprecated jquery methods
+                if (typeof this.source === "function" && this.source.length === 3) {
                     this.source(this.query, $.proxy(this.process, this), $.proxy(this.process, this));
-                } else if ($.isFunction(this.source)) {
+                } else if (typeof this.source === "function") {
                     this.source(this.query, $.proxy(this.process, this));
                 } else if (this.source) {
                     this.process(this.source);
                 }
+                // PIOREK94: end of custom code
+                // if ($.isFunction(this.source) && this.source.length === 3) {
+                //     this.source(this.query, $.proxy(this.process, this), $.proxy(this.process, this));
+                // } else if ($.isFunction(this.source)) {
+                //     this.source(this.query, $.proxy(this.process, this));
+                // } else if (this.source) {
+                //     this.process(this.source);
+                // }
             }, this);
 
             clearTimeout(this.lookupWorker);
@@ -550,16 +571,24 @@
         destroy: function () {
             this.$element.data('typeahead', null);
             this.$element.data('active', null);
+            // PIOREK94: replace deprecated jquery methods
             this.$element
-                .unbind('focus.bootstrap3Typeahead')
-                .unbind('blur.bootstrap3Typeahead')
-                .unbind('keypress.bootstrap3Typeahead')
-                .unbind('propertychange.bootstrap3Typeahead input.bootstrap3Typeahead')
-                .unbind('keyup.bootstrap3Typeahead');
+                .off('focus.bootstrap3Typeahead')
+                .off('blur.bootstrap3Typeahead')
+                .off('keypress.bootstrap3Typeahead')
+                .off('propertychange.bootstrap3Typeahead input.bootstrap3Typeahead')
+                .off('keyup.bootstrap3Typeahead');
+            // PIOREK94: end of custom code
+            // this.$element
+            //     .unbind('focus.bootstrap3Typeahead')
+            //     .unbind('blur.bootstrap3Typeahead')
+            //     .unbind('keypress.bootstrap3Typeahead')
+            //     .unbind('propertychange.bootstrap3Typeahead input.bootstrap3Typeahead')
+            //     .unbind('keyup.bootstrap3Typeahead');
 
             if (this.eventSupported('keydown')) {
-                // PIOREK94: fix error keydown after event destroyed
-                this.$element.unbind('keydown.bootstrap3Typeahead');
+                // PIOREK94: fix error keydown after event destroyed & replace replace deprecated jquery methods
+                this.$element.off('keydown.bootstrap3Typeahead');
                 // PIOREK94: end of custom code
                 // this.$element.unbind('keydown.bootstrap3-typeahead');
             }
@@ -709,7 +738,10 @@
                 // This is for IE that blurs the input when user clicks on scroll.
                 // We set the focus back on the input and prevent the lookup to occur again
                 this.skipShowHintOnFocus = true;
-                this.$element.focus();
+                // PIOREK94: replace deprecated jquery methods
+                this.$element.trigger("focus");
+                // PIOREK94: end of custom code
+                // this.$element.focus();
                 this.mouseddown = false;
             }
         },
@@ -718,7 +750,10 @@
             e.preventDefault();
             this.skipShowHintOnFocus = true;
             this.select();
-            this.$element.focus();
+            // PIOREK94: replace deprecated jquery methods
+            this.$element.trigger("focus");
+            // PIOREK94: end of custom code
+            // this.$element.focus();
             this.hide();
         },
 
@@ -760,7 +795,10 @@
         touchend: function (e) {
             e.preventDefault();
             this.select();
-            this.$element.focus();
+            // PIOREK94: replace deprecated jquery methods
+            this.$element.trigger("focus");
+            // PIOREK94: end of custom code
+            // this.$element.focus();
         }
 
     };

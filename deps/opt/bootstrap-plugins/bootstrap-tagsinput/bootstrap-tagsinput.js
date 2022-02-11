@@ -348,15 +348,15 @@
 
         self.$input.typeahead($.extend({}, typeahead, {
           source: function (query, process) {
-            // PIOREK94: add support for latest version of bootstrap3-typeahead v4.0.2 and bloodhound v0.11.1
+            // PIOREK94: add support for latest version of bootstrap3-typeahead v4.0.2 and bloodhound v0.11.1 & replace deprecated jquery methods
             function processData(data) {
               if (!data)
                 return;
 
-              if ($.isFunction(data.success)) {
+              if (typeof data.success === "function") {
                 // support for Angular callbacks
                 data.success(process);
-              } else if ($.isFunction(data.then)) {
+              } else if (typeof data.then === "function") {
                 // support for Angular promises
                 data.then(process);
               } else {
@@ -368,7 +368,7 @@
             // Bloodhound (since 0.11) needs three arguments.
             // Two of them are callback functions (sync and async) for local and remote data processing
             // see https://github.com/twitter/typeahead.js/blob/master/src/bloodhound/bloodhound.js#L132
-            if ($.isFunction(typeahead.source) && typeahead.source.length === 3) {
+            if (typeof typeahead.source === "function" && typeahead.source.length === 3) {
               typeahead.source(query, processData, processData);
             }
             else {
@@ -432,7 +432,10 @@
       if (self.options.typeaheadjs) {
         // Determine if main configurations were passed or simply a dataset
         var typeaheadjs = self.options.typeaheadjs;
-        if (!$.isArray(typeaheadjs)) {
+        // PIOREK94: replace deprecated jquery methods
+        if (!Array.isArray(typeaheadjs)) {
+        // PIOREK94: end of custom code
+        // if (!$.isArray(typeaheadjs)) {
             typeaheadjs = [null, typeaheadjs];
         }
 
@@ -459,9 +462,15 @@
 
       self.$container.on('click', $.proxy(function(event) {
         if (! self.$element.attr('disabled')) {
-          self.$input.removeAttr('disabled');
+          // PIOREK94: replace deprecated jquery methods
+          self.$input.prop('disabled', false);
+          // PIOREK94: end of custom code
+          // self.$input.removeAttr('disabled');
         }
-        self.$input.focus();
+        // PIOREK94: replace deprecated jquery methods
+        self.$input.trigger("focus");
+        // PIOREK94: end of custom code
+        // self.$input.focus();
       }, self));
 
       // PIOREK94: clear input value after when freeInput is disabled:
@@ -542,7 +551,10 @@
             var $prevTag = $inputWrapper.prev();
             if ($input.val().length === 0 && $prevTag[0]) {
               $prevTag.before($inputWrapper);
-              $input.focus();
+              // PIOREK94: replace deprecated jquery methods
+              $input.trigger("focus");
+              // PIOREK94: end of custom code
+              // $input.focus();
             }
             break;
           // RIGHT ARROW
@@ -551,7 +563,10 @@
             var $nextTag = $inputWrapper.next();
             if ($input.val().length === 0 && $nextTag[0]) {
               $nextTag.after($inputWrapper);
-              $input.focus();
+              // PIOREK94: replace deprecated jquery methods
+              $input.trigger("focus");
+              // PIOREK94: end of custom code
+              // $input.focus();
             }
             break;
          default:
@@ -649,7 +664,10 @@
      * Sets focus on the tagsinput
      */
     focus: function() {
-      this.$input.focus();
+      // PIOREK94: replace deprecated jquery methods
+      this.$input.trigger("focus");
+      // PIOREK94: end of custom code
+      // this.$input.focus();
     },
 
     /**
