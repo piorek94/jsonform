@@ -11,10 +11,16 @@
   "form": [
     {
       "type": "array",
-      "items": [{
-        "key": "thoughts[]",
-        "title": "Thought number {{idx}}"
-      }]
+      "items": [
+        {
+          "key": "thoughts[]",
+          "title": "Thought number {{idx}}"
+        }
+      ]
+    },
+    {
+      "type": "submit",
+      "title": "Submit"
     }
   ]
 }

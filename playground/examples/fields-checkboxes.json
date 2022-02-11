@@ -25,6 +25,10 @@
         "cheese": "Cheddar rules!",
         "dessert": "Thumbs up for a dessert"
       }
+    },
+    {
+      "type": "submit",
+      "title": "Submit"
     }
   ]
 }

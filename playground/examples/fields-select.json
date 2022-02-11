@@ -30,6 +30,10 @@
         "male": "Dude",
         "female": "Dudette"
       }
+    },
+    {
+      "type": "submit",
+      "title": "Submit"
     }
   ]
 }

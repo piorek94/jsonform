@@ -2,7 +2,7 @@
 
 ### spectrum
 * source: https://github.com/bgrins/spectrum
-* version: v1.8.1
+* version: 101b05c1d977fbc529ae4c3b6865b1f7ab70c6e0 commit (just after v1.8.1)
 
 ### seballot-spectrum
 * source: https://github.com/seballot/spectrum

@@ -15,10 +15,17 @@
           "title": "Submit"
         },
         {
+          "type": "reset",
+          "title": "Reset"
+        },
+        {
           "type": "button",
           "title": "Cancel"
         }
       ]
     }
-  ]
+  ],
+  "defaultClasses": {
+    "actionsClass":"btn-group"
+  }
 }

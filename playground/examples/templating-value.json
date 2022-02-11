@@ -26,6 +26,10 @@
           ]
         }
       ]
+    },
+    {
+      "type": "submit",
+      "title": "Submit"
     }
   ]
 }

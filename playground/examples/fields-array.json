@@ -36,9 +36,10 @@
           }
         ]
       }
+    },
+    {
+      "type": "submit",
+      "title": "Submit"
     }
-  ],
-  "defaultClasses": {
-    "iconClassPrefix": "fa fa"
-  }
+  ]
 }

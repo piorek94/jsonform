@@ -102,10 +102,16 @@
                 if (!newVal) {
                     newVal = '';
                 }
+                // PIOREK94: replace deprecated jquery methods
                 this.$element
                     .val(this.displayText(newVal) || newVal)
                     .text(this.displayText(newVal) || newVal)
-                    .change();
+                    .trigger("change");
+                // PIOREK94: end of custom code
+                // this.$element
+                //     .val(this.displayText(newVal) || newVal)
+                //     .text(this.displayText(newVal) || newVal)
+                //     .change();
                 this.afterSelect(newVal);
             }
             return this.hide();
@@ -124,10 +130,16 @@
                 }
 
                 if (this.changeInputOnSelect) {
+                    // PIOREK94: replace deprecated jquery methods
                     this.$element
                         .val(this.displayText(newVal) || newVal)
                         .text(this.displayText(newVal) || newVal)
-                        .change();
+                        .trigger("change");
+                    // PIOREK94: end of custom code
+                    // this.$element
+                    //     .val(this.displayText(newVal) || newVal)
+                    //     .text(this.displayText(newVal) || newVal)
+                    //     .change();
                 }
 
                 if (this.followLinkOnSelect && this.itemLink(val)) {
@@ -187,6 +199,8 @@
             // The rules for bootstrap are: 'dropup' in the parent and 'dropdown-menu-right' in the element.
             // Note that to get right alignment, you'll need to specify `menu` in the options to be:
             // '<ul class="typeahead dropdown-menu" role="listbox"></ul>'
+            // or for bootstrap >= 4
+            // '<div class="typeahead dropdown-menu" role="listbox"></div>'
             var dropup = $(element).parent().hasClass('dropup');
             var newTop = dropup ? 'auto' : (pos.top + pos.height + scrollHeight);
             var right = $(element).hasClass('dropdown-menu-right');
@@ -230,13 +244,22 @@
                 // Bloodhound (since 0.11) needs three arguments.
                 // Two of them are callback functions (sync and async) for local and remote data processing
                 // see https://github.com/twitter/typeahead.js/blob/master/src/bloodhound/bloodhound.js#L132
-                if ($.isFunction(this.source) && this.source.length === 3) {
+                // PIOREK94: replace deprecated jquery methods
+                if (typeof this.source === "function" && this.source.length === 3) {
                     this.source(this.query, $.proxy(this.process, this), $.proxy(this.process, this));
-                } else if ($.isFunction(this.source)) {
+                } else if (typeof this.source === "function") {
                     this.source(this.query, $.proxy(this.process, this));
                 } else if (this.source) {
                     this.process(this.source);
                 }
+                // PIOREK94: end of custom code
+                // if ($.isFunction(this.source) && this.source.length === 3) {
+                //     this.source(this.query, $.proxy(this.process, this), $.proxy(this.process, this));
+                // } else if ($.isFunction(this.source)) {
+                //     this.source(this.query, $.proxy(this.process, this));
+                // } else if (this.source) {
+                //     this.process(this.source);
+                // }
             }, this);
 
             clearTimeout(this.lookupWorker);
@@ -387,10 +410,7 @@
                     }
                     i.find('a').attr('title', self.itemTitle(item));
                     if (text == self.$element.val()) {
-                        // PIOREK94: Bootstrap 4 highlight fix: active class has to be added to li>a element not li, for backward compatibility add to both
-                        i.addClass('active').find('a').addClass('active');
-                        // PIOREK94: end of custom code
-                        // i.addClass('active');
+                        i.addClass('active');
                         self.$element.data('active', item);
                         activeFound = true;
                     }
@@ -398,10 +418,7 @@
                 });
 
             if (this.autoSelect && !activeFound) {
-                // PIOREK94: Bootstrap 4 highlight fix: active class has to be added to li>a element not li, for backward compatibility add to both
-                items.filter(':not(.dropdown-header)').first().addClass('active').find('a').addClass('active');
-                // PIOREK94: end of custom code
-                // items.filter(':not(.dropdown-header)').first().addClass('active');
+                items.filter(':not(.dropdown-header)').first().addClass('active');
                 this.$element.data('active', items.first().data('value'));
             }
             this.$menu.html(items);
@@ -435,14 +452,14 @@
                 // next = $(this.$menu.find($(this.options.item || this.theme.item).prop('tagName'))[0]);
             }
 
-            while (next.hasClass('divider') || next.hasClass('dropdown-header')) {
+            // PIOREK94: consider bootstrap >= 4 divider class
+            while ((next.hasClass('divider') || next.hasClass('dropdown-divider')) || next.hasClass('dropdown-header')) {
+            // PIOREK94: end of custom code
+            // while (next.hasClass('divider') || next.hasClass('dropdown-header')) {
                 next = next.next();
             }
 
-            // PIOREK94: Bootstrap 4 highlight fix: active class has to be added to li>a element not li, for backward compatibility add to both
-            next.addClass('active').find('a').addClass('active');
-            // PIOREK94: end of custom code
-            // next.addClass('active');
+            next.addClass('active');
             // added for screen reader
             // PIOREK94: updater should not be triggered on move when
             // changeInputOnMove is false - this introduces incompatibility with
@@ -460,11 +477,12 @@
 
             // PIOREK94: Added handling for up/down key scrolling and a carousel option
             // added to scroll parent container
-            var offset_in_list = next.offset().top - next.closest('ul').offset().top;
+            var el_selector = this.theme === 'bootstrap3' ? 'ul' : 'div';
+            var offset_in_list = next.offset().top - next.closest(el_selector + ' .typeahead').offset().top;
             var item_height = next.outerHeight();
 
-            if (offset_in_list > next.closest('ul').height()) {
-                next.closest('ul').scrollTop(next.closest('ul').scrollTop() + item_height);
+            if (offset_in_list > next.closest(el_selector + ' .typeahead').height()) {
+                next.closest(el_selector + ' .typeahead').scrollTop(next.closest(el_selector + ' .typeahead').scrollTop() + item_height);
             }
             // PIOREK94: end of custom code
         },
@@ -488,10 +506,7 @@
                 prev = prev.prev();
             }
 
-            // PIOREK94: Bootstrap 4 highlight fix: active class has to be added to li>a element not li, for backward compatibility add to both
-            prev.addClass('active').find('a').addClass('active');
-            // PIOREK94: end of custom code
-            // prev.addClass('active');
+            prev.addClass('active');
             // added for screen reader
             // PIOREK94: updater should not be triggered on move when
             // changeInputOnMove is false - this introduces incompatibility with
@@ -509,11 +524,12 @@
 
             // PIOREK94: Added handling for up/down key scrolling and a carousel option
             // added to scroll parent container
-            var offset_in_list = prev.offset().top - prev.closest('ul').offset().top;
+            var el_selector = this.theme === 'bootstrap3' ? 'ul' : 'div';
+            var offset_in_list = prev.offset().top - prev.closest(el_selector + ' .typeahead').offset().top;
             var item_height = prev.outerHeight();
 
             if (offset_in_list < 0) {
-                prev.closest('ul').scrollTop(prev.closest('ul').scrollTop() - item_height);
+                prev.closest(el_selector + ' .typeahead').scrollTop(prev.closest(el_selector + ' .typeahead').scrollTop() - item_height);
             }
             // PIOREK94: end of custom code
         },
@@ -555,16 +571,24 @@
         destroy: function () {
             this.$element.data('typeahead', null);
             this.$element.data('active', null);
+            // PIOREK94: replace deprecated jquery methods
             this.$element
-                .unbind('focus.bootstrap3Typeahead')
-                .unbind('blur.bootstrap3Typeahead')
-                .unbind('keypress.bootstrap3Typeahead')
-                .unbind('propertychange.bootstrap3Typeahead input.bootstrap3Typeahead')
-                .unbind('keyup.bootstrap3Typeahead');
+                .off('focus.bootstrap3Typeahead')
+                .off('blur.bootstrap3Typeahead')
+                .off('keypress.bootstrap3Typeahead')
+                .off('propertychange.bootstrap3Typeahead input.bootstrap3Typeahead')
+                .off('keyup.bootstrap3Typeahead');
+            // PIOREK94: end of custom code
+            // this.$element
+            //     .unbind('focus.bootstrap3Typeahead')
+            //     .unbind('blur.bootstrap3Typeahead')
+            //     .unbind('keypress.bootstrap3Typeahead')
+            //     .unbind('propertychange.bootstrap3Typeahead input.bootstrap3Typeahead')
+            //     .unbind('keyup.bootstrap3Typeahead');
 
             if (this.eventSupported('keydown')) {
-                // PIOREK94: fix error keydown after event destroyed
-                this.$element.unbind('keydown.bootstrap3Typeahead');
+                // PIOREK94: fix error keydown after event destroyed & replace replace deprecated jquery methods
+                this.$element.off('keydown.bootstrap3Typeahead');
                 // PIOREK94: end of custom code
                 // this.$element.unbind('keydown.bootstrap3-typeahead');
             }
@@ -714,7 +738,10 @@
                 // This is for IE that blurs the input when user clicks on scroll.
                 // We set the focus back on the input and prevent the lookup to occur again
                 this.skipShowHintOnFocus = true;
-                this.$element.focus();
+                // PIOREK94: replace deprecated jquery methods
+                this.$element.trigger("focus");
+                // PIOREK94: end of custom code
+                // this.$element.focus();
                 this.mouseddown = false;
             }
         },
@@ -723,17 +750,17 @@
             e.preventDefault();
             this.skipShowHintOnFocus = true;
             this.select();
-            this.$element.focus();
+            // PIOREK94: replace deprecated jquery methods
+            this.$element.trigger("focus");
+            // PIOREK94: end of custom code
+            // this.$element.focus();
             this.hide();
         },
 
         mouseenter: function (e) {
             this.mousedover = true;
             this.$menu.find('.active').removeClass('active');
-            // PIOREK94: Bootstrap 4 highlight fix: active class has to be added to li>a element not li, for backward compatibility add to both
-            $(e.currentTarget).addClass('active').find('a').addClass('active');
-            // PIOREK94: end of custom code
-            // $(e.currentTarget).addClass('active');
+            $(e.currentTarget).addClass('active');
         },
 
         mouseleave: function (e) {
@@ -762,16 +789,16 @@
         touchstart: function (e) {
             e.preventDefault();
             this.$menu.find('.active').removeClass('active');
-            // PIOREK94: Bootstrap 4 highlight fix: active class has to be added to li>a element not li, for backward compatibility add to both
-            $(e.currentTarget).addClass('active').find('a').addClass('active');
-            // PIOREK94: end of custom code
-            // $(e.currentTarget).addClass('active');
+            $(e.currentTarget).addClass('active');
         },
 
         touchend: function (e) {
             e.preventDefault();
             this.select();
-            this.$element.focus();
+            // PIOREK94: replace deprecated jquery methods
+            this.$element.trigger("focus");
+            // PIOREK94: end of custom code
+            // this.$element.focus();
         }
 
     };
@@ -789,6 +816,9 @@
         }
         return this.each(function () {
             var $this = $(this);
+            // PIOREK94: Prevent default browser menus from appearing over the Bootstrap typeahead dropdown
+            $this.attr( "autocomplete", "off" );
+            // PIOREK94: end of custom code
             var data = $this.data('typeahead');
             var options = typeof option == 'object' && option;
             if (!data) {
@@ -837,18 +867,26 @@
         // PIOREK94: end of custom code
         // selectOnBlur: true,
         showCategoryHeader: true,
-        theme: "bootstrap3",
+        // PIOREK94: set default theme to bootstrap4
+        theme: "bootstrap4",
+        // PIOREK94: end of custom code
         themes: {
         bootstrap3: {
             menu: '<ul class="typeahead dropdown-menu" role="listbox"></ul>',
-            item: '<li><a class="dropdown-item" href="#" role="option"></a></li>',
+            // PIOREK94: fix bootstrap3/4
+            item: '<li><a href="#" role="option"></a></li>',
+            // PIOREK94: end of custom code
+            // item: '<li><a class="dropdown-item" href="#" role="option"></a></li>',
             itemContentSelector: "a",
             headerHtml: '<li class="dropdown-header"></li>',
             headerDivider: '<li class="divider" role="separator"></li>'
         },
         bootstrap4: {
             menu: '<div class="typeahead dropdown-menu" role="listbox"></div>',
-            item: '<button class="dropdown-item" role="option"></button>',
+            // PIOREK94: fix bootstrap3/4
+            item: '<a class="dropdown-item" href="#" role="option"></a>',
+            // PIOREK94: end of custom code
+            // item: '<button class="dropdown-item" role="option"></button>',
             itemContentSelector: '.dropdown-item',
             headerHtml: '<h6 class="dropdown-header"></h6>',
             headerDivider: '<div class="dropdown-divider"></div>'
