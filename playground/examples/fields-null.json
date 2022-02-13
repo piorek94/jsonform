@@ -1,0 +1,23 @@
+{
+  "schema": {
+    "title": "Null field example",
+    "type": "object",
+    "required": [
+      "helpText"
+    ],
+    "properties": {
+      "helpText": {
+        "title": "A null field",
+        "description": "Null fields like this are great for adding extra information",
+        "type": "null"
+      }
+    }
+  },
+  "form": [
+    "*",
+    {
+      "type": "submit",
+      "title": "Submit"
+    }
+  ]
+}
