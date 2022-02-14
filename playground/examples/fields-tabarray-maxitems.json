@@ -25,6 +25,7 @@
   },
   "form": [
     {
+      "key": "friends",
       "type": "tabarray",
       "items": {
         "type": "section",

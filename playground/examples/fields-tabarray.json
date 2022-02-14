@@ -1,6 +1,6 @@
 {
   "schema": {
-  	"friends": {
+    "friends": {
       "type": "array",
       "items": {
         "type": "object",
@@ -36,6 +36,7 @@
   },
   "form": [
     {
+      "key": "friends",
       "type": "tabarray",
       "items": {
         "type": "section",
@@ -51,6 +52,7 @@
       }
     },
     {
+      "key": "notDraggableFamily",
       "type": "tabarray",
       "draggable": false,
       "items": {

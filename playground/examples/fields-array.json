@@ -23,6 +23,7 @@
   },
   "form": [
     {
+      "key": "friends",
       "type": "array",
       "items": {
         "type": "section",
