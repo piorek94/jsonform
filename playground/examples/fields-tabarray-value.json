@@ -13,6 +13,7 @@
     {
       "key": "thoughts",
       "type": "tabarray",
+      "notitle": true,
       "items": [
         {
           "type": "section",

@@ -27,7 +27,7 @@
         "title": "Family member",
         "properties": {
           "name": {
-            "type": "string",
+            "type": "integer",
             "title": "Name"
           }
         }
@@ -44,9 +44,8 @@
           "friends[].nick",
           {
             "type": "array",
-            "items": [
-              "friends[].animals[]"
-            ]
+            "key": "friends[].animals",
+            "notitle": true
           }
         ]
       }
