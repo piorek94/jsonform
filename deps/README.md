@@ -19,7 +19,7 @@ The libraries in the ```opt``` subfolder are optional as long as you do not use 
     - [dropdown.js](opt/bootstrap/js/dropdown.js) and [util.js](opt/bootstrap/js/util.js) are needed for ```imageselect``` and ```iconselect``` fields (also requires [Popper](opt/popper)). Required for ```summernote``` textarea fields if you using summernote for bootstrap 4.
     - [button.js](opt/bootstrap/js/button.js) is needed for ```radiobuttons``` and ```checkboxbuttons``` fields.
     - [modal.js](opt/bootstrap/js/modal.js) is needed if you want insert links and images in ```wysihtml5``` textarea fields. Required for ```summernote``` textarea fields if you using summernote for bootstrap 4.
-    - [tooltip.js](opt/bootstrap/js/tooltip.js) is required for ```summernote``` textarea fields if you using summernote for bootstrap 4.
+    - [tooltip.js](opt/bootstrap/js/tooltip.js) is required for ```summernote``` textarea fields if you using summernote for bootstrap 4. It is also required if you are want to use bootstrap tooltip for `description` property of jsonschema.
 
   * [bootstrap-plugins](opt/bootstrap-plugins):
     - [bootstrap-tagsinput](http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/) is required for tags support with array values and textual input fields. The [opt/bootstrap-plugins/bootstrap-tagsinput](opt/bootstrap-plugins/bootstrap-tagsinput) folder contains all required files.
@@ -47,6 +47,7 @@ The libraries in the ```opt``` subfolder are optional as long as you do not use 
   * [Popper](https://popper.js.org/) 1.16.1 or above (< 2.0.0):
     - required for ```imageselect``` and ```iconselect``` fields. The [opt/popper](opt/popper) folder contains all required files;
     - required for ```summernote``` textarea fields if you using summernote for bootstrap 4;
+    - required if you are want to use bootstrap tooltip for `description` property of jsonschema.
 
   * [validator](opt/validator):
     - [JSV](https://github.com/garycourt/JSV): JSON Schema Validator is used to detect and report validation errors against the JSON schema upon form submission. The [opt/validator/JSV](opt/validator/JSV) folder contains a "build" of the JSON Schema Validator for use in JSON Form. _It is not recommended to use this validator: outdated, no longer updated, support only drafts up to `json-schema-draft-03`._
