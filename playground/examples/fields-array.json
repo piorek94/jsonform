@@ -1,31 +1,117 @@
 {
   "schema": {
-    "friends": {
-      "type": "array",
-      "title": "Friends",
-      "items": {
+    "definitions": {
+      "Thing": {
         "type": "object",
-        "title": "Friend",
         "properties": {
-          "nick": {
+          "name": {
             "type": "string",
-            "title": "Nickname"
-          },
-          "animals": {
-            "type": "array",
-            "title": "Animals",
-            "items": {
+            "default": "Default name"
+          }
+        }
+      }
+    },
+    "type": "object",
+    "properties": {
+      "friends": {
+        "type": "array",
+        "title": "Friends",
+        "items": {
+          "type": "object",
+          "title": "Friend",
+          "properties": {
+            "nick": {
               "type": "string",
-              "title": "Animal name"
+              "title": "Nickname"
+            },
+            "animals": {
+              "type": "array",
+              "title": "Animals",
+              "items": {
+                "type": "string",
+                "title": "Animal name"
+              }
             }
+          }
+        }
+      },
+      "listOfNumbers": {
+        "title": "A list of numbers",
+        "type": "array",
+        "items": {
+          "title": "A number",
+          "type": "number",
+          "default": 42
+        }
+      },
+      "listOfBooleans": {
+        "type": "array",
+        "title": "A list of booleans",
+        "items": {
+          "title": "a boolean value",
+          "type": "boolean"
+        }
+      },
+      "listOfStrings": {
+        "type": "array",
+        "title": "A list of strings",
+        "items": {
+          "type": "string",
+          "default": "bazinga"
+        }
+      },
+      "choicesList": {
+        "type": "array",
+        "title": "A choices list",
+        "items": {
+          "type": "string",
+          "enum": [
+            "foo",
+            "bar",
+            "fuzz",
+            "qux"
+          ]
+        },
+        "uniqueItems": true
+      },
+      "minItemsList": {
+        "type": "array",
+        "title": "A list with a minimal number of items",
+        "minItems": 3,
+        "items": {
+          "$ref": "#/definitions/Thing"
+        }
+      },
+      "defaultsAndMinItems": {
+        "type": "array",
+        "title": "List and item level defaults",
+        "minItems": 5,
+        "default": [
+          "carp",
+          "trout",
+          "bream"
+        ],
+        "items": {
+          "type": "string",
+          "default": "unidentified"
+        }
+      },
+      "nestedList": {
+        "type": "array",
+        "title": "Nested list",
+        "items": {
+          "type": "array",
+          "title": "Inner list",
+          "items": {
+            "type": "string",
+            "default": "lorem ipsum"
           }
         }
       }
     }
   },
-  "form": [
-    {
-      "key": "friends",
+  "customFormItems": {
+    "friends": {
       "type": "array",
       "items": {
         "type": "section",
@@ -37,10 +123,6 @@
           }
         ]
       }
-    },
-    {
-      "type": "submit",
-      "title": "Submit"
     }
-  ]
+  }
 }
