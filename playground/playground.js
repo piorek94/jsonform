@@ -101,7 +101,7 @@ $('document').ready(function () {
           'fields-summernote': 'Fields - Summernote editor: the rich text type',
           'fields-color': 'Fields - Color picker: the color type',
           'fields-checkbox': 'Fields - Boolean flag: the checkbox type',
-          'fields-switch': 'Fields - Boolean flag: the swicth type',
+          'fields-switch': 'Fields - Boolean flag: the switch type',
           'fields-checkbox-toogleNext': 'Fields - Boolean flag: the checkbox type w/ toogleNext & dependencies',
           'fields-checkboxes': 'Fields - Multiple options: the checkboxes type',
           'fields-checkboxes-other-field': 'Fields - Multiple options: the checkboxes type w/ custom otherField',
