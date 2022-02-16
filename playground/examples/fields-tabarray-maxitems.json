@@ -25,6 +25,7 @@
   },
   "form": [
     {
+      "key": "friends",
       "type": "tabarray",
       "items": {
         "type": "section",
@@ -32,9 +33,8 @@
           "friends[].nick",
           {
             "type": "array",
-            "items": [
-              "friends[].animals[]"
-            ]
+            "key": "friends[].animals",
+            "notitle": true
           }
         ]
       }

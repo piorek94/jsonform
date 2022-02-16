@@ -4,7 +4,7 @@
 * source: https://github.com/bootstrap-tagsinput/bootstrap-tagsinput
 * version: 41fe4aa2201c4af4cfc4293fa3fc8260ad60bf35
 * __NOTES__:
-  - bootstrap 2 and 3 support
+  - bootstrap 3 and 4 support
   - modified `bootstrap-tagsinput.js` file from `src` folder: custom code is wrapped in comments that start with "PIOREK94"
 
 ### bootstrap-typeahead

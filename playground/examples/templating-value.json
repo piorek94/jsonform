@@ -12,6 +12,7 @@
   },
   "form": [
     {
+      "key": "thoughts",
       "type": "tabarray",
       "items": [
         {

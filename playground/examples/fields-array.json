@@ -2,6 +2,7 @@
   "schema": {
     "friends": {
       "type": "array",
+      "title": "Friends",
       "items": {
         "type": "object",
         "title": "Friend",
@@ -12,6 +13,7 @@
           },
           "animals": {
             "type": "array",
+            "title": "Animals",
             "items": {
               "type": "string",
               "title": "Animal name"
@@ -23,6 +25,7 @@
   },
   "form": [
     {
+      "key": "friends",
       "type": "array",
       "items": {
         "type": "section",
@@ -30,9 +33,7 @@
           "friends[].nick",
           {
             "type": "array",
-            "items": [
-              "friends[].animals[]"
-            ]
+            "key": "friends[].animals"
           }
         ]
       }

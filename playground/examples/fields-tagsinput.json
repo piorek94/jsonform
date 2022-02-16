@@ -7,7 +7,10 @@
     "tags2": {
       "title": "Tags array",
       "type": "array",
+      "maxItems": 3,
+      "uniqueItems": true,
       "items": {
+        "maxLength": 4,
         "type": "string"
       }
     }

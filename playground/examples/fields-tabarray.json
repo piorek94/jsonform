@@ -1,6 +1,6 @@
 {
   "schema": {
-  	"friends": {
+    "friends": {
       "type": "array",
       "items": {
         "type": "object",
@@ -27,7 +27,7 @@
         "title": "Family member",
         "properties": {
           "name": {
-            "type": "string",
+            "type": "integer",
             "title": "Name"
           }
         }
@@ -36,6 +36,7 @@
   },
   "form": [
     {
+      "key": "friends",
       "type": "tabarray",
       "items": {
         "type": "section",
@@ -43,14 +44,14 @@
           "friends[].nick",
           {
             "type": "array",
-            "items": [
-              "friends[].animals[]"
-            ]
+            "key": "friends[].animals",
+            "notitle": true
           }
         ]
       }
     },
     {
+      "key": "notDraggableFamily",
       "type": "tabarray",
       "draggable": false,
       "items": {
