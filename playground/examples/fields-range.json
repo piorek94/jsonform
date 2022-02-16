@@ -14,6 +14,7 @@
     {
       "key": "range",
       "type": "range",
+      "useTooltip": false,
       "step": 20,
       "indicator": true
     },

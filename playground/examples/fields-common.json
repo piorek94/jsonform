@@ -20,6 +20,7 @@
       "prepend": "I feel",
       "append": "today",
       "notitle": true,
+      "useTooltip": false,
       "htmlClass": "usermood",
       "htmlMetaData":{
         "style":"border: 1px solid blue",
