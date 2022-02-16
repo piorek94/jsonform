@@ -1,0 +1,162 @@
+{
+  "schema": {
+    "friends1": {
+      "type": "array",
+      "title": "Friends - nested arrays with items constraints",
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "title": "Friend",
+        "properties": {
+          "nick": {
+            "type": "string",
+            "title": "Nickname"
+          },
+          "animals": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 5,
+            "title": "Animals",
+            "items": {
+              "type": "string",
+              "title": "Animal name"
+            }
+          }
+        }
+      }
+    },
+    "friends2": {
+      "type": "array",
+      "title": "Friends - nested tabarrays with items constraints",
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "title": "Friend",
+        "properties": {
+          "nick": {
+            "type": "string",
+            "title": "Nickname"
+          },
+          "animals": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 5,
+            "title": "Animals",
+            "items": {
+              "type": "string",
+              "title": "Animal name"
+            }
+          }
+        }
+      }
+    },
+    "friends12": {
+      "type": "array",
+      "title": "Friends - nested arrays without items constraints",
+      "items": {
+        "type": "object",
+        "title": "Friend",
+        "properties": {
+          "nick": {
+            "type": "string",
+            "title": "Nickname"
+          },
+          "animals": {
+            "type": "array",
+            "title": "Animals",
+            "items": {
+              "type": "string",
+              "title": "Animal name"
+            }
+          }
+        }
+      }
+    },
+    "friends22": {
+      "type": "array",
+      "title": "Friends - nested tabarrays without items constraints",
+      "items": {
+        "type": "object",
+        "title": "Friend",
+        "properties": {
+          "nick": {
+            "type": "string",
+            "title": "Nickname"
+          },
+          "animals": {
+            "type": "array",
+            "title": "Animals",
+            "items": {
+              "type": "string",
+              "title": "Animal name"
+            }
+          }
+        }
+      }
+    }
+  },
+  "form": [
+    {
+      "key": "friends1",
+      "type": "array",
+      "items": {
+        "type": "section",
+        "items": [
+          "friends1[].nick",
+          {
+            "type": "array",
+            "key": "friends1[].animals"
+          }
+        ]
+      }
+    },
+    {
+      "key": "friends2",
+      "type": "tabarray",
+      "items": {
+        "type": "section",
+        "items": [
+          "friends2[].nick",
+          {
+            "type": "tabarray",
+            "key": "friends2[].animals"
+          }
+        ]
+      }
+    },
+    {
+      "key": "friends12",
+      "type": "array",
+      "items": {
+        "type": "section",
+        "items": [
+          "friends12[].nick",
+          {
+            "type": "array",
+            "key": "friends12[].animals"
+          }
+        ]
+      }
+    },
+    {
+      "key": "friends22",
+      "type": "tabarray",
+      "items": {
+        "type": "section",
+        "items": [
+          "friends22[].nick",
+          {
+            "type": "tabarray",
+            "key": "friends22[].animals"
+          }
+        ]
+      }
+    },
+    {
+      "type": "submit",
+      "title": "Submit"
+    }
+  ]
+}
