@@ -53,8 +53,8 @@
           "id":"navtabs",
           "items": [
             {
-              "title":"Movies",
               "type":"tab",
+              "addIcon": "sliders fa-fw",
               "items":[
                 {
                   "key":"favorite_movie",
