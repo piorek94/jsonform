@@ -54,6 +54,7 @@
           "items": [
             {
               "type":"tab",
+              "addIcon": "sliders fa-fw",
               "items":[
                 {
                   "key":"favorite_movie",
