@@ -4,5 +4,6 @@
     "title": "A single-field form",
     "description": "A simple boolean data type as schema root",
     "type": "boolean"
-  }
+  },
+  "value" : true
 }
