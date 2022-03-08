@@ -17,6 +17,7 @@
             "enum": [ "male", "female", "alien" ]
           },
           "age": {
+            "description": "Enter number",
             "type": "integer",
             "title": "Age"
           }
