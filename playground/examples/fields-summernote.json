@@ -2,7 +2,7 @@
   "schema": {
     "text": {
       "type": "string",
-      "title": "Some formatted text"
+      "title": "Formatted text"
     }
   },
   "form": [

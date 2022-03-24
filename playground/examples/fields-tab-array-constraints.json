@@ -2,7 +2,8 @@
   "schema": {
     "friends1": {
       "type": "array",
-      "title": "Friends - nested arrays with items constraints",
+      "title": "Friends",
+      "description": "Nested arrays with items constraints",
       "minItems": 1,
       "maxItems": 5,
       "items": {
@@ -28,7 +29,8 @@
     },
     "friends2": {
       "type": "array",
-      "title": "Friends - nested tabarrays with items constraints",
+      "title": "Friends",
+      "description": "Nested tabarrays with items constraints",
       "minItems": 1,
       "maxItems": 5,
       "items": {
@@ -54,7 +56,8 @@
     },
     "friends12": {
       "type": "array",
-      "title": "Friends - nested arrays without items constraints",
+      "title": "Friends",
+      "description": "Nested arrays without items constraints",
       "items": {
         "type": "object",
         "title": "Friend",
@@ -76,7 +79,8 @@
     },
     "friends22": {
       "type": "array",
-      "title": "Friends - nested tabarrays without items constraints",
+      "title": "Friends",
+      "description": "Nested tabarrays without items constraints",
       "items": {
         "type": "object",
         "title": "Friend",
