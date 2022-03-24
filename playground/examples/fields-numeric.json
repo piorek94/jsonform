@@ -21,14 +21,16 @@
         ]
       },
       "numberRangeSteps": {
-        "title": "Number range (by 3.5)",
+        "title": "Number range",
+        "description": "Step: 3.5",
         "type": "number",
         "minimum": 0,
         "maximum": 35,
         "multipleOf": 3.5
       },
       "integerRangeSteps": {
-        "title": "Integer range (by 10)",
+        "title": "Integer range",
+        "description": "Step: 10",
         "type": "integer",
         "minimum": 50,
         "maximum": 100,

@@ -1,7 +1,7 @@
 {
   "schema": {
     "icon": {
-      "title": "Choose an icon",
+      "title": "Choose an image",
       "type": "string",
       "enum": [
         "address-book",

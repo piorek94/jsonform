@@ -59,7 +59,6 @@
     },
     "menu2": {
       "type": "checkboxes",
-      "title": "Options inline style",
       "inline": true,
       "titleMap": {
         "starter": "Starter would be great",

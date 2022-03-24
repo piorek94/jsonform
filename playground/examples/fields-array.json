@@ -15,7 +15,7 @@
     "properties": {
       "friends": {
         "type": "array",
-        "title": "Friends",
+        "title": "Objects list",
         "items": {
           "type": "object",
           "title": "Friend",
@@ -36,7 +36,7 @@
         }
       },
       "listOfNumbers": {
-        "title": "A list of numbers",
+        "title": "Numbers list",
         "type": "array",
         "items": {
           "title": "A number",
@@ -46,7 +46,7 @@
       },
       "listOfBooleans": {
         "type": "array",
-        "title": "A list of booleans",
+        "title": "Booleans list",
         "items": {
           "title": "a boolean value",
           "type": "boolean"
@@ -54,7 +54,7 @@
       },
       "listOfStrings": {
         "type": "array",
-        "title": "A list of strings",
+        "title": "Strings list",
         "items": {
           "type": "string",
           "default": "bazinga"
@@ -62,7 +62,7 @@
       },
       "choicesList": {
         "type": "array",
-        "title": "A choices list",
+        "title": "Choices list",
         "items": {
           "type": "string",
           "enum": [
@@ -76,7 +76,8 @@
       },
       "minItemsList": {
         "type": "array",
-        "title": "A list with a minimal number of items",
+        "title": "List",
+        "description": "Min. items",
         "minItems": 3,
         "items": {
           "$ref": "#/definitions/Thing"
@@ -84,7 +85,8 @@
       },
       "defaultsAndMinItems": {
         "type": "array",
-        "title": "List and item level defaults",
+        "title": "Strings list",
+        "description": "Min. items & defaults",
         "minItems": 5,
         "default": [
           "carp",
