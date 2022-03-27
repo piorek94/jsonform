@@ -21,7 +21,7 @@
               "title": "Yes",
               "value": "happy",
               "next": "q2",
-              "htmlClass": "btn-outline-success"
+              "htmlClass": "btn-outline-primary"
             },
             {
               "title": "No",
