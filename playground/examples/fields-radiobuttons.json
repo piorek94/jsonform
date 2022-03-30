@@ -32,7 +32,7 @@
       "title": "Submit"
     }
   ],
-  "defaultClasses": {
+  "defaultConfig": {
     "submitButtonClass": "btn-danger"
   }
 }

@@ -25,7 +25,7 @@
       ]
     }
   ],
-  "defaultClasses": {
+  "defaultConfig": {
     "actionsClass":"btn-group"
   }
 }
