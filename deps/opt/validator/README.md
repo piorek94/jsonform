@@ -18,9 +18,3 @@
 * version: v6.12.6
 * __NOTES__:
   - draft support: 04,06,07
-
-# Form validator
-
-### jquery-validation
-* source: https://github.com/jquery-validation/jquery-validation
-* version: 1.19.3
