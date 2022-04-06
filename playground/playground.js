@@ -5,7 +5,7 @@ $('document').ready(function () {
       example: {
         title: 'JSON Form example to start from',
         type: 'string',
-        'default': 'gettingstarted'
+        default: 'gettingstarted'
       },
       greatform: {
         title: 'JSON Form object to render',
@@ -187,7 +187,7 @@ $('document').ready(function () {
         }
         return true;
       };
-      $('#result').html('<form id="result-form" class="form-vertical"></form>');
+      $('#result').html('<form id="result-form"></form>');
       $('#result-form').jsonForm(createdForm);
     }
     catch (e) {
