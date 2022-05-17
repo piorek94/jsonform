@@ -9,7 +9,7 @@
 
 ### z-schema
 * source: https://github.com/zaggino/z-schema
-* version: v5.0.2
+* version: v5.0.3
 * __NOTES__:
   - draft support: 04
 
