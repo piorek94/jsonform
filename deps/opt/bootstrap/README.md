@@ -1,7 +1,7 @@
 # Bootstrap
 
 * source: https://github.com/twbs/bootstrap
-* version: v4.6.1
+* version: v4.6.2
 * __NOTES__:
   - `bootstrap.css` file are used for styling purpose. Required for ```summernote``` textarea fields if you using summernote for bootstrap 4.
   - `dropdown.js` and `util.js` are needed for ```imageselect``` and ```iconselect``` fields. Required for ```summernote``` textarea fields if you using summernote for bootstrap 4.
