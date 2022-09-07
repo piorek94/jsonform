@@ -2,7 +2,7 @@
 
 ### ace
 * source: https://github.com/ajaxorg/ace-builds
-* version: v1.9.6
+* version: v1.10.1
 * __NOTES__:
   - files from `src-noconflict` directory
   - older versions may require to encapsulate code of `ace.js` in `(function(require,define,requirejs) {...})(undefined,undefined,undefined);` before using within JSON Form
