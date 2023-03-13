@@ -425,10 +425,8 @@ Here are the basic themeable display options (colors, fonts, global widths)
     vertical-align: middle;
     width: 3rem;
     height: 1.5rem;
-}
-.sp-replacer:hover, .sp-replacer.sp-active {
-    border: 1px solid #666;
-    color: black;
+    margin: 0;
+    padding: 0;
 }
 .sp-replacer.sp-disabled {
     cursor:default;
@@ -456,9 +454,6 @@ Here are the basic themeable display options (colors, fonts, global widths)
     transition: background-color .2s;
 }
 .sp-preview-inner.sp-clear-display {
-    /*width: 20px;
-    margin-left: 10px;
-    margin-top: 2px;*/
     display: none;
 }
 
@@ -514,7 +509,10 @@ Here are the basic themeable display options (colors, fonts, global widths)
 .sp-preview-inner, .sp-alpha-inner, .sp-thumb-inner {
     display:block;
     position:absolute;
-    top:0;left:0;bottom:0;right:0;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
 }
 
 .sp-palette .sp-thumb-inner {

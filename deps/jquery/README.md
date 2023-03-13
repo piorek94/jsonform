@@ -1,4 +1,4 @@
 # jquery
 
 * source: https://github.com/jquery/jquery
-* version: 3.6.3
+* version: 3.6.4
