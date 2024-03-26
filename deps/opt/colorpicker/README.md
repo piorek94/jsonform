@@ -10,4 +10,4 @@
 
 ### vanilla-picker
 * source: https://github.com/Sphinxxxx/vanilla-picker
-* version: v2.12.1
+* version: v2.12.3
