@@ -1,7 +1,7 @@
-/*! jQuery UI - v1.13.2 - 2022-07-20
-* http://jqueryui.com
+/*! jQuery UI - v1.13.3 - 2024-05-14
+* https://jqueryui.com
 * Includes: widget.js, position.js, data.js, disable-selection.js, focusable.js, form-reset-mixin.js, jquery-patch.js, keycode.js, labels.js, scroll-parent.js, tabbable.js, unique-id.js, widgets/sortable.js, widgets/autocomplete.js, widgets/menu.js, widgets/mouse.js
-* Copyright jQuery Foundation and other contributors; Licensed MIT */
+* Copyright OpenJS Foundation and other contributors; Licensed MIT */
 
 ( function( factory ) {
 	"use strict";
@@ -20,23 +20,23 @@
 
 $.ui = $.ui || {};
 
-var version = $.ui.version = "1.13.2";
+var version = $.ui.version = "1.13.3";
 
 
 /*!
- * jQuery UI Widget 1.13.2
- * http://jqueryui.com
+ * jQuery UI Widget 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Widget
 //>>group: Core
 //>>description: Provides a factory for creating stateful widgets with a common API.
-//>>docs: http://api.jqueryui.com/jQuery.widget/
-//>>demos: http://jqueryui.com/widget/
+//>>docs: https://api.jqueryui.com/jQuery.widget/
+//>>demos: https://jqueryui.com/widget/
 
 
 var widgetUuid = 0;
@@ -766,21 +766,21 @@ var widget = $.widget;
 
 
 /*!
- * jQuery UI Position 1.13.2
- * http://jqueryui.com
+ * jQuery UI Position 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  *
- * http://api.jqueryui.com/position/
+ * https://api.jqueryui.com/position/
  */
 
 //>>label: Position
 //>>group: Core
 //>>description: Positions elements relative to other elements.
-//>>docs: http://api.jqueryui.com/position/
-//>>demos: http://jqueryui.com/position/
+//>>docs: https://api.jqueryui.com/position/
+//>>demos: https://jqueryui.com/position/
 
 
 ( function() {
@@ -1263,18 +1263,18 @@ var position = $.ui.position;
 
 
 /*!
- * jQuery UI :data 1.13.2
- * http://jqueryui.com
+ * jQuery UI :data 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: :data Selector
 //>>group: Core
 //>>description: Selects elements which have data stored under the specified key.
-//>>docs: http://api.jqueryui.com/data-selector/
+//>>docs: https://api.jqueryui.com/data-selector/
 
 
 var data = $.extend( $.expr.pseudos, {
@@ -1292,18 +1292,18 @@ var data = $.extend( $.expr.pseudos, {
 } );
 
 /*!
- * jQuery UI Disable Selection 1.13.2
- * http://jqueryui.com
+ * jQuery UI Disable Selection 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: disableSelection
 //>>group: Core
 //>>description: Disable selection of text content within the set of matched elements.
-//>>docs: http://api.jqueryui.com/disableSelection/
+//>>docs: https://api.jqueryui.com/disableSelection/
 
 // This file is deprecated
 
@@ -1327,18 +1327,18 @@ var disableSelection = $.fn.extend( {
 
 
 /*!
- * jQuery UI Focusable 1.13.2
- * http://jqueryui.com
+ * jQuery UI Focusable 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: :focusable Selector
 //>>group: Core
 //>>description: Selects elements which can be focused.
-//>>docs: http://api.jqueryui.com/focusable-selector/
+//>>docs: https://api.jqueryui.com/focusable-selector/
 
 
 // Selectors
@@ -1409,18 +1409,18 @@ var form = $.fn._form = function() {
 
 
 /*!
- * jQuery UI Form Reset Mixin 1.13.2
- * http://jqueryui.com
+ * jQuery UI Form Reset Mixin 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Form Reset Mixin
 //>>group: Core
 //>>description: Refresh input widgets when their form is reset
-//>>docs: http://api.jqueryui.com/form-reset-mixin/
+//>>docs: https://api.jqueryui.com/form-reset-mixin/
 
 
 var formResetMixin = $.ui.formResetMixin = {
@@ -1471,12 +1471,12 @@ var formResetMixin = $.ui.formResetMixin = {
 
 
 /*!
- * jQuery UI Support for jQuery core 1.8.x and newer 1.13.2
- * http://jqueryui.com
+ * jQuery UI Support for jQuery core 1.8.x and newer 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  *
  */
 
@@ -1546,18 +1546,18 @@ if ( !$.fn.even || !$.fn.odd ) {
 
 ;
 /*!
- * jQuery UI Keycode 1.13.2
- * http://jqueryui.com
+ * jQuery UI Keycode 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Keycode
 //>>group: Core
 //>>description: Provide keycodes as keynames
-//>>docs: http://api.jqueryui.com/jQuery.ui.keyCode/
+//>>docs: https://api.jqueryui.com/jQuery.ui.keyCode/
 
 
 var keycode = $.ui.keyCode = {
@@ -1581,18 +1581,18 @@ var keycode = $.ui.keyCode = {
 
 
 /*!
- * jQuery UI Labels 1.13.2
- * http://jqueryui.com
+ * jQuery UI Labels 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: labels
 //>>group: Core
 //>>description: Find all the labels associated with a given input
-//>>docs: http://api.jqueryui.com/labels/
+//>>docs: https://api.jqueryui.com/labels/
 
 
 var labels = $.fn.labels = function() {
@@ -1636,18 +1636,18 @@ var labels = $.fn.labels = function() {
 
 
 /*!
- * jQuery UI Scroll Parent 1.13.2
- * http://jqueryui.com
+ * jQuery UI Scroll Parent 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: scrollParent
 //>>group: Core
 //>>description: Get the closest ancestor element that is scrollable.
-//>>docs: http://api.jqueryui.com/scrollParent/
+//>>docs: https://api.jqueryui.com/scrollParent/
 
 
 var scrollParent = $.fn.scrollParent = function( includeHidden ) {
@@ -1670,18 +1670,18 @@ var scrollParent = $.fn.scrollParent = function( includeHidden ) {
 
 
 /*!
- * jQuery UI Tabbable 1.13.2
- * http://jqueryui.com
+ * jQuery UI Tabbable 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: :tabbable Selector
 //>>group: Core
 //>>description: Selects elements which can be tabbed to.
-//>>docs: http://api.jqueryui.com/tabbable-selector/
+//>>docs: https://api.jqueryui.com/tabbable-selector/
 
 
 var tabbable = $.extend( $.expr.pseudos, {
@@ -1694,18 +1694,18 @@ var tabbable = $.extend( $.expr.pseudos, {
 
 
 /*!
- * jQuery UI Unique ID 1.13.2
- * http://jqueryui.com
+ * jQuery UI Unique ID 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: uniqueId
 //>>group: Core
 //>>description: Functions to generate and remove uniqueId's
-//>>docs: http://api.jqueryui.com/uniqueId/
+//>>docs: https://api.jqueryui.com/uniqueId/
 
 
 var uniqueId = $.fn.extend( {
@@ -1736,18 +1736,18 @@ var uniqueId = $.fn.extend( {
 var ie = $.ui.ie = !!/msie [\w.]+/.exec( navigator.userAgent.toLowerCase() );
 
 /*!
- * jQuery UI Mouse 1.13.2
- * http://jqueryui.com
+ * jQuery UI Mouse 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Mouse
 //>>group: Widgets
 //>>description: Abstracts mouse-based interactions to assist in creating certain widgets.
-//>>docs: http://api.jqueryui.com/mouse/
+//>>docs: https://api.jqueryui.com/mouse/
 
 
 var mouseHandled = false;
@@ -1756,7 +1756,7 @@ $( document ).on( "mouseup", function() {
 } );
 
 var widgetsMouse = $.widget( "ui.mouse", {
-	version: "1.13.2",
+	version: "1.13.3",
 	options: {
 		cancel: "input, textarea, button, select, option",
 		distance: 1,
@@ -1954,24 +1954,24 @@ var widgetsMouse = $.widget( "ui.mouse", {
 
 
 /*!
- * jQuery UI Sortable 1.13.2
- * http://jqueryui.com
+ * jQuery UI Sortable 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Sortable
 //>>group: Interactions
 //>>description: Enables items in a list to be sorted using the mouse.
-//>>docs: http://api.jqueryui.com/sortable/
-//>>demos: http://jqueryui.com/sortable/
+//>>docs: https://api.jqueryui.com/sortable/
+//>>demos: https://jqueryui.com/sortable/
 //>>css.structure: ../../themes/base/sortable.css
 
 
 var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
-	version: "1.13.2",
+	version: "1.13.3",
 	widgetEventPrefix: "sort",
 	ready: false,
 	options: {
@@ -3577,26 +3577,26 @@ var safeActiveElement = $.ui.safeActiveElement = function( document ) {
 
 
 /*!
- * jQuery UI Menu 1.13.2
- * http://jqueryui.com
+ * jQuery UI Menu 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Menu
 //>>group: Widgets
 //>>description: Creates nestable menus.
-//>>docs: http://api.jqueryui.com/menu/
-//>>demos: http://jqueryui.com/menu/
+//>>docs: https://api.jqueryui.com/menu/
+//>>demos: https://jqueryui.com/menu/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/menu.css
 //>>css.theme: ../../themes/base/theme.css
 
 
 var widgetsMenu = $.widget( "ui.menu", {
-	version: "1.13.2",
+	version: "1.13.3",
 	defaultElement: "<ul>",
 	delay: 300,
 	options: {
@@ -4268,26 +4268,26 @@ var widgetsMenu = $.widget( "ui.menu", {
 
 
 /*!
- * jQuery UI Autocomplete 1.13.2
- * http://jqueryui.com
+ * jQuery UI Autocomplete 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Autocomplete
 //>>group: Widgets
 //>>description: Lists suggested words as the user is typing.
-//>>docs: http://api.jqueryui.com/autocomplete/
-//>>demos: http://jqueryui.com/autocomplete/
+//>>docs: https://api.jqueryui.com/autocomplete/
+//>>demos: https://jqueryui.com/autocomplete/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/autocomplete.css
 //>>css.theme: ../../themes/base/theme.css
 
 
 $.widget( "ui.autocomplete", {
-	version: "1.13.2",
+	version: "1.13.3",
 	defaultElement: "<input>",
 	options: {
 		appendTo: null,
