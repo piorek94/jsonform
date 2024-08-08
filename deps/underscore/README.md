@@ -1,4 +1,4 @@
 # underscore
 
 * source: https://github.com/jashkenas/underscore
-* version: 1.13.6
+* version: 1.13.7

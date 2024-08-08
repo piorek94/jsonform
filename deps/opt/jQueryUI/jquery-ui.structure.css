@@ -1,5 +1,5 @@
 /*!
- * jQuery UI CSS Framework 1.13.3
+ * jQuery UI CSS Framework 1.14.0
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -9,7 +9,6 @@
  * https://api.jqueryui.com/category/theming/
  */
 .ui-sortable-handle {
-	-ms-touch-action: none;
 	touch-action: none;
 }
 /* Layout helpers
@@ -53,7 +52,6 @@
 	left: 0;
 	position: absolute;
 	opacity: 0;
-	-ms-filter: "alpha(opacity=0)"; /* support: IE8 */
 }
 
 .ui-front {
@@ -117,8 +115,6 @@
 .ui-menu .ui-menu-item {
 	margin: 0;
 	cursor: pointer;
-	/* support: IE10, see #8844 */
-	list-style-image: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
 }
 .ui-menu .ui-menu-item-wrapper {
 	position: relative;

@@ -1,11 +1,11 @@
-/*! jQuery UI - v1.13.3 - 2024-05-14
+/*! jQuery UI - v1.14.0 - 2024-08-08
 * https://jqueryui.com
 * Includes: widget.js, position.js, data.js, disable-selection.js, focusable.js, form-reset-mixin.js, jquery-patch.js, keycode.js, labels.js, scroll-parent.js, tabbable.js, unique-id.js, widgets/sortable.js, widgets/autocomplete.js, widgets/menu.js, widgets/mouse.js
 * Copyright OpenJS Foundation and other contributors; Licensed MIT */
 
 ( function( factory ) {
 	"use strict";
-	
+
 	if ( typeof define === "function" && define.amd ) {
 
 		// AMD. Register as an anonymous module.
@@ -20,11 +20,11 @@
 
 $.ui = $.ui || {};
 
-var version = $.ui.version = "1.13.3";
+var version = $.ui.version = "1.14.0";
 
 
 /*!
- * jQuery UI Widget 1.13.3
+ * jQuery UI Widget 1.14.0
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -766,7 +766,7 @@ var widget = $.widget;
 
 
 /*!
- * jQuery UI Position 1.13.3
+ * jQuery UI Position 1.14.0
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -1263,7 +1263,7 @@ var position = $.ui.position;
 
 
 /*!
- * jQuery UI :data 1.13.3
+ * jQuery UI :data 1.14.0
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -1278,21 +1278,15 @@ var position = $.ui.position;
 
 
 var data = $.extend( $.expr.pseudos, {
-	data: $.expr.createPseudo ?
-		$.expr.createPseudo( function( dataName ) {
-			return function( elem ) {
-				return !!$.data( elem, dataName );
-			};
-		} ) :
-
-		// Support: jQuery <1.8
-		function( elem, i, match ) {
-			return !!$.data( elem, match[ 3 ] );
-		}
+	data: $.expr.createPseudo( function( dataName ) {
+		return function( elem ) {
+			return !!$.data( elem, dataName );
+		};
+	} )
 } );
 
 /*!
- * jQuery UI Disable Selection 1.13.3
+ * jQuery UI Disable Selection 1.14.0
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -1327,7 +1321,7 @@ var disableSelection = $.fn.extend( {
 
 
 /*!
- * jQuery UI Focusable 1.13.3
+ * jQuery UI Focusable 1.14.0
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -1376,19 +1370,9 @@ $.ui.focusable = function( element, hasTabindex ) {
 		focusableIfVisible = hasTabindex;
 	}
 
-	return focusableIfVisible && $( element ).is( ":visible" ) && visible( $( element ) );
+	return focusableIfVisible && $( element ).is( ":visible" ) &&
+		$( element ).css( "visibility" ) === "visible";
 };
-
-// Support: IE 8 only
-// IE 8 doesn't resolve inherit to visible/hidden for computed values
-function visible( element ) {
-	var visibility = element.css( "visibility" );
-	while ( visibility === "inherit" ) {
-		element = element.parent();
-		visibility = element.css( "visibility" );
-	}
-	return visibility === "visible";
-}
 
 $.extend( $.expr.pseudos, {
 	focusable: function( element ) {
@@ -1399,17 +1383,8 @@ $.extend( $.expr.pseudos, {
 var focusable = $.ui.focusable;
 
 
-
-// Support: IE8 Only
-// IE8 does not support the form attribute and when it is supplied. It overwrites the form prop
-// with a string, so we need to find the proper form.
-var form = $.fn._form = function() {
-	return typeof this[ 0 ].form === "string" ? this.closest( "form" ) : $( this[ 0 ].form );
-};
-
-
 /*!
- * jQuery UI Form Reset Mixin 1.13.3
+ * jQuery UI Form Reset Mixin 1.14.0
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -1437,7 +1412,7 @@ var formResetMixin = $.ui.formResetMixin = {
 	},
 
 	_bindFormResetHandler: function() {
-		this.form = this.element._form();
+		this.form = $( this.element.prop( "form" ) );
 		if ( !this.form.length ) {
 			return;
 		}
@@ -1471,7 +1446,7 @@ var formResetMixin = $.ui.formResetMixin = {
 
 
 /*!
- * jQuery UI Support for jQuery core 1.8.x and newer 1.13.3
+ * jQuery UI Legacy jQuery Core patches 1.14.0
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -1480,50 +1455,17 @@ var formResetMixin = $.ui.formResetMixin = {
  *
  */
 
-//>>label: jQuery 1.8+ Support
+//>>label: Legacy jQuery Core patches
 //>>group: Core
-//>>description: Support version 1.8.x and newer of jQuery core
+//>>description: Backport `.even()`, `.odd()` and `$.escapeSelector` to older jQuery Core versions (deprecated)
 
-
-// Support: jQuery 1.9.x or older
-// $.expr[ ":" ] is deprecated.
-if ( !$.expr.pseudos ) {
-	$.expr.pseudos = $.expr[ ":" ];
-}
-
-// Support: jQuery 1.11.x or older
-// $.unique has been renamed to $.uniqueSort
-if ( !$.uniqueSort ) {
-	$.uniqueSort = $.unique;
-}
 
 // Support: jQuery 2.2.x or older.
 // This method has been defined in jQuery 3.0.0.
 // Code from https://github.com/jquery/jquery/blob/e539bac79e666bba95bba86d690b4e609dca2286/src/selector/escapeSelector.js
 if ( !$.escapeSelector ) {
-
-	// CSS string/identifier serialization
-	// https://drafts.csswg.org/cssom/#common-serializing-idioms
-	var rcssescape = /([\0-\x1f\x7f]|^-?\d)|^-$|[^\x80-\uFFFF\w-]/g;
-
-	var fcssescape = function( ch, asCodePoint ) {
-		if ( asCodePoint ) {
-
-			// U+0000 NULL becomes U+FFFD REPLACEMENT CHARACTER
-			if ( ch === "\0" ) {
-				return "\uFFFD";
-			}
-
-			// Control characters and (dependent upon position) numbers get escaped as code points
-			return ch.slice( 0, -1 ) + "\\" + ch.charCodeAt( ch.length - 1 ).toString( 16 ) + " ";
-		}
-
-		// Other potentially-special ASCII characters get backslash-escaped
-		return "\\" + ch;
-	};
-
-	$.escapeSelector = function( sel ) {
-		return ( sel + "" ).replace( rcssescape, fcssescape );
+	$.escapeSelector = function( id ) {
+		return CSS.escape( id + "" );
 	};
 }
 
@@ -1546,7 +1488,7 @@ if ( !$.fn.even || !$.fn.odd ) {
 
 ;
 /*!
- * jQuery UI Keycode 1.13.3
+ * jQuery UI Keycode 1.14.0
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -1581,7 +1523,7 @@ var keycode = $.ui.keyCode = {
 
 
 /*!
- * jQuery UI Labels 1.13.3
+ * jQuery UI Labels 1.14.0
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -1607,9 +1549,8 @@ var labels = $.fn.labels = function() {
 		return this.pushStack( this[ 0 ].labels );
 	}
 
-	// Support: IE <= 11, FF <= 37, Android <= 2.3 only
-	// Above browsers do not support control.labels. Everything below is to support them
-	// as well as document fragments. control.labels does not work on document fragments
+	// If `control.labels` is empty - e.g. inside of document fragments - find
+	// the labels manually
 	labels = this.eq( 0 ).parents( "label" );
 
 	// Look for the label based on the id
@@ -1624,7 +1565,7 @@ var labels = $.fn.labels = function() {
 		ancestors = ancestor.add( ancestor.length ? ancestor.siblings() : this.siblings() );
 
 		// Create a selector for the label based on the id
-		selector = "label[for='" + $.escapeSelector( id ) + "']";
+		selector = "label[for='" + CSS.escape( id ) + "']";
 
 		labels = labels.add( ancestors.find( selector ).addBack( selector ) );
 
@@ -1636,7 +1577,7 @@ var labels = $.fn.labels = function() {
 
 
 /*!
- * jQuery UI Scroll Parent 1.13.3
+ * jQuery UI Scroll Parent 1.14.0
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -1670,7 +1611,7 @@ var scrollParent = $.fn.scrollParent = function( includeHidden ) {
 
 
 /*!
- * jQuery UI Tabbable 1.13.3
+ * jQuery UI Tabbable 1.14.0
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -1694,7 +1635,7 @@ var tabbable = $.extend( $.expr.pseudos, {
 
 
 /*!
- * jQuery UI Unique ID 1.13.3
+ * jQuery UI Unique ID 1.14.0
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -1731,12 +1672,8 @@ var uniqueId = $.fn.extend( {
 } );
 
 
-
-// This file is deprecated
-var ie = $.ui.ie = !!/msie [\w.]+/.exec( navigator.userAgent.toLowerCase() );
-
 /*!
- * jQuery UI Mouse 1.13.3
+ * jQuery UI Mouse 1.14.0
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -1756,7 +1693,7 @@ $( document ).on( "mouseup", function() {
 } );
 
 var widgetsMouse = $.widget( "ui.mouse", {
-	version: "1.13.3",
+	version: "1.14.0",
 	options: {
 		cancel: "input, textarea, button, select, option",
 		distance: 1,
@@ -1808,12 +1745,10 @@ var widgetsMouse = $.widget( "ui.mouse", {
 		this._mouseDownEvent = event;
 
 		var that = this,
-			btnIsLeft = ( event.which === 1 ),
-
-			// event.target.nodeName works around a bug in IE 8 with
-			// disabled inputs (#7620)
-			elIsCancel = ( typeof this.options.cancel === "string" && event.target.nodeName ?
-				$( event.target ).closest( this.options.cancel ).length : false );
+			btnIsLeft = event.which === 1,
+			elIsCancel = typeof this.options.cancel === "string" ?
+				$( event.target ).closest( this.options.cancel ).length :
+				false;
 		if ( !btnIsLeft || elIsCancel || !this._mouseCapture( event ) ) {
 			return true;
 		}
@@ -1859,28 +1794,17 @@ var widgetsMouse = $.widget( "ui.mouse", {
 	_mouseMove: function( event ) {
 
 		// Only check for mouseups outside the document if you've moved inside the document
-		// at least once. This prevents the firing of mouseup in the case of IE<9, which will
-		// fire a mousemove event if content is placed under the cursor. See #7778
-		// Support: IE <9
-		if ( this._mouseMoved ) {
+		// at least once.
+		if ( this._mouseMoved && !event.which ) {
 
-			// IE mouseup check - mouseup happened when mouse was out of window
-			if ( $.ui.ie && ( !document.documentMode || document.documentMode < 9 ) &&
-					!event.button ) {
+			// Support: Safari <=8 - 9
+			// Safari sets which to 0 if you press any of the following keys
+			// during a drag (#14461)
+			if ( event.originalEvent.altKey || event.originalEvent.ctrlKey ||
+					event.originalEvent.metaKey || event.originalEvent.shiftKey ) {
+				this.ignoreMissingWhich = true;
+			} else if ( !this.ignoreMissingWhich ) {
 				return this._mouseUp( event );
-
-			// Iframe mouseup check - mouseup occurred in another document
-			} else if ( !event.which ) {
-
-				// Support: Safari <=8 - 9
-				// Safari sets which to 0 if you press any of the following keys
-				// during a drag (#14461)
-				if ( event.originalEvent.altKey || event.originalEvent.ctrlKey ||
-						event.originalEvent.metaKey || event.originalEvent.shiftKey ) {
-					this.ignoreMissingWhich = true;
-				} else if ( !this.ignoreMissingWhich ) {
-					return this._mouseUp( event );
-				}
 			}
 		}
 
@@ -1954,7 +1878,7 @@ var widgetsMouse = $.widget( "ui.mouse", {
 
 
 /*!
- * jQuery UI Sortable 1.13.3
+ * jQuery UI Sortable 1.14.0
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -1971,7 +1895,7 @@ var widgetsMouse = $.widget( "ui.mouse", {
 
 
 var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
-	version: "1.13.3",
+	version: "1.14.0",
 	widgetEventPrefix: "sort",
 	ready: false,
 	options: {
@@ -2209,11 +2133,7 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 		if ( o.cursor && o.cursor !== "auto" ) { // cursor option
 			body = this.document.find( "body" );
 
-			// Support: IE
-			this.storedCursor = body.css( "cursor" );
-			body.css( "cursor", o.cursor );
-
-			this.storedStylesheet =
+			this._storedStylesheet =
 				$( "<style>*{ cursor: " + o.cursor + " !important; }</style>" ).appendTo( body );
 		}
 
@@ -3130,11 +3050,9 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 			po.top += this.scrollParent.scrollTop();
 		}
 
-		// This needs to be actually done for all browsers, since pageX/pageY includes this
-		// information with an ugly IE fix
-		if ( this.offsetParent[ 0 ] === this.document[ 0 ].body ||
-				( this.offsetParent[ 0 ].tagName &&
-				this.offsetParent[ 0 ].tagName.toLowerCase() === "html" && $.ui.ie ) ) {
+		// This needs to be actually done for all browsers, since pageX/pageY includes
+		// this information.
+		if ( this.offsetParent[ 0 ] === this.document[ 0 ].body ) {
 			po = { top: 0, left: 0 };
 		}
 
@@ -3482,9 +3400,9 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 		}
 
 		//Do what was originally in plugins
-		if ( this.storedCursor ) {
-			this.document.find( "body" ).css( "cursor", this.storedCursor );
-			this.storedStylesheet.remove();
+		if ( this._storedStylesheet ) {
+			this._storedStylesheet.remove();
+			this._storedStylesheet = null;
 		}
 		if ( this._storedOpacity ) {
 			this.helper.css( "opacity", this._storedOpacity );
@@ -3546,38 +3464,8 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 } );
 
 
-
-var safeActiveElement = $.ui.safeActiveElement = function( document ) {
-	var activeElement;
-
-	// Support: IE 9 only
-	// IE9 throws an "Unspecified error" accessing document.activeElement from an <iframe>
-	try {
-		activeElement = document.activeElement;
-	} catch ( error ) {
-		activeElement = document.body;
-	}
-
-	// Support: IE 9 - 11 only
-	// IE may return null instead of an element
-	// Interestingly, this only seems to occur when NOT in an iframe
-	if ( !activeElement ) {
-		activeElement = document.body;
-	}
-
-	// Support: IE 11 only
-	// IE11 returns a seemingly empty object in some cases when accessing
-	// document.activeElement from an <iframe>
-	if ( !activeElement.nodeName ) {
-		activeElement = document.body;
-	}
-
-	return activeElement;
-};
-
-
 /*!
- * jQuery UI Menu 1.13.3
+ * jQuery UI Menu 1.14.0
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -3596,7 +3484,7 @@ var safeActiveElement = $.ui.safeActiveElement = function( document ) {
 
 
 var widgetsMenu = $.widget( "ui.menu", {
-	version: "1.13.3",
+	version: "1.14.0",
 	defaultElement: "<ul>",
 	delay: 300,
 	options: {
@@ -3643,7 +3531,7 @@ var widgetsMenu = $.widget( "ui.menu", {
 			},
 			"click .ui-menu-item": function( event ) {
 				var target = $( event.target );
-				var active = $( $.ui.safeActiveElement( this.document[ 0 ] ) );
+				var active = $( this.document[ 0 ].activeElement );
 				if ( !this.mouseHandled && target.not( ".ui-state-disabled" ).length ) {
 					this.select( event );
 
@@ -3687,7 +3575,7 @@ var widgetsMenu = $.widget( "ui.menu", {
 				this._delay( function() {
 					var notContained = !$.contains(
 						this.element[ 0 ],
-						$.ui.safeActiveElement( this.document[ 0 ] )
+						this.document[ 0 ].activeElement
 					);
 					if ( notContained ) {
 						this.collapseAll( event );
@@ -4268,7 +4156,7 @@ var widgetsMenu = $.widget( "ui.menu", {
 
 
 /*!
- * jQuery UI Autocomplete 1.13.3
+ * jQuery UI Autocomplete 1.14.0
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -4287,7 +4175,7 @@ var widgetsMenu = $.widget( "ui.menu", {
 
 
 $.widget( "ui.autocomplete", {
-	version: "1.13.3",
+	version: "1.14.0",
 	defaultElement: "<input>",
 	options: {
 		appendTo: null,
@@ -4331,9 +4219,9 @@ $.widget( "ui.autocomplete", {
 
 		// Textareas are always multi-line
 		// Inputs are always single-line, even if inside a contentEditable element
-		// IE also treats inputs as contentEditable
-		// All other element types are determined by whether or not they're contentEditable
-		this.isMultiLine = isTextarea || !isInput && this._isContentEditable( this.element );
+		// All other element types are determined by whether they're contentEditable
+		this.isMultiLine = isTextarea ||
+			!isInput && this.element.prop( "contentEditable" ) === "true";
 
 		this.valueMethod = this.element[ isTextarea || isInput ? "val" : "text" ];
 		this.isNewMenu = true;
@@ -4397,7 +4285,6 @@ $.widget( "ui.autocomplete", {
 
 						// Different browsers have different default behavior for escape
 						// Single press can mean undo or clear
-						// Double press in IE means clear the whole form
 						event.preventDefault();
 					}
 					break;
@@ -4466,16 +4353,6 @@ $.widget( "ui.autocomplete", {
 				role: null
 			} )
 			.hide()
-
-			// Support: IE 11 only, Edge <= 14
-			// For other browsers, we preventDefault() on the mousedown event
-			// to keep the dropdown from taking focus from the input. This doesn't
-			// work for IE/Edge, causing problems with selection and scrolling (#9638)
-			// Happily, IE and Edge support an "unselectable" attribute that
-			// prevents an element from receiving focus, exactly what we want here.
-			.attr( {
-				"unselectable": "on"
-			} )
 			.menu( "instance" );
 
 		this._addClass( this.menu.element, "ui-autocomplete", "ui-front" );
@@ -4488,7 +4365,7 @@ $.widget( "ui.autocomplete", {
 			menufocus: function( event, ui ) {
 				var label, item;
 
-				// support: Firefox
+				// Support: Firefox
 				// Prevent accidental activation of menu items in Firefox (#7024 #9118)
 				if ( this.isNewMenu ) {
 					this.isNewMenu = false;
@@ -4526,17 +4403,9 @@ $.widget( "ui.autocomplete", {
 					previous = this.previous;
 
 				// Only trigger when focus was lost (click on menu)
-				if ( this.element[ 0 ] !== $.ui.safeActiveElement( this.document[ 0 ] ) ) {
+				if ( this.element[ 0 ] !== this.document[ 0 ].activeElement ) {
 					this.element.trigger( "focus" );
 					this.previous = previous;
-
-					// #6109 - IE triggers two focus events and the second
-					// is asynchronous, so we need to reset the previous
-					// term synchronously and asynchronously :-(
-					this._delay( function() {
-						this.previous = previous;
-						this.selectedItem = item;
-					} );
 				}
 
 				if ( false !== this._trigger( "select", event, { item: item } ) ) {
@@ -4855,24 +4724,6 @@ $.widget( "ui.autocomplete", {
 			// Prevents moving cursor to beginning/end of the text field in some browsers
 			event.preventDefault();
 		}
-	},
-
-	// Support: Chrome <=50
-	// We should be able to just use this.element.prop( "isContentEditable" )
-	// but hidden elements always report false in Chrome.
-	// https://code.google.com/p/chromium/issues/detail?id=313082
-	_isContentEditable: function( element ) {
-		if ( !element.length ) {
-			return false;
-		}
-
-		var editable = element.prop( "contentEditable" );
-
-		if ( editable === "inherit" ) {
-			return this._isContentEditable( element.parent() );
-		}
-
-		return editable === "true";
 	}
 } );
 
