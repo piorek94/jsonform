@@ -9,7 +9,7 @@
 
 ### summernote
 * source: https://github.com/summernote/summernote/
-* version: v0.8.20
+* version: v0.8.20 (versions >= v9.x are incompatible)
 * __NOTES__:
   - bootstrap 3 and 4 support
   - lite version can work without bootstrap
