@@ -1,4 +1,4 @@
-/*! jQuery UI - v1.14.0 - 2024-08-08
+/*! jQuery UI - v1.14.1 - 2024-11-02
 * https://jqueryui.com
 * Includes: widget.js, position.js, data.js, disable-selection.js, focusable.js, form-reset-mixin.js, jquery-patch.js, keycode.js, labels.js, scroll-parent.js, tabbable.js, unique-id.js, widgets/sortable.js, widgets/autocomplete.js, widgets/menu.js, widgets/mouse.js
 * Copyright OpenJS Foundation and other contributors; Licensed MIT */
@@ -20,11 +20,11 @@
 
 $.ui = $.ui || {};
 
-var version = $.ui.version = "1.14.0";
+var version = $.ui.version = "1.14.1";
 
 
 /*!
- * jQuery UI Widget 1.14.0
+ * jQuery UI Widget 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -67,6 +67,9 @@ $.widget = function( name, base, prototype ) {
 
 	var namespace = name.split( "." )[ 0 ];
 	name = name.split( "." )[ 1 ];
+	if ( name === "__proto__" || name === "constructor" ) {
+		return $.error( "Invalid widget name: " + name );
+	}
 	var fullName = namespace + "-" + name;
 
 	if ( !prototype ) {
@@ -766,7 +769,7 @@ var widget = $.widget;
 
 
 /*!
- * jQuery UI Position 1.14.0
+ * jQuery UI Position 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -1263,7 +1266,7 @@ var position = $.ui.position;
 
 
 /*!
- * jQuery UI :data 1.14.0
+ * jQuery UI :data 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -1286,7 +1289,7 @@ var data = $.extend( $.expr.pseudos, {
 } );
 
 /*!
- * jQuery UI Disable Selection 1.14.0
+ * jQuery UI Disable Selection 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -1321,7 +1324,7 @@ var disableSelection = $.fn.extend( {
 
 
 /*!
- * jQuery UI Focusable 1.14.0
+ * jQuery UI Focusable 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -1384,7 +1387,7 @@ var focusable = $.ui.focusable;
 
 
 /*!
- * jQuery UI Form Reset Mixin 1.14.0
+ * jQuery UI Form Reset Mixin 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -1446,7 +1449,7 @@ var formResetMixin = $.ui.formResetMixin = {
 
 
 /*!
- * jQuery UI Legacy jQuery Core patches 1.14.0
+ * jQuery UI Legacy jQuery Core patches 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -1488,7 +1491,7 @@ if ( !$.fn.even || !$.fn.odd ) {
 
 ;
 /*!
- * jQuery UI Keycode 1.14.0
+ * jQuery UI Keycode 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -1523,7 +1526,7 @@ var keycode = $.ui.keyCode = {
 
 
 /*!
- * jQuery UI Labels 1.14.0
+ * jQuery UI Labels 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -1577,7 +1580,7 @@ var labels = $.fn.labels = function() {
 
 
 /*!
- * jQuery UI Scroll Parent 1.14.0
+ * jQuery UI Scroll Parent 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -1611,7 +1614,7 @@ var scrollParent = $.fn.scrollParent = function( includeHidden ) {
 
 
 /*!
- * jQuery UI Tabbable 1.14.0
+ * jQuery UI Tabbable 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -1635,7 +1638,7 @@ var tabbable = $.extend( $.expr.pseudos, {
 
 
 /*!
- * jQuery UI Unique ID 1.14.0
+ * jQuery UI Unique ID 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -1673,7 +1676,7 @@ var uniqueId = $.fn.extend( {
 
 
 /*!
- * jQuery UI Mouse 1.14.0
+ * jQuery UI Mouse 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -1693,7 +1696,7 @@ $( document ).on( "mouseup", function() {
 } );
 
 var widgetsMouse = $.widget( "ui.mouse", {
-	version: "1.14.0",
+	version: "1.14.1",
 	options: {
 		cancel: "input, textarea, button, select, option",
 		distance: 1,
@@ -1878,7 +1881,7 @@ var widgetsMouse = $.widget( "ui.mouse", {
 
 
 /*!
- * jQuery UI Sortable 1.14.0
+ * jQuery UI Sortable 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -1895,7 +1898,7 @@ var widgetsMouse = $.widget( "ui.mouse", {
 
 
 var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
-	version: "1.14.0",
+	version: "1.14.1",
 	widgetEventPrefix: "sort",
 	ready: false,
 	options: {
@@ -3465,7 +3468,7 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 
 
 /*!
- * jQuery UI Menu 1.14.0
+ * jQuery UI Menu 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -3484,7 +3487,7 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 
 
 var widgetsMenu = $.widget( "ui.menu", {
-	version: "1.14.0",
+	version: "1.14.1",
 	defaultElement: "<ul>",
 	delay: 300,
 	options: {
@@ -4156,7 +4159,7 @@ var widgetsMenu = $.widget( "ui.menu", {
 
 
 /*!
- * jQuery UI Autocomplete 1.14.0
+ * jQuery UI Autocomplete 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -4175,7 +4178,7 @@ var widgetsMenu = $.widget( "ui.menu", {
 
 
 $.widget( "ui.autocomplete", {
-	version: "1.14.0",
+	version: "1.14.1",
 	defaultElement: "<input>",
 	options: {
 		appendTo: null,

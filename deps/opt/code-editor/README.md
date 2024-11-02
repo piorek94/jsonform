@@ -2,8 +2,10 @@
 
 ### ace
 * source: https://github.com/ajaxorg/ace-builds
-* version: v1.36.1
+* version: v1.36.3
 * __NOTES__:
   - files from `src-min-noconflict` directory
   - older versions may require to encapsulate code of `ace.js` in `(function(require,define,requirejs) {...})(undefined,undefined,undefined);` before using within JSON Form
   - minimal set of files from ACE to render a CSS/HTML/JAVASCRIPT/JSON/LESS/MARKDOWN input field
+
+https://raw.githubusercontent.com/ajaxorg/ace-builds/refs/heads/master/src-min-noconflict/{ace,mode-css,mode-html,mode-javascript,mode-json,mode-less,mode-markdown,theme-twilight,worker-css,worker-html,worker-javascript,worker-json,worker-xml}.js
